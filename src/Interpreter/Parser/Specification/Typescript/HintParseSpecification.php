@@ -130,8 +130,8 @@ final class HintParseSpecification implements ParseSpecification
     /**
      * @throws UnexpectedEnd
      * @throws UnexpectedLexical
-     * @todo support generic
      *
+     * @todo support generic
      */
     private function parseHint(LexicalStream $stream, ?string $file): CodeToken
     {
@@ -229,7 +229,7 @@ final class HintParseSpecification implements ParseSpecification
             return BuiltInCodeToken::Any;
         }
 
-        // @todo fix keyof support
+        // @todo fix typeof support
         if ($label === 'typeof') {
             $stream->next();
             $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
