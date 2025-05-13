@@ -47,6 +47,7 @@ final class BuiltInRendererSpecification implements RendererSpecification
             BuiltInCodeToken::True => 'true',
             BuiltInCodeToken::Void => 'void',
             BuiltInCodeToken::Never => 'never',
+            BuiltInCodeToken::Undefined => 'undefined',
         };
     }
 }
