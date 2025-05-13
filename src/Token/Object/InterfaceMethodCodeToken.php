@@ -18,8 +18,6 @@ final class InterfaceMethodCodeToken implements CodeToken
 
     /**
      * @param array<ParameterCodeToken> $parameters
-     *
-     * @todo change comment to string
      */
     public function __construct(
         public readonly string $name,

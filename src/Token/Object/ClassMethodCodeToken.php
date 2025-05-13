@@ -21,8 +21,6 @@ final class ClassMethodCodeToken extends AbstractClassPart
      * @param array<ParameterCodeToken|ClassPropertyCodeToken> $parameters
      * @param array<CodeToken> $body
      * @param array<AttributeCodeToken> $attributes
-     *
-     * @todo change comment to a string
      */
     public function __construct(
         Visibility $visibility,
