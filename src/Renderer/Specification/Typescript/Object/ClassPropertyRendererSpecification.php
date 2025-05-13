@@ -62,8 +62,12 @@ final class ClassPropertyRendererSpecification implements RendererSpecification
             ? $this->renderComment($token->comment->comment) . PHP_EOL
             : '';
 
+        $hintGlue = $token->flags & ClassPropertyCodeToken::FLAG_OPTIONAL
+            ? '?:'
+            : ':';
+
         $hint = $token->hint
-            ? ': ' . $renderer->render($token->hint)
+            ? $hintGlue . ' ' . $renderer->render($token->hint)
             : '';
 
         $assigned = $token->assigned

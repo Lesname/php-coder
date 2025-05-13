@@ -500,10 +500,11 @@ final class ClassParseSpecification implements ParseSpecification
             return $this->parseClassPartSetProperty($stream, $visibility, $attributes, $flags);
         }
 
-        // @todo fix optional property
         if ($this->isLexical($stream, QuestionMarkLexical::TYPE)) {
             $stream->next();
             $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+            $flags |= ClassPropertyCodeToken::FLAG_OPTIONAL;
         }
 
         if ($this->isLexical($stream, ColonLexical::TYPE)) {

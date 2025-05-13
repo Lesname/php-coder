@@ -35,6 +35,7 @@ class ClassParseSpecificationTest extends TestCase
 @Xyz
 abstract class Foo<E extends Goo> extends Fiz implements Bar, Biz {
     private abc: string;
+    private cba?: boolean;
     
     protected get rts(): string {
         return 'rts';
@@ -103,13 +104,14 @@ TS;
 
         $hintParseSpecification = $this->createMock(ParseSpecification::class);
         $hintParseSpecification
-            ->expects(self::exactly(5))
+            ->expects(self::exactly(6))
             ->method('parse')
             ->willReturnCallback(
                 function (LexicalStream $stream) {
                     if ($stream->current()->getType() === LabelLexical::TYPE) {
                         $hint = match ((string)$stream->current()) {
                             'string' => BuiltInCodeToken::String,
+                            'boolean' => BuiltInCodeToken::Boolean,
                             'void' => BuiltInCodeToken::Void,
                             'Goo' => new ReferenceCodeToken('Goo'),
                             default => throw new RuntimeException("Unexpected '{$stream->current()}"),
@@ -146,6 +148,12 @@ TS;
                         Visibility::Private,
                         'abc',
                         BuiltInCodeToken::String,
+                    ),
+                    new ClassPropertyCodeToken(
+                        Visibility::Private,
+                        'cba',
+                        BuiltInCodeToken::Boolean,
+                        flags: ClassPropertyCodeToken::FLAG_OPTIONAL,
                     ),
                     new ClassGetPropertyCodeToken(
                         Visibility::Protected,

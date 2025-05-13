@@ -15,6 +15,7 @@ abstract class AbstractClassPart implements CodeToken
     public const FLAG_OVERRIDE = 1;
     public const FLAG_STATIC = 2;
     public const FLAG_READONLY = 4;
+    public const FLAG_OPTIONAL = 8;
 
     /**
      * @param array<AttributeCodeToken> $attributes

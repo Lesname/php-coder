@@ -79,4 +79,32 @@ TXT;
 
         self::assertSame($expected, $rendered);
     }
+
+    public function testRenderOptional(): void
+    {
+        $hint = $this->createMock(CodeToken::class);
+
+        $renderer = $this->createMock(CodeRenderer::class);
+        $renderer
+            ->expects(self::exactly(1))
+            ->method('render')
+            ->with($hint)
+            ->willReturn('hint');
+
+
+        $token = new ClassPropertyCodeToken(
+            Visibility::Public,
+            'Props',
+            $hint,
+            flags: ClassPropertyCodeToken::FLAG_OPTIONAL,
+        );
+
+        $rendered = $this->specification->render($token, $renderer);
+
+        $expected = <<<'TXT'
+public Props?: hint
+TXT;
+
+        self::assertSame($expected, $rendered);
+    }
 }
