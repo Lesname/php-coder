@@ -304,11 +304,13 @@ final class InterfaceParseSpecification implements ParseSpecification
 
             $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
 
-            // @todo fix optional support
             if ($this->isLexical($stream, QuestionMarkLexical::TYPE)) {
                 $stream->next();
 
                 $this->expectLexical($stream, ColonLexical::TYPE);
+                $optional = true;
+            } else {
+                $optional = false;
             }
 
             if ($this->isLexical($stream, ColonLexical::TYPE)) {
@@ -331,7 +333,7 @@ final class InterfaceParseSpecification implements ParseSpecification
                 $assigned = null;
             }
 
-            $parameters[] = new ParameterCodeToken($paramName, $hint, $assigned);
+            $parameters[] = new ParameterCodeToken($paramName, $hint, $assigned, optional: $optional);
 
             if (!$this->isLexical($stream, CommaLexical::TYPE)) {
                 break;
