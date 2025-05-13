@@ -18,8 +18,6 @@ final class InterfacePropertyCodeToken implements CodeToken
 
     /**
      * @param array<AttributeCodeToken> $attributes
-     *
-     * @todo change comment to string
      */
     public function __construct(
         public readonly CodeToken $name,
