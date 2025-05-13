@@ -21,6 +21,7 @@ use LesCoder\Interpreter\Lexer\Lexical\Character\CommaLexical;
 use LesCoder\Interpreter\Parser\Specification\ParseSpecification;
 use LesCoder\Interpreter\Lexer\Lexical\Character\AsteriskLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\SemicolonLexical;
+use LesCoder\Interpreter\Parser\Specification\GroupParseSpecification;
 use LesCoder\Interpreter\Parser\Specification\Typescript\HintParseSpecification;
 use LesCoder\Interpreter\Parser\Specification\Typescript\TypeParseSpecification;
 use LesCoder\Interpreter\Parser\Specification\Typescript\ClassParseSpecification;
@@ -188,17 +189,15 @@ final class TypescriptCodeInterpreter implements CodeInterpreter
      */
     private function parse(LexicalStream $stream, array $imports, ?string $file): Generator
     {
-        $parseSpecifications = $this->getParseSpecifications($imports);
+        $parseSpecification = $this->getParseSpecification($imports);
 
         while ($stream->isActive()) {
-            foreach ($parseSpecifications as $parseSpecification) {
-                if ($parseSpecification->isSatisfiedBy($stream)) {
-                    yield $parseSpecification->parse($stream, $file);
+            if ($parseSpecification->isSatisfiedBy($stream)) {
+                yield $parseSpecification->parse($stream, $file);
 
-                    $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+                $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
 
-                    continue 2;
-                }
+                continue;
             }
 
             $current = $stream->current();
@@ -209,51 +208,30 @@ final class TypescriptCodeInterpreter implements CodeInterpreter
 
     /**
      * @param array<string, string> $imports
-     *
-     * @return array<ParseSpecification>
      */
-    private function getParseSpecifications(array $imports): array
+    private function getParseSpecification(array $imports): ParseSpecification
     {
         $referenceParseSpecification = new ReferenceParseSpecification($imports);
         $hintParseSpecification = new HintParseSpecification($referenceParseSpecification);
 
         $expressionParseSpecification = new ExpressionParseSpecification($referenceParseSpecification, $hintParseSpecification, $imports);
 
-        $attributeParseSpecification = new AttributeParseSpecification($expressionParseSpecification, $referenceParseSpecification);
-
-        $interfaceParseSpecification = new InterfaceParseSpecification($hintParseSpecification, $expressionParseSpecification);
-        $constantParseSpecification = new ConstantParseSpecification($expressionParseSpecification, $hintParseSpecification);
-        $classParseSpecification = new ClassParseSpecification(
-            $attributeParseSpecification,
-            $expressionParseSpecification,
-            $referenceParseSpecification,
-            $hintParseSpecification,
+        return new GroupParseSpecification(
+            [
+                new InterfaceParseSpecification($hintParseSpecification, $expressionParseSpecification),
+                new ConstantParseSpecification($expressionParseSpecification, $hintParseSpecification),
+                new ClassParseSpecification(
+                    new AttributeParseSpecification($expressionParseSpecification, $referenceParseSpecification),
+                    $expressionParseSpecification,
+                    $referenceParseSpecification,
+                    $hintParseSpecification,
+                ),
+                new TypeParseSpecification($hintParseSpecification),
+                fn (ParseSpecification $parentParseSpecification): ParseSpecification => new ExportParseSpecification($parentParseSpecification),
+                fn (ParseSpecification $parentParseSpecification): ParseSpecification => new DeclareParseSpecification($parentParseSpecification),
+                $expressionParseSpecification,
+            ]
         );
-        $typeParseSpecification = new TypeParseSpecification($hintParseSpecification);
-
-        $exportParseSpecification = new ExportParseSpecification(
-            $interfaceParseSpecification,
-            $constantParseSpecification,
-            $classParseSpecification,
-            $typeParseSpecification,
-        );
-
-        $declareParseSpecification = new DeclareParseSpecification(
-            $interfaceParseSpecification,
-            $constantParseSpecification,
-            $classParseSpecification,
-            $typeParseSpecification,
-        );
-
-        return [
-            $interfaceParseSpecification,
-            $constantParseSpecification,
-            $classParseSpecification,
-            $typeParseSpecification,
-            $exportParseSpecification,
-            $declareParseSpecification,
-            $expressionParseSpecification,
-        ];
     }
 
     private function getCodeLexer(): CodeLexer
