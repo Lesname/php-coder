@@ -25,4 +25,5 @@ enum BuiltInCodeToken implements CodeToken
     case String;
     case True;
     case Void;
+    case Undefined;
 }
