@@ -60,6 +60,8 @@ class GroupParseSpecificationTest extends TestCase
     {
         self::expectException(ExpectedParseSpecification::class);
 
+        // ignore is for test needed
+        /** @phpstan-ignore argument.type */
         new GroupParseSpecification(['test']);
     }
 
@@ -69,10 +71,8 @@ class GroupParseSpecificationTest extends TestCase
 
         $stream = $this->createMock(LexicalStream::class);
 
-        $token = $this->createMock(CodeToken::class);
-
         $specification = $this->createMock(ParseSpecification::class);
-        $specification->expects(self::once(1))->method('isSatisfiedBy')->with($stream)->willReturn(false);
+        $specification->expects(self::once())->method('isSatisfiedBy')->with($stream)->willReturn(false);
         $specification->expects(self::never())->method('parse');
 
         $groupSpecification = new GroupParseSpecification([$specification]);
