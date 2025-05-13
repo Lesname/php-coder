@@ -19,6 +19,9 @@ final class NamespaceParseSpecification implements ParseSpecification
 {
     use ExpectParseSpecificationHelper;
 
+    public function __construct(private readonly ParseSpecification $subParseSpecification)
+    {}
+
     #[Override]
     public function isSatisfiedBy(LexicalStream $stream): bool
     {
@@ -26,8 +29,6 @@ final class NamespaceParseSpecification implements ParseSpecification
     }
 
     /**
-     * @todo, fix body
-     *
      * @throws Exception\UnexpectedEnd
      * @throws Exception\UnexpectedLabel
      * @throws Exception\UnexpectedLexical
@@ -49,21 +50,18 @@ final class NamespaceParseSpecification implements ParseSpecification
         $this->expectLexical($stream, CurlyBracketLeftLexical::TYPE);
         $stream->next();
 
-        $ignore = 0;
+        $stream->skip(CommentLexical::TYPE, WhitespaceLexical::TYPE);
 
-        while ($stream->isActive() && (!$this->isLexical($stream, CurlyBracketRightLexical::TYPE) || $ignore > 0)) {
-            if ($this->isLexical($stream, CurlyBracketLeftLexical::TYPE)) {
-                $ignore += 1;
-            } elseif ($this->isLexical($stream, CurlyBracketRightLexical::TYPE)) {
-                $ignore -= 1;
-            }
+        $body = [];
 
-            $stream->next();
+        while ($stream->isActive() && !$this->isLexical($stream, CurlyBracketRightLexical::TYPE)) {
+            $body[] = $this->subParseSpecification->parse($stream, $file);
+            $stream->skip(CommentLexical::TYPE, WhitespaceLexical::TYPE);
         }
 
         $this->expectLexical($stream, CurlyBracketRightLexical::TYPE);
         $stream->next();
 
-        return new NamespaceCodeToken($name, []);
+        return new NamespaceCodeToken($name, $body);
     }
 }
