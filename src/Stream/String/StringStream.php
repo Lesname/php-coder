@@ -16,6 +16,9 @@ interface StringStream extends Stream
     #[Override]
     public function current(int $length = 1): string;
 
+    #[Override]
+    public function next(int $size = 1): void;
+
     public function matchesExactly(string $input): bool;
 
     /**

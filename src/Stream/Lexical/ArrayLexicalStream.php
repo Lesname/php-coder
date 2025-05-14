@@ -28,12 +28,8 @@ final class ArrayLexicalStream extends AbstractLexicalStream
     }
 
     #[Override]
-    public function next(int $size = 1): void
+    public function next(): void
     {
-        if ($size > 1) {
-            throw new RuntimeException();
-        }
-
         $this->position += 1;
     }
 

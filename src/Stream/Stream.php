@@ -13,7 +13,7 @@ interface Stream
      */
     public function current(): mixed;
 
-    public function next(int $size = 1): void;
+    public function next(): void;
 
     public function isActive(): bool;
 

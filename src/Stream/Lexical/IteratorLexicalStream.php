@@ -24,12 +24,8 @@ final class IteratorLexicalStream extends AbstractLexicalStream
     }
 
     #[Override]
-    public function next(int $size = 1): void
+    public function next(): void
     {
-        if ($size > 1) {
-            throw new RuntimeException();
-        }
-
         $this->iterator->next();
     }
 
