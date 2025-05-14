@@ -1,12 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace LesCoder\Interpreter\Lexer\Specification;
+namespace LesCoder\Interpreter\Lexer\Specification\Typescript;
 
 use Override;
 use LesCoder\Stream\String\StringStream;
 use LesCoder\Interpreter\Lexer\Lexical\Lexical;
 use LesCoder\Stream\String\Exception\ExpectedExactly;
+use LesCoder\Interpreter\Lexer\Specification\Specification;
 use LesCoder\Interpreter\Lexer\Lexical\Character\MinusLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Assignment\Math\SubtractAssignmentLexical;
 

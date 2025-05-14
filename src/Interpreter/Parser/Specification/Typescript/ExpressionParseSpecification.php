@@ -397,7 +397,7 @@ final class ExpressionParseSpecification implements ParseSpecification
         $stream->next();
         $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
 
-        return new StringCodeToken(substr((string)$lexical, 1, -1));
+        return new StringCodeToken((string)$lexical);
     }
 
     private function parseValueLabel(LexicalStream $stream, ?string $file): CodeToken
@@ -643,7 +643,7 @@ final class ExpressionParseSpecification implements ParseSpecification
 
         while ($stream->isActive() && $stream->current()->getType() !== CurlyBracketRightLexical::TYPE) {
             if ($this->isLexical($stream, StringLexical::TYPE)) {
-                $key = new StringCodeToken(substr((string)$stream->current(), 1, -1));
+                $key = new StringCodeToken((string)$stream->current());
                 $stream->next();
                 $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
             } elseif ($this->isLexical($stream, LabelLexical::TYPE)) {

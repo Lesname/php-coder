@@ -1,17 +1,17 @@
 <?php
 declare(strict_types=1);
 
-namespace LesCoderTest\Interpreter\Lexer\Specification\Typescript;
+namespace Interpreter\Lexer\Specification;
 
 use Override;
 use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\Attributes\DataProvider;
-use LesCoder\Stream\String\DirectStringStream;
-use LesCoder\Interpreter\Lexer\Lexical\Value\StringLexical;
-use LesCoder\Interpreter\Lexer\Specification\Specification;
-use LesCoder\Interpreter\Lexer\Specification\Typescript\StringSpecification;
-use LesCoder\Interpreter\Lexer\Specification\Exception\MissesClosingIdentifier;
 use PHPUnit\Framework\Attributes\CoversClass;
+use LesCoder\Stream\String\DirectStringStream;
+use PHPUnit\Framework\Attributes\DataProvider;
+use LesCoder\Interpreter\Lexer\Specification\Specification;
+use LesCoder\Interpreter\Lexer\Lexical\Value\StringLexical;
+use LesCoder\Interpreter\Lexer\Specification\StringSpecification;
+use LesCoder\Interpreter\Lexer\Specification\Exception\MissesClosingIdentifier;
 
 #[CoversClass(StringSpecification::class)]
 class StringLexSpecificationTest extends TestCase
@@ -21,7 +21,7 @@ class StringLexSpecificationTest extends TestCase
     #[Override]
     protected function setUp(): void
     {
-        $this->specification = new StringSpecification();
+        $this->specification = new StringSpecification(["'", '"', '`']);
     }
 
     public function testIsSatisfiedBy(): void
@@ -34,13 +34,13 @@ class StringLexSpecificationTest extends TestCase
     }
 
     #[DataProvider('getTestString')]
-    public function testParse(string $input): void
+    public function testParse(string $input, string $expected): void
     {
         /** @var StringLexical $token */
         $token = $this->specification->parse(new DirectStringStream($input));
 
         self::assertInstanceOf(StringLexical::class, $token);
-        self::assertSame(trim($input), (string)$token);
+        self::assertSame($expected, (string)$token);
     }
 
     /**
@@ -50,19 +50,12 @@ class StringLexSpecificationTest extends TestCase
     {
         return [
             [
-                <<<'TYPESCRIPT'
-"foo"
-
-TYPESCRIPT,
-                <<<'TYPESCRIPT'
-'bar'
-
-TYPESCRIPT,
+                '"foo"', 'foo',
+                "'bar'", 'bar',
                 <<<'TYPESCRIPT'
 `foo
 bar`
-
-TYPESCRIPT,
+TYPESCRIPT, 'foo' . PHP_EOL . 'bar',
             ],
         ];
     }

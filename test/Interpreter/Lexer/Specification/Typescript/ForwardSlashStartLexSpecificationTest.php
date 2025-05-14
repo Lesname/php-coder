@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace LesCoderTest\Interpreter\Lexer\Specification;
+namespace Interpreter\Lexer\Specification\Typescript;
 
 use PHPUnit\Framework\TestCase;
 use LesCoder\Stream\String\StringStream;
@@ -9,8 +9,8 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Stream\String\DirectStringStream;
 use LesCoder\Interpreter\Lexer\Lexical\CommentLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\Slash\ForwardSlashLexical;
-use LesCoder\Interpreter\Lexer\Specification\ForwardSlashStartSpecification;
 use LesCoder\Interpreter\Lexer\Specification\Exception\MissesClosingIdentifier;
+use LesCoder\Interpreter\Lexer\Specification\Typescript\ForwardSlashStartSpecification;
 
 #[CoversClass(ForwardSlashStartSpecification::class)]
 class ForwardSlashStartLexSpecificationTest extends TestCase

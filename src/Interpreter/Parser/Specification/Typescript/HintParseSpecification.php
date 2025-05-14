@@ -348,7 +348,7 @@ final class HintParseSpecification implements ParseSpecification
         $stream->next();
         $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
 
-        return new StringCodeToken(substr((string)$lexical, 1, -1));
+        return new StringCodeToken((string)$lexical);
     }
 
     /**

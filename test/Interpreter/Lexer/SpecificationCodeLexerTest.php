@@ -13,7 +13,7 @@ use LesCoder\Interpreter\Lexer\SpecificationCodeLexer;
 use LesCoder\Interpreter\Lexer\Specification\Specification;
 
 #[CoversClass(SpecificationCodeLexer::class)]
-class LexSpecificationCodeLexerTest extends TestCase
+class SpecificationCodeLexerTest extends TestCase
 {
     public function testTokenize(): void
     {

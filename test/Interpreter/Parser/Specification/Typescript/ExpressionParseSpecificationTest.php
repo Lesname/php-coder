@@ -136,10 +136,9 @@ class ExpressionParseSpecificationTest extends TestCase
         $this->specification->parse($lexicals);
     }
 
-    #[DataProvider('getStringTestValues')]
-    public function testParseString(string $enclose): void
+    public function testParseString(): void
     {
-        $string = new StringLexical("{$enclose}foo{$enclose}");
+        $string = new StringLexical("foo");
 
         $code = $this->specification->parse(
             new ArrayLexicalStream([$string]),
@@ -147,18 +146,6 @@ class ExpressionParseSpecificationTest extends TestCase
 
         self::assertInstanceOf(StringCodeToken::class, $code);
         self::assertSame('foo', $code->value);
-    }
-
-    /**
-     * @return array<mixed>
-     */
-    public static function getStringTestValues(): array
-    {
-        return [
-            ['"'],
-            ['`'],
-            ["'"],
-        ];
     }
 
     #[DataProvider('getLabelTestValues')]
@@ -292,7 +279,7 @@ class ExpressionParseSpecificationTest extends TestCase
                 new SquareBracketLeftLexical(),
                 new IntegerLexical('123'),
                 new CommaLexical(),
-                new StringLexical('"foo"'),
+                new StringLexical('foo'),
                 new CommaLexical(),
                 new SquareBracketRightLexical(),
             ],
@@ -316,7 +303,7 @@ class ExpressionParseSpecificationTest extends TestCase
     {
         $lexicals = new ArrayLexicalStream(
             [
-                new StringLexical('"foo"'),
+                new StringLexical('foo'),
                 new DotLexical(),
                 new LabelLexical('bar'),
             ],
@@ -338,7 +325,7 @@ class ExpressionParseSpecificationTest extends TestCase
     {
         $lexicals = new ArrayLexicalStream(
             [
-                new StringLexical('"foo"'),
+                new StringLexical('foo'),
                 new ParenthesisLeftLexical(),
                 new LabelLexical('bar'),
                 new CommaLexical(),
@@ -367,7 +354,7 @@ class ExpressionParseSpecificationTest extends TestCase
     {
         $lexicals = new ArrayLexicalStream(
             [
-                new StringLexical('"foo"'),
+                new StringLexical('foo'),
                 new SquareBracketLeftLexical(),
                 new LabelLexical('bar'),
                 new SquareBracketRightLexical(),

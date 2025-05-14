@@ -12,10 +12,9 @@ use LesCoder\Interpreter\Lexer\Lexical\Character\CommaLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\TildeLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\AtSignLexical;
 use LesCoder\Interpreter\Lexer\Specification\PipeSpecification;
-use LesCoder\Interpreter\Lexer\Specification\PlusSpecification;
-use LesCoder\Interpreter\Lexer\Specification\MinusSpecification;
 use LesCoder\Interpreter\Lexer\Specification\LabelSpecification;
 use LesCoder\Interpreter\Lexer\Lexical\Character\AsteriskLexical;
+use LesCoder\Interpreter\Lexer\Specification\StringSpecification;
 use LesCoder\Interpreter\Lexer\Lexical\Character\SemicolonLexical;
 use LesCoder\Interpreter\Lexer\Specification\IntegerSpecification;
 use LesCoder\Interpreter\Lexer\Lexical\Character\PercentageLexical;
@@ -23,12 +22,13 @@ use LesCoder\Interpreter\Lexer\Specification\AmpersandSpecification;
 use LesCoder\Interpreter\Lexer\Specification\CharacterSpecification;
 use LesCoder\Interpreter\Lexer\Specification\ComparisonSpecification;
 use LesCoder\Interpreter\Lexer\Specification\WhitespaceSpecification;
-use LesCoder\Interpreter\Lexer\Specification\QuestionMarkSpecification;
-use LesCoder\Interpreter\Lexer\Specification\ForwardSlashStartSpecification;
-use LesCoder\Interpreter\Lexer\Specification\Typescript\StringSpecification;
+use LesCoder\Interpreter\Lexer\Specification\Typescript\PlusSpecification;
+use LesCoder\Interpreter\Lexer\Specification\Typescript\MinusSpecification;
+use LesCoder\Interpreter\Lexer\Specification\Typescript\QuestionMarkSpecification;
 use LesCoder\Interpreter\Lexer\Lexical\Character\Parenthesis\ParenthesisLeftLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\Parenthesis\ParenthesisRightLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\CurlyBracket\CurlyBracketLeftLexical;
+use LesCoder\Interpreter\Lexer\Specification\Typescript\ForwardSlashStartSpecification;
 use LesCoder\Interpreter\Lexer\Lexical\Character\CurlyBracket\CurlyBracketRightLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\SquareBracket\SquareBracketLeftLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\SquareBracket\SquareBracketRightLexical;
@@ -55,7 +55,7 @@ final class TypescriptCodeLexer implements CodeLexer
                 new MinusSpecification(),
                 new PlusSpecification(),
 
-                new StringSpecification(),
+                new StringSpecification(["'", '"', '`']),
                 new IntegerSpecification(),
 
                 new LabelSpecification(),

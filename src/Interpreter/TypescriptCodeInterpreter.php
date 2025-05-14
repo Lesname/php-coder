@@ -101,7 +101,7 @@ final class TypescriptCodeInterpreter implements CodeInterpreter
 
             $this->expectLexical($stream, StringLexical::TYPE);
 
-            $from = substr((string)$stream->current(), 1, -1);
+            $from = (string)$stream->current();
             $stream->next();
 
             if ($stream->current()->getType() === SemicolonLexical::TYPE) {
@@ -164,7 +164,7 @@ final class TypescriptCodeInterpreter implements CodeInterpreter
             throw new RuntimeException();
         }
 
-        $from = substr((string)$stream->current(), 1, -1);
+        $from = (string)$stream->current();
         $stream->next();
 
         if ($stream->current()->getType() === SemicolonLexical::TYPE) {

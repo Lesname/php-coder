@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace LesCoderTest\Interpreter\Lexer\Specification;
+namespace Interpreter\Lexer\Specification\Typescript;
 
 use Override;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Stream\String\DirectStringStream;
 use LesCoder\Interpreter\Lexer\Specification\Specification;
-use LesCoder\Interpreter\Lexer\Specification\MinusSpecification;
+use LesCoder\Interpreter\Lexer\Specification\Typescript\MinusSpecification;
 
 #[CoversClass(MinusSpecification::class)]
 class MinusLexSpecificationTest extends TestCase
