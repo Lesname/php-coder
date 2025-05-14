@@ -18,12 +18,8 @@ final class IteratorLexicalStream extends AbstractLexicalStream
     {}
 
     #[Override]
-    public function current(int $length = 1): Lexical
+    public function current(): Lexical
     {
-        if ($length > 1) {
-            throw new RuntimeException();
-        }
-
         return $this->iterator->current();
     }
 

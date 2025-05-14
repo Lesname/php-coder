@@ -11,7 +11,7 @@ interface Stream
     /**
      * @return T
      */
-    public function current(int $length = 1): mixed;
+    public function current(): mixed;
 
     public function next(int $size = 1): void;
 
