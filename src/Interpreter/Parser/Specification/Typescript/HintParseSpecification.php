@@ -130,8 +130,6 @@ final class HintParseSpecification implements ParseSpecification
     /**
      * @throws UnexpectedEnd
      * @throws UnexpectedLexical
-     *
-     * @todo support generic
      */
     private function parseHint(LexicalStream $stream, ?string $file): CodeToken
     {
@@ -219,7 +217,10 @@ final class HintParseSpecification implements ParseSpecification
             return BuiltInCodeToken::Collection;
         }
 
-        // @todo fix keyof support
+        /**
+         * @todo fix keyof support
+         * @see https://github.com/Lesname/php-coder/issues/4
+         */
         if ($label === 'keyof') {
             $stream->next();
             $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
@@ -229,7 +230,10 @@ final class HintParseSpecification implements ParseSpecification
             return BuiltInCodeToken::Any;
         }
 
-        // @todo fix typeof support
+        /**
+         * @todo fix typeof support
+         * @see https://github.com/Lesname/php-coder/issues/3
+         */
         if ($label === 'typeof') {
             $stream->next();
             $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
@@ -350,8 +354,6 @@ final class HintParseSpecification implements ParseSpecification
     /**
      * @throws UnexpectedEnd
      * @throws UnexpectedLexical
-     *
-     * @todo support anonymous function
      */
     private function parseHintParenthesis(LexicalStream $stream, ?string $file): CodeToken
     {
@@ -495,7 +497,10 @@ final class HintParseSpecification implements ParseSpecification
                     $stream->next();
                     $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
 
-                    // @todo fix type
+                    /**
+                     * @todo fix actual type
+                     * @see https://github.com/Lesname/php-coder/issues/2
+                     */
                     $hint = BuiltInCodeToken::Any;
                 } else {
                     $this->expectLexical($stream, ColonLexical::TYPE);
