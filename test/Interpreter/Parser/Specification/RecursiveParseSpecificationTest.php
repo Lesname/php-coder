@@ -6,14 +6,14 @@ namespace LesCoderTest\Interpreter\Parser\Specification;
 use LesCoder\Token\CodeToken;
 use LesCoder\Stream\Lexical\LexicalStream;
 use LesCoder\Interpreter\Parser\Specification\ParseSpecification;
-use LesCoder\Interpreter\Parser\Specification\GroupParseSpecification;
+use LesCoder\Interpreter\Parser\Specification\RecursiveParseSpecification;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Interpreter\Parser\Specification\Exception\NoParseSpecification;
 use LesCoder\Interpreter\Parser\Specification\Exception\ExpectedParseSpecification;
 
-#[CoversClass(GroupParseSpecification::class)]
-class GroupParseSpecificationTest extends TestCase
+#[CoversClass(RecursiveParseSpecification::class)]
+class RecursiveParseSpecificationTest extends TestCase
 {
     public function testDirectSpecification(): void
     {
@@ -25,7 +25,7 @@ class GroupParseSpecificationTest extends TestCase
         $specification->expects(self::exactly(2))->method('isSatisfiedBy')->with($stream)->willReturn(true);
         $specification->expects(self::once())->method('parse')->with($stream)->willReturn($token);
 
-        $groupSpecification = new GroupParseSpecification([$specification]);
+        $groupSpecification = new RecursiveParseSpecification([$specification]);
 
         self::assertTrue($groupSpecification->isSatisfiedBy($stream));
         self::assertSame($token, $groupSpecification->parse($stream));
@@ -43,7 +43,7 @@ class GroupParseSpecificationTest extends TestCase
 
         $capture = null;
 
-        $groupSpecification = new GroupParseSpecification(
+        $groupSpecification = new RecursiveParseSpecification(
             [
                 function (ParseSpecification $parentSpecification) use (&$capture, $specification) {
                     $capture = $parentSpecification;
@@ -62,7 +62,7 @@ class GroupParseSpecificationTest extends TestCase
 
         // ignore is for test needed
         /** @phpstan-ignore argument.type */
-        new GroupParseSpecification(['test']);
+        new RecursiveParseSpecification(['test']);
     }
 
     public function testNoParseSpecification(): void
@@ -75,7 +75,7 @@ class GroupParseSpecificationTest extends TestCase
         $specification->expects(self::once())->method('isSatisfiedBy')->with($stream)->willReturn(false);
         $specification->expects(self::never())->method('parse');
 
-        $groupSpecification = new GroupParseSpecification([$specification]);
+        $groupSpecification = new RecursiveParseSpecification([$specification]);
 
         $groupSpecification->parse($stream);
     }
