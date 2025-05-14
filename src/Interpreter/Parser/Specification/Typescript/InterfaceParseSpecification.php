@@ -181,16 +181,19 @@ final class InterfaceParseSpecification implements ParseSpecification
                 continue;
             }
 
+            $readonly = false;
+
             if ($this->isLexical($stream, LabelLexical::TYPE)) {
                 $name = (string)$stream->current();
                 $stream->next();
 
                 $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
 
-                // @todo fix actual readonly support
                 if ($name === 'readonly' && $this->isLexical($stream, LabelLexical::TYPE)) {
                     $name = (string)$stream->current();
                     $stream->next();
+
+                    $readonly = true;
                 }
 
                 $name = new StringCodeToken($name);
@@ -233,6 +236,10 @@ final class InterfaceParseSpecification implements ParseSpecification
                     throw new RuntimeException();
                 }
 
+                if ($readonly) {
+                    throw new RuntimeException();
+                }
+
                 $methods[] = $this->parseInterfaceMethod($stream, $name->value, $required, $file);
             } elseif ($this->isLexical($stream, ColonLexical::TYPE)) {
                 $stream->next();
@@ -242,7 +249,7 @@ final class InterfaceParseSpecification implements ParseSpecification
                 $hint = $this->hintParseSpecification->parse($stream, $file);
                 $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
 
-                $properties[] = new InterfacePropertyCodeToken($name, $hint, comment: $comment, required: $required);
+                $properties[] = new InterfacePropertyCodeToken($name, $hint, comment: $comment, required: $required, readonly:  $readonly);
             } elseif ($this->isLexical($stream, CommaLexical::TYPE, SemicolonLexical::TYPE, CurlyBracketRightLexical::TYPE)) {
                 if ($this->isLexical($stream, CommaLexical::TYPE, SemicolonLexical::TYPE)) {
                     $stream->next();

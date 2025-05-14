@@ -25,6 +25,7 @@ final class InterfacePropertyCodeToken implements CodeToken
         public readonly array $attributes = [],
         public readonly ?CommentCodeToken $comment = null,
         public readonly bool $required = true,
+        public readonly bool $readonly = false,
     ) {}
 
     /**
