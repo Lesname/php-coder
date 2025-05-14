@@ -8,15 +8,14 @@ use LesCoder\Token\CodeToken;
 use LesCoder\Token\Hint\ReferenceCodeToken;
 use LesCoder\Token\LineCodeToken;
 use LesCoder\Token\Object\ClassCodeToken;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Token\Object\ClassMethodCodeToken;
 use LesCoder\Token\Object\ClassPropertyCodeToken;
 use LesCoder\Token\Object\Visibility;
 use LesCoder\Token\ParameterCodeToken;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LesCoder\Token\Object\ClassCodeToken
- */
+#[CoversClass(ClassCodeToken::class)]
 final class ClassCodeTokenTest extends TestCase
 {
     public function testGetImports(): void

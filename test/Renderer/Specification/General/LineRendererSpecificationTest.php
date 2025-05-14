@@ -7,13 +7,12 @@ use Override;
 use LesCoder\Token\CodeToken;
 use LesCoder\Token\LineCodeToken;
 use LesCoder\Renderer\CodeRenderer;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Renderer\Specification\RendererSpecification;
 use LesCoder\Renderer\Specification\General\LineRendererSpecification;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LesCoder\Renderer\Specification\General\LineRendererSpecification
- */
+#[CoversClass(LineRendererSpecification::class)]
 class LineRendererSpecificationTest extends TestCase
 {
     public RendererSpecification $specification;

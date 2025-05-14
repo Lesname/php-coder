@@ -6,10 +6,9 @@ namespace LesCoderTest\Token\Hint;
 use LesCoder\Token\CodeToken;
 use LesCoder\Token\Hint\GenericCodeToken;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @covers \LesCoder\Token\Hint\GenericCodeToken
- */
+#[CoversClass(GenericCodeToken::class)]
 final class GenericCodeTokenTest extends TestCase
 {
     public function testgetImports(): void

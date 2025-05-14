@@ -8,12 +8,11 @@ use PHPUnit\Framework\TestCase;
 use LesCoder\Token\CodeToken;
 use LesCoder\Renderer\CodeRenderer;
 use LesCoder\Token\Object\AccessCodeToken;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Renderer\Specification\RendererSpecification;
 use LesCoder\Renderer\Specification\Php\Object\AccessRendererSpecification;
 
-/**
- * @covers \LesCoder\Renderer\Specification\Php\Object\AccessRendererSpecification
- */
+#[CoversClass(AccessRendererSpecification::class)]
 class AccessRendererSpecificationTest extends TestCase
 {
     public RendererSpecification $specification;

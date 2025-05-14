@@ -6,14 +6,13 @@ namespace LesCoderTest\Renderer\Specification\Typescript\Expression;
 use Override;
 use LesCoder\Token\CodeToken;
 use LesCoder\Renderer\CodeRenderer;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Token\Expression\ExportCodeToken;
 use LesCoder\Renderer\Specification\RendererSpecification;
 use LesCoder\Renderer\Specification\Typescript\Expression\ExportRendererSpecification;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LesCoder\Renderer\Specification\Typescript\Expression\ExportRendererSpecification
- */
+#[CoversClass(ExportRendererSpecification::class)]
 class ExportRendererSpecificationTest extends TestCase
 {
     public RendererSpecification $specification;

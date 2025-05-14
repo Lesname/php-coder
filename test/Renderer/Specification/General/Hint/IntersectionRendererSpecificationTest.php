@@ -6,14 +6,13 @@ namespace LesCoderTest\Renderer\Specification\General\Hint;
 use Override;
 use LesCoder\Token\CodeToken;
 use LesCoder\Renderer\CodeRenderer;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Token\Hint\IntersectionCodeToken;
 use LesCoder\Renderer\Specification\RendererSpecification;
 use LesCoder\Renderer\Specification\General\Hint\IntersectionRendererSpecification;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LesCoder\Renderer\Specification\General\Hint\IntersectionRendererSpecification
- */
+#[CoversClass(IntersectionRendererSpecification::class)]
 class IntersectionRendererSpecificationTest extends TestCase
 {
     public RendererSpecification $specification;

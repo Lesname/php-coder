@@ -7,13 +7,12 @@ use Override;
 use LesCoder\Token\CodeToken;
 use LesCoder\Renderer\CodeRenderer;
 use LesCoder\Token\Object\NamespaceCodeToken;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Renderer\Specification\RendererSpecification;
 use LesCoder\Renderer\Specification\Php\Object\NamespaceRendererSpecification;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LesCoder\Renderer\Specification\Php\Object\NamespaceRendererSpecification
- */
+#[CoversClass(NamespaceRendererSpecification::class)]
 class NamespaceRendererSpecificationTest extends TestCase
 {
     public RendererSpecification $specification;

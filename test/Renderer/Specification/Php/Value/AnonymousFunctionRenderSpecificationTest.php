@@ -7,14 +7,13 @@ use Override;
 use LesCoder\Token\CodeToken;
 use LesCoder\Renderer\CodeRenderer;
 use LesCoder\Token\ParameterCodeToken;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Token\Value\AnonymousFunctionCodeToken;
 use LesCoder\Renderer\Specification\RendererSpecification;
 use LesCoder\Renderer\Specification\Php\Value\AnonymousFunctionRenderSpecification;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LesCoder\Renderer\Specification\Php\Value\AnonymousFunctionRenderSpecification
- */
+#[CoversClass(AnonymousFunctionRenderSpecification::class)]
 class AnonymousFunctionRenderSpecificationTest extends TestCase
 {
     public RendererSpecification $specification;

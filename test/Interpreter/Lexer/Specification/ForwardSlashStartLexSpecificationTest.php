@@ -5,15 +5,14 @@ namespace LesCoderTest\Interpreter\Lexer\Specification;
 
 use PHPUnit\Framework\TestCase;
 use LesCoder\Stream\String\StringStream;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Stream\String\DirectStringStream;
 use LesCoder\Interpreter\Lexer\Lexical\CommentLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\Slash\ForwardSlashLexical;
 use LesCoder\Interpreter\Lexer\Specification\ForwardSlashStartSpecification;
 use LesCoder\Interpreter\Lexer\Specification\Exception\MissesClosingIdentifier;
 
-/**
- * @covers \LesCoder\Interpreter\Lexer\Specification\ForwardSlashStartSpecification
- */
+#[CoversClass(ForwardSlashStartSpecification::class)]
 class ForwardSlashStartLexSpecificationTest extends TestCase
 {
     public function testIsSatisfiedByTrue(): void

@@ -7,13 +7,12 @@ use Override;
 use LesCoder\Token\CodeToken;
 use LesCoder\Renderer\CodeRenderer;
 use LesCoder\Token\Block\IfCodeToken;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Renderer\Specification\RendererSpecification;
 use LesCoder\Renderer\Specification\Typescript\Block\IfRendererSpecification;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LesCoder\Renderer\Specification\Typescript\Block\IfRendererSpecification
- */
+#[CoversClass(IfRendererSpecification::class)]
 class IfRendererSpecificationTest extends TestCase
 {
     public RendererSpecification $specification;

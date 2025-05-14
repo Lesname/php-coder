@@ -10,14 +10,13 @@ use LesCoder\Renderer\CodeRenderer;
 use LesCoder\Token\AttributeCodeToken;
 use LesCoder\Token\Hint\ReferenceCodeToken;
 use LesCoder\Token\Object\InterfaceCodeToken;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Token\Hint\GenericParameterCodeToken;
 use LesCoder\Token\Object\InterfaceMethodCodeToken;
 use LesCoder\Renderer\Specification\RendererSpecification;
 use LesCoder\Renderer\Specification\Php\Object\InterfaceRendererSpecification;
 
-/**
- * @covers \LesCoder\Renderer\Specification\Php\Object\InterfaceRendererSpecification
- */
+#[CoversClass(InterfaceRendererSpecification::class)]
 class InterfaceRendererSpecificationTest extends TestCase
 {
     public RendererSpecification $specification;

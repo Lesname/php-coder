@@ -5,9 +5,11 @@ namespace LesCoderTest\Interpreter\Lexer\Specification;
 
 use Override;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use LesCoder\Stream\String\DirectStringStream;
 use LesCoder\Interpreter\Lexer\Lexical\Lexical;
+use LesCoder\Stream\String\Exception\ExpectedExactly;
 use LesCoder\Interpreter\Lexer\Specification\Specification;
 use LesCoder\Interpreter\Lexer\Lexical\Character\LowerThanLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\GreaterThanLexical;
@@ -19,9 +21,7 @@ use LesCoder\Interpreter\Lexer\Lexical\Expression\Comparison\NotEqualsLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Expression\Comparison\LowerThanOrEqualsLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Expression\Comparison\GreaterThanOrEqualsLexical;
 
-/**
- * @covers \LesCoder\Interpreter\Lexer\Specification\ComparisonSpecification
- */
+#[CoversClass(ComparisonSpecification::class)]
 class ComparisonLexSpecificationTest extends TestCase
 {
     private Specification $specification;
@@ -44,6 +44,8 @@ class ComparisonLexSpecificationTest extends TestCase
 
     /**
      * @param class-string $expect
+     *
+     * @throws ExpectedExactly
      */
     #[DataProvider('getTestParseValues')]
     public function testParse(string $text, string $expect): void

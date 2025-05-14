@@ -3,12 +3,11 @@ declare(strict_types=1);
 
 namespace LesCoderTest\Renderer\Specification\Helper;
 
+use PHPUnit\Framework\Attributes\CoversTrait;
 use LesCoder\Renderer\Specification\Helper\CommentRendererHelper;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LesCoder\Renderer\Specification\Helper\CommentRendererHelper
- */
+#[CoversTrait(CommentRendererHelper::class)]
 class CommentRendererHelperTest extends TestCase
 {
     public function testSingleLine(): void

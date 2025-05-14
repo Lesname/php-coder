@@ -3,13 +3,12 @@ declare(strict_types=1);
 
 namespace LesCoderTest\Token;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Token\AbstractCollectionCodeToken;
 use LesCoder\Token\CodeToken;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LesCoder\Token\AbstractCollectionCodeToken
- */
+#[CoversClass(AbstractCollectionCodeToken::class)]
 final class AbstractCollectionCodeTokenTest extends TestCase
 {
     public function testGetImports(): void

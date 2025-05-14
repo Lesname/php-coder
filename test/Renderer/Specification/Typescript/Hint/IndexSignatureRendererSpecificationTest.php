@@ -6,14 +6,13 @@ namespace LesCoderTest\Renderer\Specification\Typescript\Hint;
 use Override;
 use LesCoder\Token\CodeToken;
 use LesCoder\Renderer\CodeRenderer;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Token\Hint\IndexSignatureCodeToken;
 use LesCoder\Renderer\Specification\RendererSpecification;
 use LesCoder\Renderer\Specification\Typescript\Hint\IndexSignatureRendererSpecification;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LesCoder\Renderer\Specification\Typescript\Hint\IndexSignatureRendererSpecification
- */
+#[CoversClass(IndexSignatureRendererSpecification::class)]
 class IndexSignatureRendererSpecificationTest extends TestCase
 {
     public RendererSpecification $specification;

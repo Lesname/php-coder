@@ -5,13 +5,12 @@ namespace LesCoderTest\Interpreter\Lexer\Specification;
 
 use Override;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Stream\String\DirectStringStream;
 use LesCoder\Interpreter\Lexer\Specification\Specification;
 use LesCoder\Interpreter\Lexer\Specification\IntegerSpecification;
 
-/**
- * @covers \LesCoder\Interpreter\Lexer\Specification\IntegerSpecification
- */
+#[CoversClass(IntegerSpecification::class)]
 class IntegerLexSpecificationTest extends TestCase
 {
     private Specification $specification;

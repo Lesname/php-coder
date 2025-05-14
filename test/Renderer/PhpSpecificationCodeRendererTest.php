@@ -8,7 +8,10 @@ use LesCoder\Token\FileCodeToken;
 use LesCoder\Renderer\CodeRenderer;
 use LesCoder\Token\CommentCodeToken;
 use LesCoder\Token\Block\IfCodeToken;
+use LesCoder\Token\Object\Visibility;
 use LesCoder\Token\AttributeCodeToken;
+use LesCoder\Token\Object\EnumCodeToken;
+use LesCoder\Token\Object\ClassCodeToken;
 use LesCoder\Token\Object\AccessCodeToken;
 use LesCoder\Token\Expression\AndCodeToken;
 use LesCoder\Token\Expression\OrCodeToken;
@@ -20,11 +23,16 @@ use LesCoder\Token\ReturnCodeToken;
 use LesCoder\Token\Value;
 use LesCoder\Token\VariableCodeToken;
 use PHPUnit\Framework\TestCase;
+use LesCoder\Token\Object\InitiateCodeToken;
+use LesCoder\Token\Object\NamespaceCodeToken;
+use LesCoder\Token\Object\InterfaceCodeToken;
+use PHPUnit\Framework\Attributes\CoversClass;
+use LesCoder\Token\Object\ClassMethodCodeToken;
+use LesCoder\Token\Object\ClassPropertyCodeToken;
 use LesCoder\Renderer\PhpSpecificationCodeRenderer;
+use LesCoder\Token\Object\InterfaceMethodCodeToken;
 
-/**
- * @covers \LesCoder\Renderer\PhpSpecificationCodeRenderer
- */
+#[CoversClass(PhpSpecificationCodeRenderer::class)]
 class PhpSpecificationCodeRendererTest extends TestCase
 {
     protected CodeRenderer $codeRenderer;
@@ -166,9 +174,9 @@ PHP;
 
     public function testRenderObjectAccess(): void
     {
-        $token = new \LesCoder\Token\Object\AccessCodeToken(
-            new \LesCoder\Token\Object\AccessCodeToken(
-                new \LesCoder\Token\Object\AccessCodeToken(
+        $token = new AccessCodeToken(
+            new AccessCodeToken(
+                new AccessCodeToken(
                     new Hint\ReferenceCodeToken('bar', 'foo'),
                     new Value\StringCodeToken('fiz'),
                 ),
@@ -182,7 +190,7 @@ PHP;
 
     public function testRenderObjectAccessNonLabelChar(): void
     {
-        $token = new \LesCoder\Token\Object\AccessCodeToken(
+        $token = new AccessCodeToken(
             new Hint\ReferenceCodeToken('bar', 'foo'),
             new Value\StringCodeToken('fiz#'),
             AccessCodeToken::FLAG_NULLABLE,
@@ -193,7 +201,7 @@ PHP;
 
     public function testRenderObjectAccessNullable(): void
     {
-        $token = new \LesCoder\Token\Object\AccessCodeToken(
+        $token = new AccessCodeToken(
             new Hint\ReferenceCodeToken('bar', 'foo'),
             new Value\StringCodeToken('fiz'),
             AccessCodeToken::FLAG_NULLABLE,
@@ -204,7 +212,7 @@ PHP;
 
     public function testRenderObjectClass(): void
     {
-        $token = new \LesCoder\Token\Object\ClassCodeToken(
+        $token = new ClassCodeToken(
             'Fiz',
             extends: new Hint\ReferenceCodeToken('Extends', 'ex'),
             implements: [new Hint\ReferenceCodeToken('Impl', 'impl')],
@@ -215,8 +223,8 @@ PHP;
                 ),
             ],
             properties: [
-                new \LesCoder\Token\Object\ClassPropertyCodeToken(
-                    \LesCoder\Token\Object\Visibility::Public,
+                new ClassPropertyCodeToken(
+                    Visibility::Public,
                     'biz',
                     new Hint\ReferenceCodeToken('bar', 'foo'),
                     attributes: [
@@ -229,8 +237,8 @@ PHP;
                 ),
             ],
             methods: [
-                new \LesCoder\Token\Object\ClassMethodCodeToken(
-                    \LesCoder\Token\Object\Visibility::Public,
+                new ClassMethodCodeToken(
+                    Visibility::Public,
                     'far',
                     [
                         new ParameterCodeToken(
@@ -266,7 +274,7 @@ PHP;
 
     public function testObjectEnum(): void
     {
-        $token = new \LesCoder\Token\Object\EnumCodeToken(
+        $token = new EnumCodeToken(
             'Foo',
             [
                 'Fiz' => new Value\StringCodeToken('bar'),
@@ -313,7 +321,7 @@ PHP;
 
     public function testObjectInitiate(): void
     {
-        $token = new \LesCoder\Token\Object\InitiateCodeToken(
+        $token = new InitiateCodeToken(
             new Hint\ReferenceCodeToken('Bar', 'foo'),
             [new Value\IntegerCodeToken(123456)],
         );
@@ -323,7 +331,7 @@ PHP;
 
     public function testRenderObjectInterface(): void
     {
-        $token = new \LesCoder\Token\Object\InterfaceCodeToken(
+        $token = new InterfaceCodeToken(
             'Fiz',
             extends: [new Hint\ReferenceCodeToken('Extends', 'ex')],
             attributes: [
@@ -334,7 +342,7 @@ PHP;
             ],
             properties: [],
             methods: [
-                new \LesCoder\Token\Object\InterfaceMethodCodeToken(
+                new InterfaceMethodCodeToken(
                     'far',
                     [
                         new ParameterCodeToken(
@@ -361,8 +369,8 @@ PHP;
 
     public function testRenderObjectClassMethod(): void
     {
-        $token = new \LesCoder\Token\Object\ClassMethodCodeToken(
-            \LesCoder\Token\Object\Visibility::Public,
+        $token = new ClassMethodCodeToken(
+            Visibility::Public,
             'fiz',
             [
                 new ParameterCodeToken(
@@ -394,7 +402,7 @@ PHP;
     {
         $token = new VariableCodeToken('foo');
 
-        $namespace = new \LesCoder\Token\Object\NamespaceCodeToken(
+        $namespace = new NamespaceCodeToken(
             'Biz',
             [$token],
         );
@@ -501,10 +509,10 @@ TXT;
     public function testRenderAccessChainFlat(): void
     {
         $code = new InvokeCodeToken(
-            new \LesCoder\Token\Object\AccessCodeToken(
+            new AccessCodeToken(
                 new InvokeCodeToken(
-                    new \LesCoder\Token\Object\AccessCodeToken(
-                        new \LesCoder\Token\Object\AccessCodeToken(
+                    new AccessCodeToken(
+                        new AccessCodeToken(
                             new Value\StringCodeToken('fiz'),
                             new Value\StringCodeToken('biz'),
                         ),
@@ -530,10 +538,10 @@ TXT;
     public function testRenderAccessChainLine(): void
     {
         $code = new InvokeCodeToken(
-            new \LesCoder\Token\Object\AccessCodeToken(
+            new AccessCodeToken(
                 new InvokeCodeToken(
-                    new \LesCoder\Token\Object\AccessCodeToken(
-                        new \LesCoder\Token\Object\AccessCodeToken(
+                    new AccessCodeToken(
+                        new AccessCodeToken(
                             new Value\StringCodeToken('fiz'),
                             new Value\StringCodeToken('biz'),
                         ),

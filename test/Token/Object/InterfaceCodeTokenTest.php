@@ -7,15 +7,14 @@ use LesCoder\Token\AttributeCodeToken;
 use LesCoder\Token\CodeToken;
 use LesCoder\Token\Hint\ReferenceCodeToken;
 use LesCoder\Token\Object\InterfaceCodeToken;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Token\Object\InterfaceMethodCodeToken;
 use LesCoder\Token\Object\InterfacePropertyCodeToken;
 use LesCoder\Token\ParameterCodeToken;
 use LesCoder\Token\Value\StringCodeToken;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LesCoder\Token\Object\InterfaceCodeToken
- */
+#[CoversClass(InterfaceCodeToken::class)]
 final class InterfaceCodeTokenTest extends TestCase
 {
     public function testGetImports(): void

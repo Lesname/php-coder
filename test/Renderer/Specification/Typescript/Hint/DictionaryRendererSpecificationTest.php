@@ -7,13 +7,12 @@ use Override;
 use LesCoder\Token\CodeToken;
 use LesCoder\Renderer\CodeRenderer;
 use LesCoder\Token\Hint\DictionaryCodeToken;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Renderer\Specification\RendererSpecification;
 use LesCoder\Renderer\Specification\Typescript\Hint\DictionaryRendererSpecification;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LesCoder\Renderer\Specification\Typescript\Hint\DictionaryRendererSpecification
- */
+#[CoversClass(DictionaryRendererSpecification::class)]
 class DictionaryRendererSpecificationTest extends TestCase
 {
     public RendererSpecification $specification;

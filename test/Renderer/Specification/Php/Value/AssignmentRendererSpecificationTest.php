@@ -8,12 +8,11 @@ use PHPUnit\Framework\TestCase;
 use LesCoder\Token\CodeToken;
 use LesCoder\Renderer\CodeRenderer;
 use LesCoder\Token\Value\AssignmentCodeToken;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Renderer\Specification\RendererSpecification;
 use LesCoder\Renderer\Specification\Php\Value\AssignmentRendererSpecification;
 
-/**
- * @covers \LesCoder\Renderer\Specification\Php\Value\AssignmentRendererSpecification
- */
+#[CoversClass(AssignmentRendererSpecification::class)]
 class AssignmentRendererSpecificationTest extends TestCase
 {
     public RendererSpecification $specification;

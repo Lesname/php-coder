@@ -4,17 +4,15 @@ declare(strict_types=1);
 namespace LesCoderTest\Interpreter\Lexer;
 
 use PHPUnit\Framework\TestCase;
-use LesCoder\ValueObject\Position;
 use LesCoder\Stream\String\StringStream;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Stream\String\DirectStringStream;
 use LesCoder\Interpreter\Lexer\Lexical\Lexical;
 use LesCoder\Interpreter\Lexer\Lexical\TextLexical;
 use LesCoder\Interpreter\Lexer\SpecificationCodeLexer;
 use LesCoder\Interpreter\Lexer\Specification\Specification;
 
-/**
- * @covers \LesCoder\Interpreter\Lexer\SpecificationCodeLexer
- */
+#[CoversClass(SpecificationCodeLexer::class)]
 class LexSpecificationCodeLexerTest extends TestCase
 {
     public function testTokenize(): void

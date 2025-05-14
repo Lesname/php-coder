@@ -8,10 +8,9 @@ use PHPUnit\Framework\TestCase;
 use LesCoder\Stream\String\DirectStringStream;
 use LesCoder\Interpreter\Lexer\Specification\Specification;
 use LesCoder\Interpreter\Lexer\Specification\PipeSpecification;
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @covers \LesCoder\Interpreter\Lexer\Specification\PipeSpecification
- */
+#[CoversClass(PipeSpecification::class)]
 class PipeLexSpecificationTest extends TestCase
 {
     private Specification $specification;

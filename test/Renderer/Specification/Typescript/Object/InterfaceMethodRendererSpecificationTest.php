@@ -9,13 +9,12 @@ use LesCoder\Token\CodeToken;
 use LesCoder\Renderer\CodeRenderer;
 use LesCoder\Token\CommentCodeToken;
 use LesCoder\Token\ParameterCodeToken;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Token\Object\InterfaceMethodCodeToken;
 use LesCoder\Renderer\Specification\RendererSpecification;
 use LesCoder\Renderer\Specification\Typescript\Object\InterfaceMethodRendererSpecification;
 
-/**
- * @covers \LesCoder\Renderer\Specification\Typescript\Object\InterfaceMethodRendererSpecification
- */
+#[CoversClass(InterfaceMethodRendererSpecification::class)]
 class InterfaceMethodRendererSpecificationTest extends TestCase
 {
     public RendererSpecification $specification;

@@ -3,15 +3,13 @@ declare(strict_types=1);
 
 namespace LesCoderTest\Renderer\Specification\Helper;
 
-use Override;
 use PHPUnit\Framework\TestCase;
 use LesCoder\Token\CodeToken;
 use LesCoder\Renderer\CodeRenderer;
+use PHPUnit\Framework\Attributes\CoversTrait;
 use LesCoder\Renderer\Specification\Helper\TokenListRenderHelper;
 
-/**
- * @covers \LesCoder\Renderer\Specification\Helper\TokenListRenderHelper
- */
+#[CoversTrait(TokenListRenderHelper::class)]
 class TokenListRenderHelperTest extends TestCase
 {
     public function testSimple(): void

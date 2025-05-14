@@ -7,13 +7,12 @@ use Override;
 use LesCoder\Token\CodeToken;
 use LesCoder\Renderer\CodeRenderer;
 use LesCoder\Token\Value\CollectionCodeToken;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Renderer\Specification\RendererSpecification;
 use LesCoder\Renderer\Specification\Typescript\Value\CollectionRendererSpecification;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LesCoder\Renderer\Specification\Typescript\Value\CollectionRendererSpecification
- */
+#[CoversClass(CollectionRendererSpecification::class)]
 class CollectionRendererSpecificationTest extends TestCase
 {
     public RendererSpecification $specification;

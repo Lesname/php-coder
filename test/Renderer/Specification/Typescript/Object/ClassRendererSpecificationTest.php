@@ -5,7 +5,6 @@ namespace LesCoderTest\Renderer\Specification\Typescript\Object;
 
 use Override;
 use PHPUnit\Framework\TestCase;
-use PHP_CodeSniffer\Reports\Code;
 use LesCoder\Token\CodeToken;
 use LesCoder\Renderer\CodeRenderer;
 use LesCoder\Token\CommentCodeToken;
@@ -13,15 +12,14 @@ use LesCoder\Token\Object\Visibility;
 use LesCoder\Token\AttributeCodeToken;
 use LesCoder\Token\Object\ClassCodeToken;
 use LesCoder\Token\Hint\ReferenceCodeToken;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Token\Object\ClassMethodCodeToken;
 use LesCoder\Token\Object\ClassPropertyCodeToken;
 use LesCoder\Token\Hint\GenericParameterCodeToken;
 use LesCoder\Renderer\Specification\RendererSpecification;
 use LesCoder\Renderer\Specification\Typescript\Object\ClassRendererSpecification;
 
-/**
- * @covers \LesCoder\Renderer\Specification\Typescript\Object\ClassRendererSpecification
- */
+#[CoversClass(ClassRendererSpecification::class)]
 class ClassRendererSpecificationTest extends TestCase
 {
     public RendererSpecification $specification;

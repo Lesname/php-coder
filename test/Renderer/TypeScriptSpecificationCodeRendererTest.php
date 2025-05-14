@@ -12,7 +12,7 @@ use LesCoder\Token\Object\AccessCodeToken;
 use LesCoder\Token\Expression\AndCodeToken;
 use LesCoder\Token\Object\InitiateCodeToken;
 use LesCoder\Token\Object\InterfaceCodeToken;
-use LesCoder\Token\Value\CollectionCodeToken;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Token\Expression\ExportCodeToken;
 use LesCoder\Token\Expression\OrCodeToken;
 use LesCoder\Token\Object\ClassMethodCodeToken;
@@ -33,9 +33,7 @@ use LesCoder\Token\Value;
 use LesCoder\Token\VariableCodeToken;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LesCoder\Renderer\TypeScriptSpecificationCodeRenderer
- */
+#[CoversClass(TypeScriptSpecificationCodeRenderer::class)]
 class TypeScriptSpecificationCodeRendererTest extends TestCase
 {
     protected CodeRenderer $codeRenderer;

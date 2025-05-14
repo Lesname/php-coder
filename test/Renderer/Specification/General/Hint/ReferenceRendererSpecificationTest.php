@@ -7,13 +7,12 @@ use Override;
 use LesCoder\Token\CodeToken;
 use LesCoder\Renderer\CodeRenderer;
 use LesCoder\Token\Hint\ReferenceCodeToken;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Renderer\Specification\RendererSpecification;
 use LesCoder\Renderer\Specification\General\Hint\ReferenceRendererSpecification;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LesCoder\Renderer\Specification\General\Hint\ReferenceRendererSpecification
- */
+#[CoversClass(ReferenceRendererSpecification::class)]
 class ReferenceRendererSpecificationTest extends TestCase
 {
     public RendererSpecification $specification;

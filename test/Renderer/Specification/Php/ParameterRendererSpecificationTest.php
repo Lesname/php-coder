@@ -9,14 +9,12 @@ use LesCoder\Renderer\CodeRenderer;
 use LesCoder\Token\ParameterCodeToken;
 use LesCoder\Token\AttributeCodeToken;
 use LesCoder\Token\Hint\ReferenceCodeToken;
-use LesCoder\Token\Expression\DeclareCodeToken;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Renderer\Specification\RendererSpecification;
 use LesCoder\Renderer\Specification\Php\ParameterRendererSpecification;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LesCoder\Renderer\Specification\Php\ParameterRendererSpecification
- */
+#[CoversClass(ParameterRendererSpecification::class)]
 class ParameterRendererSpecificationTest extends TestCase
 {
     public RendererSpecification $specification;

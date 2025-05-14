@@ -12,15 +12,14 @@ use LesCoder\Token\Object\Visibility;
 use LesCoder\Token\AttributeCodeToken;
 use LesCoder\Token\Object\ClassCodeToken;
 use LesCoder\Token\Hint\ReferenceCodeToken;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Token\Object\ClassMethodCodeToken;
 use LesCoder\Token\Object\ClassPropertyCodeToken;
 use LesCoder\Token\Hint\GenericParameterCodeToken;
 use LesCoder\Renderer\Specification\RendererSpecification;
 use LesCoder\Renderer\Specification\Php\Object\ClassRendererSpecification;
 
-/**
- * @covers \LesCoder\Renderer\Specification\Php\Object\ClassRendererSpecification
- */
+#[CoversClass(ClassRendererSpecification::class)]
 class ClassRendererSpecificationTest extends TestCase
 {
     public RendererSpecification $specification;

@@ -8,15 +8,14 @@ use PHPUnit\Framework\TestCase;
 use LesCoder\Token\CodeToken;
 use PHPUnit\Framework\MockObject\Exception;
 use LesCoder\Renderer\CodeRenderer;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use LesCoder\Token\Value\BuiltInCodeToken;
 use LesCoder\Renderer\Specification\RendererSpecification;
 use LesCoder\Renderer\Specification\Exception\UnexpectedCodeToken;
 use LesCoder\Renderer\Specification\Typescript\Value\BuiltInRendererSpecification;
 
-/**
- * @covers \LesCoder\Renderer\Specification\Typescript\Value\BuiltInRendererSpecification
- */
+#[CoversClass(BuiltInRendererSpecification::class)]
 class BuiltInRendererSpecificationTest extends TestCase
 {
     public RendererSpecification $specification;

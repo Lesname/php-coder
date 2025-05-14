@@ -6,14 +6,13 @@ namespace LesCoderTest\Renderer\Specification\Php\Value\Dictionary;
 use Override;
 use LesCoder\Token\CodeToken;
 use LesCoder\Renderer\CodeRenderer;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Token\Value\Dictionary\AccessCodeToken;
 use LesCoder\Renderer\Specification\RendererSpecification;
 use LesCoder\Renderer\Specification\Php\Value\Dictionary\AccessRendererSpecification;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LesCoder\Renderer\Specification\Php\Value\Dictionary\AccessRendererSpecification
- */
+#[CoversClass(AccessRendererSpecification::class)]
 class AccessRendererSpecificationTest extends TestCase
 {
     public RendererSpecification $specification;

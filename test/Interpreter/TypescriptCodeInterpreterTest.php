@@ -9,6 +9,7 @@ use LesCoder\Token\Value;
 use LesCoder\Token\Object\Visibility;
 use LesCoder\Token\AttributeCodeToken;
 use LesCoder\Token\ParameterCodeToken;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Stream\String\DirectStringStream;
 use LesCoder\Token\Object\ClassCodeToken;
 use LesCoder\Token\Object\AccessCodeToken;
@@ -20,9 +21,7 @@ use LesCoder\Token\Object\ClassPropertyCodeToken;
 use LesCoder\Interpreter\TypescriptCodeInterpreter;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LesCoder\Interpreter\TypescriptCodeInterpreter
- */
+#[CoversClass(TypescriptCodeInterpreter::class)]
 class TypescriptCodeInterpreterTest extends TestCase
 {
     public function testInterpret(): void

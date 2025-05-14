@@ -7,14 +7,13 @@ use Override;
 use LesCoder\Token\CodeToken;
 use LesCoder\Renderer\CodeRenderer;
 use LesCoder\Token\Expression\MathOperator;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Token\Expression\CalculationCodeToken;
 use LesCoder\Renderer\Specification\RendererSpecification;
 use LesCoder\Renderer\Specification\General\Expression\CalculationRendererSpecification;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LesCoder\Renderer\Specification\General\Expression\CalculationRendererSpecification
- */
+#[CoversClass(CalculationRendererSpecification::class)]
 class CalculationRendererSpecificationTest extends TestCase
 {
     public RendererSpecification $specification;

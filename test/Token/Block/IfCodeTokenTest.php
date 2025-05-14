@@ -6,10 +6,9 @@ namespace LesCoderTest\Token\Block;
 use LesCoder\Token\CodeToken;
 use LesCoder\Token\Block\IfCodeToken;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @covers \LesCoder\Token\Block\IfCodeToken
- */
+#[CoversClass(IfCodeToken::class)]
 class IfCodeTokenTest extends TestCase
 {
     public function testGetImports(): void

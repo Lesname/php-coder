@@ -11,13 +11,12 @@ use LesCoder\Token\CommentCodeToken;
 use LesCoder\Token\Object\Visibility;
 use LesCoder\Token\AttributeCodeToken;
 use LesCoder\Token\Hint\ReferenceCodeToken;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Token\Object\ClassPropertyCodeToken;
 use LesCoder\Renderer\Specification\RendererSpecification;
 use LesCoder\Renderer\Specification\Php\Object\ClassPropertyRendererSpecification;
 
-/**
- * @covers \LesCoder\Renderer\Specification\Php\Object\ClassPropertyRendererSpecification
- */
+#[CoversClass(ClassPropertyRendererSpecification::class)]
 class ClassPropertyRendererSpecificationTest extends TestCase
 {
     public RendererSpecification $specification;

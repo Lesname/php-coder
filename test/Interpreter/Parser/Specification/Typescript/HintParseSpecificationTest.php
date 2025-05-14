@@ -5,6 +5,7 @@ namespace LesCoderTest\Interpreter\Parser\Specification\Typescript;
 
 use LesCoder\Stream\Lexical\LexicalStream;
 use LesCoder\Token\Hint\UnionCodeToken;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Stream\String\DirectStringStream;
 use LesCoder\Token\Hint\BuiltInCodeToken;
 use LesCoder\Token\Hint\GenericCodeToken;
@@ -19,9 +20,7 @@ use LesCoder\Interpreter\Parser\Specification\ParseSpecification;
 use LesCoder\Interpreter\Parser\Specification\Typescript\HintParseSpecification;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LesCoder\Interpreter\Parser\Specification\Typescript\HintParseSpecification
- */
+#[CoversClass(HintParseSpecification::class)]
 class HintParseSpecificationTest extends TestCase
 {
     public function testParseDictionary(): void

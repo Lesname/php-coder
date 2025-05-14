@@ -5,10 +5,9 @@ namespace LesCoderTest\Token\Hint;
 
 use LesCoder\Token\Hint\ReferenceCodeToken;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @covers \LesCoder\Token\Hint\ReferenceCodeToken
- */
+#[CoversClass(ReferenceCodeToken::class)]
 final class ReferenceCodeTokenTest extends TestCase
 {
     public function testGetImports(): void

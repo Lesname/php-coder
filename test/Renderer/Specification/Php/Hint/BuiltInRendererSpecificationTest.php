@@ -7,6 +7,7 @@ use Override;
 use LesCoder\Token\CodeToken;
 use PHPUnit\Framework\MockObject\Exception;
 use LesCoder\Renderer\CodeRenderer;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use LesCoder\Token\Hint\BuiltInCodeToken;
 use LesCoder\Renderer\Specification\RendererSpecification;
@@ -14,9 +15,7 @@ use LesCoder\Renderer\Specification\Exception\UnexpectedCodeToken;
 use LesCoder\Renderer\Specification\Php\Hint\BuiltInRendererSpecification;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LesCoder\Renderer\Specification\Php\Hint\BuiltInRendererSpecification
- */
+#[CoversClass(BuiltInRendererSpecification::class)]
 class BuiltInRendererSpecificationTest extends TestCase
 {
     public RendererSpecification $specification;

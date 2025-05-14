@@ -4,13 +4,12 @@ declare(strict_types=1);
 namespace LesCoderTest\Interpreter\Lexer\Specification;
 
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Stream\String\DirectStringStream;
 use LesCoder\Interpreter\Lexer\Lexical\Character\EqualsSignLexical;
 use LesCoder\Interpreter\Lexer\Specification\CharacterSpecification;
 
-/**
- * @covers \LesCoder\Interpreter\Lexer\Specification\CharacterSpecification
- */
+#[CoversClass(CharacterSpecification::class)]
 class CharacterLexSpecificationTest extends TestCase
 {
     public function testCharacterIsSatisfied(): void

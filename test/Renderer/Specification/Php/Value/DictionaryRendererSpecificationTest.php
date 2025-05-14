@@ -9,12 +9,11 @@ use LesCoder\Token\CodeToken;
 use LesCoder\Renderer\CodeRenderer;
 use LesCoder\Token\Value\Dictionary\Item;
 use LesCoder\Token\Value\DictionaryCodeToken;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Renderer\Specification\RendererSpecification;
 use LesCoder\Renderer\Specification\Php\Value\DictionaryRendererSpecification;
 
-/**
- * @covers \LesCoder\Renderer\Specification\Php\Value\DictionaryRendererSpecification
- */
+#[CoversClass(DictionaryRendererSpecification::class)]
 class DictionaryRendererSpecificationTest extends TestCase
 {
     public RendererSpecification $specification;

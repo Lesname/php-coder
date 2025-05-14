@@ -11,10 +11,9 @@ use LesCoder\Interpreter\Lexer\Lexical\Value\StringLexical;
 use LesCoder\Interpreter\Lexer\Specification\Specification;
 use LesCoder\Interpreter\Lexer\Specification\Typescript\StringSpecification;
 use LesCoder\Interpreter\Lexer\Specification\Exception\MissesClosingIdentifier;
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @covers \LesCoder\Interpreter\Lexer\Specification\Typescript\StringSpecification
- */
+#[CoversClass(StringSpecification::class)]
 class StringLexSpecificationTest extends TestCase
 {
     private Specification $specification;

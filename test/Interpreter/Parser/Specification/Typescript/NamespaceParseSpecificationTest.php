@@ -18,7 +18,7 @@ use LesCoder\Interpreter\Parser\Specification\Typescript\NamespaceParseSpecifica
 #[CoversClass(NamespaceParseSpecification::class)]
 class NamespaceParseSpecificationTest extends TestCase
 {
-    private const TEST_CODE = <<<'TS'
+    private const string TEST_CODE = <<<'TS'
 namespace Fiz {
     export
     
@@ -41,7 +41,7 @@ TS;
             ->willReturnCallback(
                 function (LexicalStream $stream) use ($exportCodeToken, $declareCodeToken) {
                     if ($stream->isEnd()) {
-                        throw new \RuntimeException('Unexpected end of stream');
+                        throw new RuntimeException('Unexpected end of stream');
                     }
 
                     $current = $stream->current();

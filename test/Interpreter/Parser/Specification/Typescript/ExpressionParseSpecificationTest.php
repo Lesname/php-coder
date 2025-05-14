@@ -8,6 +8,7 @@ use LesCoder\Token\CodeToken;
 use LesCoder\Token\InvokeCodeToken;
 use LesCoder\Token\VariableCodeToken;
 use LesCoder\Stream\Lexical\LexicalStream;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use LesCoder\Token\ParameterCodeToken;
 use LesCoder\Token\Value\FloatCodeToken;
@@ -44,9 +45,7 @@ use LesCoder\Interpreter\Lexer\Lexical\Character\CurlyBracket\CurlyBracketRightL
 use LesCoder\Interpreter\Lexer\Lexical\Character\SquareBracket\SquareBracketLeftLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\SquareBracket\SquareBracketRightLexical;
 
-/**
- * @covers \LesCoder\Interpreter\Parser\Specification\Typescript\ExpressionParseSpecification
- */
+#[CoversClass(ExpressionParseSpecification::class)]
 class ExpressionParseSpecificationTest extends TestCase
 {
     private ParseSpecification $specification;

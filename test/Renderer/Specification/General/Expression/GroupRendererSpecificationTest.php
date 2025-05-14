@@ -7,13 +7,12 @@ use Override;
 use LesCoder\Token\CodeToken;
 use LesCoder\Renderer\CodeRenderer;
 use LesCoder\Token\Expression\GroupCodeToken;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Renderer\Specification\RendererSpecification;
 use LesCoder\Renderer\Specification\General\Expression\GroupRendererSpecification;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LesCoder\Renderer\Specification\General\Expression\GroupRendererSpecification
- */
+#[CoversClass(GroupRendererSpecification::class)]
 class GroupRendererSpecificationTest extends TestCase
 {
     public RendererSpecification $specification;

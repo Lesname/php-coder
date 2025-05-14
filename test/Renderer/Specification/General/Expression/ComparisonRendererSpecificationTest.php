@@ -6,15 +6,14 @@ namespace LesCoderTest\Renderer\Specification\General\Expression;
 use Override;
 use LesCoder\Token\CodeToken;
 use LesCoder\Renderer\CodeRenderer;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Token\Expression\ComparisonOperator;
 use LesCoder\Token\Expression\ComparisonCodeToken;
 use LesCoder\Renderer\Specification\RendererSpecification;
 use LesCoder\Renderer\Specification\General\Expression\ComparisonRendererSpecification;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LesCoder\Renderer\Specification\General\Expression\ComparisonRendererSpecification
- */
+#[CoversClass(ComparisonRendererSpecification::class)]
 class ComparisonRendererSpecificationTest extends TestCase
 {
     public RendererSpecification $specification;

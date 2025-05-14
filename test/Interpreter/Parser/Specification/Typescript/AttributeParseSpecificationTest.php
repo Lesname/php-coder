@@ -7,6 +7,7 @@ use RuntimeException;
 use LesCoder\Token\CodeToken;
 use LesCoder\Stream\Lexical\LexicalStream;
 use LesCoder\Token\AttributeCodeToken;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Stream\String\DirectStringStream;
 use LesCoder\Token\Hint\ReferenceCodeToken;
 use LesCoder\Interpreter\Lexer\Lexical\Lexical;
@@ -16,9 +17,7 @@ use LesCoder\Interpreter\Parser\Specification\ParseSpecification;
 use LesCoder\Interpreter\Parser\Specification\Typescript\AttributeParseSpecification;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LesCoder\Interpreter\Parser\Specification\Typescript\AttributeParseSpecification
- */
+#[CoversClass(AttributeParseSpecification::class)]
 class AttributeParseSpecificationTest extends TestCase
 {
     public function testParse(): void

@@ -11,9 +11,7 @@ use LesCoder\Token\Object\AccessCodeToken;
 use LesCoder\Renderer\Specification\RendererSpecification;
 use LesCoder\Renderer\Specification\Typescript\Object\AccessRendererSpecification;
 
-/**
- * @covers \LesCoder\Renderer\Specification\Typescript\Object\AccessRendererSpecification
- */
+#[\PHPUnit\Framework\Attributes\CoversClass(AccessRendererSpecification::class)]
 class AccessRendererSpecificationTest extends TestCase
 {
     public RendererSpecification $specification;

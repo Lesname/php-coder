@@ -8,13 +8,12 @@ use LesCoder\Token\CodeToken;
 use LesCoder\Renderer\CodeRenderer;
 use LesCoder\Token\AttributeCodeToken;
 use LesCoder\Token\Hint\ReferenceCodeToken;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Renderer\Specification\RendererSpecification;
 use LesCoder\Renderer\Specification\Php\AttributeRendererSpecification;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LesCoder\Renderer\Specification\Php\AttributeRendererSpecification
- */
+#[CoversClass(AttributeRendererSpecification::class)]
 class AttributeRendererSpecificationTest extends TestCase
 {
     public RendererSpecification $specification;

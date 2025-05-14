@@ -7,10 +7,9 @@ use LesCoder\Token\AttributeCodeToken;
 use LesCoder\Token\CodeToken;
 use LesCoder\Token\Hint\ReferenceCodeToken;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @covers \LesCoder\Token\AttributeCodeToken
- */
+#[CoversClass(AttributeCodeToken::class)]
 final class AttributeCodeTokenTest extends TestCase
 {
     public function testGetImports(): void

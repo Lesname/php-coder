@@ -8,13 +8,12 @@ use LesCoder\Token\CodeToken;
 use LesCoder\Renderer\CodeRenderer;
 use LesCoder\Token\CommentCodeToken;
 use LesCoder\Token\Object\EnumCodeToken;
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Renderer\Specification\RendererSpecification;
 use LesCoder\Renderer\Specification\Php\Object\EnumRendererSpecification;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LesCoder\Renderer\Specification\Php\Object\EnumRendererSpecification
- */
+#[CoversClass(EnumRendererSpecification::class)]
 class EnumRendererSpecificationTest extends TestCase
 {
     public RendererSpecification $specification;

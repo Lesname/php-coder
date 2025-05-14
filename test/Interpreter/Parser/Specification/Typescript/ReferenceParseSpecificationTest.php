@@ -3,15 +3,14 @@ declare(strict_types=1);
 
 namespace LesCoderTest\Interpreter\Parser\Specification\Typescript;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Stream\String\DirectStringStream;
 use LesCoder\Token\Hint\ReferenceCodeToken;
 use LesCoder\Interpreter\Lexer\TypescriptCodeLexer;
 use LesCoder\Interpreter\Parser\Specification\Typescript\ReferenceParseSpecification;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \LesCoder\Interpreter\Parser\Specification\Typescript\ReferenceParseSpecification
- */
+#[CoversClass(ReferenceParseSpecification::class)]
 class ReferenceParseSpecificationTest extends TestCase
 {
     public function testSimpleReference(): void
