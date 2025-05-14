@@ -165,6 +165,10 @@ final class InterfaceParseSpecification implements ParseSpecification
 
             $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
 
+            /**
+             * @todo support unnamed member
+             * @see https://github.com/Lesname/php-coder/issues/1
+             */
             if ($this->isLexical($stream, ParenthesisLeftLexical::TYPE)) {
                 $this->parseUnnamedMember($stream);
 
@@ -219,6 +223,7 @@ final class InterfaceParseSpecification implements ParseSpecification
 
                 $stream->next();
                 $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+                $this->expectLexical($stream, ColonLexical::TYPE);
             } else {
                 $required = true;
             }
@@ -228,8 +233,7 @@ final class InterfaceParseSpecification implements ParseSpecification
                     throw new RuntimeException();
                 }
 
-                // @todo pass required
-                $methods[] = $this->parseInterfaceMethod($stream, $name->value, $file);
+                $methods[] = $this->parseInterfaceMethod($stream, $name->value, $required, $file);
             } elseif ($this->isLexical($stream, ColonLexical::TYPE)) {
                 $stream->next();
 
@@ -281,14 +285,14 @@ final class InterfaceParseSpecification implements ParseSpecification
 
     private function parseUnnamedMember(LexicalStream $stream): void
     {
-        $this->parseInterfaceMethod($stream, '', null);
+        $this->parseInterfaceMethod($stream, null);
     }
 
     /**
      * @throws UnexpectedEnd
      * @throws UnexpectedLexical
      */
-    private function parseInterfaceMethod(LexicalStream $stream, string $name, ?string $file): InterfaceMethodCodeToken
+    private function parseInterfaceMethod(LexicalStream $stream, ?string $name, bool $required = true, ?string $file = null): InterfaceMethodCodeToken
     {
         $this->expectLexical($stream, ParenthesisLeftLexical::TYPE);
         $stream->next();
@@ -357,7 +361,7 @@ final class InterfaceParseSpecification implements ParseSpecification
             $returns = null;
         }
 
-        return new InterfaceMethodCodeToken($name, $parameters, $returns);
+        return new InterfaceMethodCodeToken($name, $parameters, $returns, $required);
     }
 
     /**

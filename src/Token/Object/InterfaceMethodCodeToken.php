@@ -23,6 +23,7 @@ final class InterfaceMethodCodeToken implements CodeToken
         public readonly string $name,
         public readonly array $parameters = [],
         public readonly ?CodeToken $returns = null,
+        public readonly bool $required = true,
         public readonly ?CommentCodeToken $comment = null,
     ) {}
 

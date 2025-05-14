@@ -56,6 +56,8 @@ final class InterfaceMethodRendererSpecification implements RendererSpecificatio
             ? $this->renderComment($token->comment->comment) . PHP_EOL
             : '';
 
-        return "{$comment}{$token->name}({$codeParameters}){$returns};";
+        $optionalMarker = $token->required ? '' : '?';
+
+        return "{$comment}{$token->name}{$optionalMarker}({$codeParameters}){$returns};";
     }
 }

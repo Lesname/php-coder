@@ -59,6 +59,7 @@ class InterfaceMethodRendererSpecificationTest extends TestCase
             'name',
             [$parameter],
             $returns,
+            true,
             $comment,
         );
 

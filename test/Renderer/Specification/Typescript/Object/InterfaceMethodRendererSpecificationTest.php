@@ -59,6 +59,7 @@ class InterfaceMethodRendererSpecificationTest extends TestCase
             'name',
             [$parameter],
             $returns,
+            false,
             $comment,
         );
 
@@ -66,7 +67,7 @@ class InterfaceMethodRendererSpecificationTest extends TestCase
 
         $expected = <<<'TXT'
 /** Comment */
-name(Parameter): Returns;
+name?(Parameter): Returns;
 TXT;
 
         self::assertSame($expected, $rendered);
