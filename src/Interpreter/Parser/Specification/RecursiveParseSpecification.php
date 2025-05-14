@@ -9,7 +9,7 @@ use LesCoder\Stream\Lexical\LexicalStream;
 use LesCoder\Interpreter\Parser\Specification\Exception\NoParseSpecification;
 use LesCoder\Interpreter\Parser\Specification\Exception\ExpectedParseSpecification;
 
-final class GroupParseSpecification implements ParseSpecification
+final class RecursiveParseSpecification implements ParseSpecification
 {
     /** @var array<ParseSpecification> */
     private readonly array $specifications;

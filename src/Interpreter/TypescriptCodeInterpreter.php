@@ -23,7 +23,7 @@ use LesCoder\Interpreter\Lexer\Lexical\Character\CommaLexical;
 use LesCoder\Interpreter\Parser\Specification\ParseSpecification;
 use LesCoder\Interpreter\Lexer\Lexical\Character\AsteriskLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\SemicolonLexical;
-use LesCoder\Interpreter\Parser\Specification\GroupParseSpecification;
+use LesCoder\Interpreter\Parser\Specification\RecursiveParseSpecification;
 use LesCoder\Interpreter\Parser\Specification\Typescript\HintParseSpecification;
 use LesCoder\Interpreter\Parser\Specification\Typescript\TypeParseSpecification;
 use LesCoder\Interpreter\Parser\Specification\Typescript\ClassParseSpecification;
@@ -212,7 +212,7 @@ final class TypescriptCodeInterpreter implements CodeInterpreter
 
         return new SpecificationCodeParser(
             [
-                new GroupParseSpecification(
+                new RecursiveParseSpecification(
                     [
                         new InterfaceParseSpecification($hintParseSpecification, $expressionParseSpecification),
                         new ConstantParseSpecification($expressionParseSpecification, $hintParseSpecification),
