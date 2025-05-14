@@ -4,15 +4,12 @@ declare(strict_types=1);
 namespace LesCoder\Interpreter;
 
 use Override;
-use Generator;
 use RuntimeException;
-use LesCoder\Token\CodeToken;
 use LesCoder\Stream\String\StringStream;
 use LesCoder\Stream\Lexical\LexicalStream;
 use LesCoder\Interpreter\Lexer\CodeLexer;
 use LesCoder\Interpreter\Parser\CodeParser;
 use LesCoder\Stream\CodeToken\CodeTokenStream;
-use LesCoder\Stream\CodeToken\IteratorCodeTokenStream;
 use LesCoder\Interpreter\Lexer\TypescriptCodeLexer;
 use LesCoder\Interpreter\Lexer\Lexical\LabelLexical;
 use LesCoder\Interpreter\Lexer\Lexical\CommentLexical;
