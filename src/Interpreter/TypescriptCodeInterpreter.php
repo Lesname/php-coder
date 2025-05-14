@@ -10,11 +10,13 @@ use LesCoder\Token\CodeToken;
 use LesCoder\Stream\String\StringStream;
 use LesCoder\Stream\Lexical\LexicalStream;
 use LesCoder\Interpreter\Lexer\CodeLexer;
+use LesCoder\Interpreter\Parser\CodeParser;
 use LesCoder\Stream\CodeToken\CodeTokenStream;
 use LesCoder\Stream\CodeToken\IteratorCodeTokenStream;
 use LesCoder\Interpreter\Lexer\TypescriptCodeLexer;
 use LesCoder\Interpreter\Lexer\Lexical\LabelLexical;
 use LesCoder\Interpreter\Lexer\Lexical\CommentLexical;
+use LesCoder\Interpreter\Parser\SpecificationCodeParser;
 use LesCoder\Interpreter\Lexer\Lexical\WhitespaceLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Value\StringLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\CommaLexical;
@@ -25,13 +27,17 @@ use LesCoder\Interpreter\Parser\Specification\GroupParseSpecification;
 use LesCoder\Interpreter\Parser\Specification\Typescript\HintParseSpecification;
 use LesCoder\Interpreter\Parser\Specification\Typescript\TypeParseSpecification;
 use LesCoder\Interpreter\Parser\Specification\Typescript\ClassParseSpecification;
+use LesCoder\Interpreter\Parser\Specification\Typescript\Exception\UnexpectedEnd;
 use LesCoder\Interpreter\Parser\Specification\Typescript\ExportParseSpecification;
 use LesCoder\Interpreter\Parser\Specification\Typescript\DeclareParseSpecification;
+use LesCoder\Interpreter\Parser\Specification\Typescript\Exception\UnexpectedLabel;
+use LesCoder\Interpreter\Parser\Specification\Exception\ExpectedParseSpecification;
 use LesCoder\Interpreter\Parser\Specification\Typescript\ConstantParseSpecification;
 use LesCoder\Interpreter\Parser\Specification\Helper\ExpectParseSpecificationHelper;
 use LesCoder\Interpreter\Parser\Specification\Typescript\InterfaceParseSpecification;
 use LesCoder\Interpreter\Parser\Specification\Typescript\ReferenceParseSpecification;
 use LesCoder\Interpreter\Parser\Specification\Typescript\AttributeParseSpecification;
+use LesCoder\Interpreter\Parser\Specification\Typescript\Exception\UnexpectedLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\CurlyBracket\CurlyBracketLeftLexical;
 use LesCoder\Interpreter\Parser\Specification\Typescript\ExpressionParseSpecification;
 use LesCoder\Interpreter\Lexer\Lexical\Character\CurlyBracket\CurlyBracketRightLexical;
@@ -47,6 +53,12 @@ final class TypescriptCodeInterpreter implements CodeInterpreter
         $this->codeLexer = $codeLexer;
     }
 
+    /**
+     * @throws ExpectedParseSpecification
+     * @throws UnexpectedEnd
+     * @throws UnexpectedLabel
+     * @throws UnexpectedLexical
+     */
     #[Override]
     public function interpret(StringStream $stream, ?string $file = null): CodeTokenStream
     {
@@ -67,11 +79,15 @@ final class TypescriptCodeInterpreter implements CodeInterpreter
             $lexicals->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
         }
 
-        return new IteratorCodeTokenStream($this->parse($lexicals, $imports, $file));
+        return $this->getCodeParser($imports)->parse($lexicals, $file);
     }
 
     /**
      * @return array<string, string>
+     *
+     * @throws UnexpectedLexical
+     * @throws UnexpectedEnd
+     * @throws UnexpectedLabel
      */
     private function parseImport(LexicalStream $stream): array
     {
@@ -185,52 +201,34 @@ final class TypescriptCodeInterpreter implements CodeInterpreter
     /**
      * @param array<string, string> $imports
      *
-     * @return Generator<CodeToken>
+     * @throws ExpectedParseSpecification
      */
-    private function parse(LexicalStream $stream, array $imports, ?string $file): Generator
-    {
-        $parseSpecification = $this->getParseSpecification($imports);
-
-        while ($stream->isActive()) {
-            if ($parseSpecification->isSatisfiedBy($stream)) {
-                yield $parseSpecification->parse($stream, $file);
-
-                $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
-
-                continue;
-            }
-
-            $current = $stream->current();
-
-            throw new RuntimeException("Unhandled token, got {$current->getType()}");
-        }
-    }
-
-    /**
-     * @param array<string, string> $imports
-     */
-    private function getParseSpecification(array $imports): ParseSpecification
+    private function getCodeParser(array $imports): CodeParser
     {
         $referenceParseSpecification = new ReferenceParseSpecification($imports);
         $hintParseSpecification = new HintParseSpecification($referenceParseSpecification);
 
         $expressionParseSpecification = new ExpressionParseSpecification($referenceParseSpecification, $hintParseSpecification, $imports);
 
-        return new GroupParseSpecification(
+        return new SpecificationCodeParser(
             [
-                new InterfaceParseSpecification($hintParseSpecification, $expressionParseSpecification),
-                new ConstantParseSpecification($expressionParseSpecification, $hintParseSpecification),
-                new ClassParseSpecification(
-                    new AttributeParseSpecification($expressionParseSpecification, $referenceParseSpecification),
-                    $expressionParseSpecification,
-                    $referenceParseSpecification,
-                    $hintParseSpecification,
+                new GroupParseSpecification(
+                    [
+                        new InterfaceParseSpecification($hintParseSpecification, $expressionParseSpecification),
+                        new ConstantParseSpecification($expressionParseSpecification, $hintParseSpecification),
+                        new ClassParseSpecification(
+                            new AttributeParseSpecification($expressionParseSpecification, $referenceParseSpecification),
+                            $expressionParseSpecification,
+                            $referenceParseSpecification,
+                            $hintParseSpecification,
+                        ),
+                        new TypeParseSpecification($hintParseSpecification),
+                        fn(ParseSpecification $parentParseSpecification): ParseSpecification => new ExportParseSpecification($parentParseSpecification),
+                        fn(ParseSpecification $parentParseSpecification): ParseSpecification => new DeclareParseSpecification($parentParseSpecification),
+                        $expressionParseSpecification,
+                    ]
                 ),
-                new TypeParseSpecification($hintParseSpecification),
-                fn (ParseSpecification $parentParseSpecification): ParseSpecification => new ExportParseSpecification($parentParseSpecification),
-                fn (ParseSpecification $parentParseSpecification): ParseSpecification => new DeclareParseSpecification($parentParseSpecification),
-                $expressionParseSpecification,
-            ]
+            ],
         );
     }
 
