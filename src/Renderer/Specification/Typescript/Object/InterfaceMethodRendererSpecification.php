@@ -57,7 +57,8 @@ final class InterfaceMethodRendererSpecification implements RendererSpecificatio
             : '';
 
         $optionalMarker = $token->required ? '' : '?';
+        $name = $token->name ?? '';
 
-        return "{$comment}{$token->name}{$optionalMarker}({$codeParameters}){$returns};";
+        return "{$comment}{$name}{$optionalMarker}({$codeParameters}){$returns};";
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace LesCoder\Renderer\Specification\Php\Object;
 
 use Override;
+use RuntimeException;
 use LesCoder\Utility\TextUtility;
 use LesCoder\Token\CodeToken;
 use LesCoder\Renderer\CodeRenderer;
@@ -38,6 +39,12 @@ final class InterfaceMethodRendererSpecification implements RendererSpecificatio
             throw new UnexpectedCodeToken(InterfaceMethodCodeToken::class, $token);
         }
 
+        $name = $token->name;
+
+        if ($name === null) {
+            throw new RuntimeException();
+        }
+
         $parameters = [];
 
         foreach ($token->parameters as $parameter) {
@@ -60,6 +67,6 @@ final class InterfaceMethodRendererSpecification implements RendererSpecificatio
             ? $this->renderComment($token->comment->comment) . PHP_EOL
             : '';
 
-        return "{$comment}public function {$token->name}({$codeParameters}){$returns};";
+        return "{$comment}public function {$name}({$codeParameters}){$returns};";
     }
 }

@@ -368,6 +368,10 @@ final class InterfaceParseSpecification implements ParseSpecification
             $returns = null;
         }
 
+        if ($name === '') {
+            throw new RuntimeException();
+        }
+
         return new InterfaceMethodCodeToken($name, $parameters, $returns, $required);
     }
 

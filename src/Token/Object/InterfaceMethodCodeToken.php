@@ -17,10 +17,12 @@ final class InterfaceMethodCodeToken implements CodeToken
     use ImportMergerHelper;
 
     /**
+     * @param non-empty-string $name
+     *
      * @param array<ParameterCodeToken> $parameters
      */
     public function __construct(
-        public readonly string $name,
+        public readonly ?string $name,
         public readonly array $parameters = [],
         public readonly ?CodeToken $returns = null,
         public readonly bool $required = true,
