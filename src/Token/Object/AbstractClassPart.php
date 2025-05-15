@@ -12,10 +12,10 @@ use LesCoder\Token\CodeToken;
  */
 abstract class AbstractClassPart implements CodeToken
 {
-    public const FLAG_OVERRIDE = 1;
-    public const FLAG_STATIC = 2;
-    public const FLAG_READONLY = 4;
-    public const FLAG_OPTIONAL = 8;
+    public const int FLAG_OVERRIDE = 1;
+    public const int FLAG_STATIC = 2;
+    public const int FLAG_READONLY = 4;
+    public const int FLAG_OPTIONAL = 8;
 
     /**
      * @param array<AttributeCodeToken> $attributes

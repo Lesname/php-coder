@@ -93,7 +93,6 @@ final class ExpressionCodeParser implements CodeParser
         $token = $this->parseExpression($stream);
 
         if ($stream->isActive()) {
-            var_dump($stream->current());
             throw new RuntimeException('Stream still active');
         }
 
@@ -301,15 +300,15 @@ final class ExpressionCodeParser implements CodeParser
     private function parseNumber(LexicalStream $stream): CodeToken
     {
         if ($this->isLexical($stream, MinusLexical::TYPE)) {
-            $negative = true;
+            $number = '-';
             $stream->next();
         } else {
-            $negative = false;
+            $number = '';
         }
 
         $this->expectLexical($stream, IntegerLexical::TYPE);
 
-        $number = (string)$stream->current();
+        $number .= (string)$stream->current();
         $stream->next();
 
         if ($this->isLexical($stream, DotLexical::TYPE)) {
@@ -320,10 +319,10 @@ final class ExpressionCodeParser implements CodeParser
             $number .= (string)$stream->current();
             $stream->next();
 
-            return new FloatCodeToken((float)$number * ($negative ? -1 : 1));
+            return new FloatCodeToken((float)$number);
         }
 
-        return new IntegerCodeToken((int)$number * ($negative ? -1 : 1));
+        return new IntegerCodeToken((int)$number);
     }
 
     /**
@@ -582,8 +581,6 @@ final class ExpressionCodeParser implements CodeParser
 
             $property = new StringCodeToken($name);
         } else {
-            var_dump($stream->current());
-
             throw new RuntimeException();
         }
 

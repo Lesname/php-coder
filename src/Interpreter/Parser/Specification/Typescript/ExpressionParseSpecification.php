@@ -349,27 +349,30 @@ final class ExpressionParseSpecification implements ParseSpecification
     }
 
     /**
+     * @throws UnexpectedEnd
      * @throws UnexpectedLexical
      */
     private function parseValueNumber(LexicalStream $stream): CodeToken
     {
         if ($stream->current()->getType() === MinusLexical::TYPE) {
-            $modifier = -1;
+            $base = '-';
             $stream->next();
-            $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
             $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
         } else {
-            $modifier = 1;
+            $base = '';
         }
 
-        if ($stream->isActive() && $stream->current()->getType() === IntegerLexical::TYPE) {
-            $base = (string)$stream->current();
+        $this->expectLexical($stream, IntegerLexical::TYPE, DotLexical::TYPE);
+
+        if ($this->isLexical($stream, IntegerLexical::TYPE)) {
+            $base .= (string)$stream->current();
             $stream->next();
             $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
             $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
         }
 
-        if ($stream->isActive() && $stream->current()->getType() === DotLexical::TYPE) {
+        if ($this->isLexical($stream, DotLexical::TYPE)) {
             $stream->next();
             $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
 
@@ -381,14 +384,10 @@ final class ExpressionParseSpecification implements ParseSpecification
                 $decimals = '0';
             }
 
-            $base ??= '0';
-
-            return new FloatCodeToken(((float)"{$base}.{$decimals}") * $modifier);
-        } elseif (!isset($base)) {
-            throw new UnexpectedLexical($stream->current(), IntegerLexical::TYPE, DotLexical::TYPE);
+            return new FloatCodeToken((float)"{$base}.{$decimals}");
         }
 
-        return new IntegerCodeToken((int)$base * $modifier);
+        return new IntegerCodeToken((int)$base);
     }
 
     private function parseValueString(LexicalStream $stream): CodeToken

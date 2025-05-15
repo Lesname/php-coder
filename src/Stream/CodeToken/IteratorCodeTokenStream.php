@@ -23,7 +23,13 @@ final class IteratorCodeTokenStream extends AbstractStream implements CodeTokenS
     #[Override]
     public function current(): CodeToken
     {
-        return $this->iterator->current();
+        $current = $this->iterator->current();
+
+        if (!$current instanceof CodeToken) {
+            throw new RuntimeException();
+        }
+
+        return $current;
     }
 
     #[Override]

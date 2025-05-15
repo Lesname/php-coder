@@ -50,7 +50,7 @@ final class ReferenceParseSpecification implements ParseSpecification
 
         $from = $this->imports[$refName] ?? null;
 
-        if ($file && $from && str_starts_with($from, '.')) {
+        if ($file !== null && $from !== null && str_starts_with($from, '.')) {
             $from = str_starts_with($from, '../')
                 ? dirname($file) . "/{$from}"
                 : dirname($file) . substr($from, 1);

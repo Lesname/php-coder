@@ -20,7 +20,13 @@ final class IteratorLexicalStream extends AbstractLexicalStream
     #[Override]
     public function current(): Lexical
     {
-        return $this->iterator->current();
+        $current = $this->iterator->current();
+
+        if (!$current instanceof Lexical) {
+            throw new RuntimeException();
+        }
+
+        return $current;
     }
 
     #[Override]

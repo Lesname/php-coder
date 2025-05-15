@@ -22,7 +22,7 @@ final class ReferenceCodeToken implements CodeToken
     #[Override]
     public function getImports(): array
     {
-        if ($this->from) {
+        if ($this->from !== null) {
             return [$this->name => $this->from];
         }
 

@@ -15,13 +15,13 @@ trait ExpectParseSpecificationHelper
      * @throws UnexpectedEnd
      * @throws UnexpectedLexical
      */
-    protected function expectLexical(LexicalStream $stream, string $expect): void
+    protected function expectLexical(LexicalStream $stream, string $expect, string ...$orExpect): void
     {
         if ($stream->isEnd()) {
             throw new UnexpectedEnd($expect);
         }
 
-        if ($stream->current()->getType() !== $expect) {
+        if (!in_array($stream->current()->getType(), [$expect, ...$orExpect], true)) {
             throw new UnexpectedLexical($stream->current(), $expect);
         }
     }
