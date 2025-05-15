@@ -58,29 +58,17 @@ class AngularExpressionCodeLexerTest extends TestCase
 
         $stream = $lexer->tokenize($input);
 
-        self::assertEquals(
+        $expect = [
             new LabelLexical('bar'),
-            $stream->current(),
-        );
-        $stream->next();
-
-        self::assertEquals(
             new ParenthesisLeftLexical(),
-            $stream->current(),
-        );
-        $stream->next();
-
-        self::assertEquals(
             new LabelLexical('biz'),
-            $stream->current(),
-        );
-        $stream->next();
-
-        self::assertEquals(
             new ParenthesisRightLexical(),
-            $stream->current(),
-        );
-        $stream->next();
+        ];
+
+        foreach ($expect as $token) {
+            self::assertEquals($token, $stream->current());
+            $stream->next();
+        }
 
         self::assertTrue($stream->isEnd());
     }
@@ -120,17 +108,15 @@ class AngularExpressionCodeLexerTest extends TestCase
 
         $stream = $lexer->tokenize($input);
 
-        self::assertEquals(
+        $expect = [
             new MinusLexical(),
-            $stream->current(),
-        );
-        $stream->next();
-
-        self::assertEquals(
             new IntegerLexical('123'),
-            $stream->current(),
-        );
-        $stream->next();
+        ];
+
+        foreach ($expect as $token) {
+            self::assertEquals($token, $stream->current());
+            $stream->next();
+        }
 
         self::assertTrue($stream->isEnd());
     }
@@ -142,23 +128,16 @@ class AngularExpressionCodeLexerTest extends TestCase
 
         $stream = $lexer->tokenize($input);
 
-        self::assertEquals(
+        $expect = [
             new IntegerLexical('123'),
-            $stream->current(),
-        );
-        $stream->next();
-
-        self::assertEquals(
             new DotLexical(),
-            $stream->current(),
-        );
-        $stream->next();
-
-        self::assertEquals(
             new IntegerLexical('321'),
-            $stream->current(),
-        );
-        $stream->next();
+        ];
+
+        foreach ($expect as $token) {
+            self::assertEquals($token, $stream->current());
+            $stream->next();
+        }
 
         self::assertTrue($stream->isEnd());
     }
@@ -170,35 +149,18 @@ class AngularExpressionCodeLexerTest extends TestCase
 
         $stream = $lexer->tokenize($input);
 
-        self::assertEquals(
+        $expect = [
             new SquareBracketLeftLexical(),
-            $stream->current(),
-        );
-        $stream->next();
-
-        self::assertEquals(
             new StringLexical('foo'),
-            $stream->current(),
-        );
-        $stream->next();
-
-        self::assertEquals(
             new CommaLexical(),
-            $stream->current(),
-        );
-        $stream->next();
-
-        self::assertEquals(
             new LabelLexical('false'),
-            $stream->current(),
-        );
-        $stream->next();
-
-        self::assertEquals(
             new SquareBracketRightLexical(),
-            $stream->current(),
-        );
-        $stream->next();
+        ];
+
+        foreach ($expect as $token) {
+            self::assertEquals($token, $stream->current());
+            $stream->next();
+        }
 
         self::assertTrue($stream->isEnd());
     }
@@ -208,61 +170,24 @@ class AngularExpressionCodeLexerTest extends TestCase
         $lexer = new AngularExpressionCodeLexer();
         $input = new DirectStringStream("{foo:'bar',bar:true}");
 
+        $expect = [
+            new CurlyBracketLeftLexical(),
+            new LabelLexical('foo'),
+            new ColonLexical(),
+            new StringLexical('bar'),
+            new CommaLexical(),
+            new LabelLexical('bar'),
+            new ColonLexical(),
+            new LabelLexical('true'),
+            new CurlyBracketRightLexical(),
+        ];
+
         $stream = $lexer->tokenize($input);
 
-        self::assertEquals(
-            new CurlyBracketLeftLexical(),
-            $stream->current(),
-        );
-        $stream->next();
-
-        self::assertEquals(
-            new LabelLexical('foo'),
-            $stream->current(),
-        );
-        $stream->next();
-
-        self::assertEquals(
-            new ColonLexical(),
-            $stream->current(),
-        );
-        $stream->next();
-
-        self::assertEquals(
-            new StringLexical('bar'),
-            $stream->current(),
-        );
-        $stream->next();
-
-        self::assertEquals(
-            new CommaLexical(),
-            $stream->current(),
-        );
-        $stream->next();
-
-        self::assertEquals(
-            new LabelLexical('bar'),
-            $stream->current(),
-        );
-        $stream->next();
-
-        self::assertEquals(
-            new ColonLexical(),
-            $stream->current(),
-        );
-        $stream->next();
-
-        self::assertEquals(
-            new LabelLexical('true'),
-            $stream->current(),
-        );
-        $stream->next();
-
-        self::assertEquals(
-            new CurlyBracketRightLexical(),
-            $stream->current(),
-        );
-        $stream->next();
+        foreach ($expect as $token) {
+            self::assertEquals($token, $stream->current());
+            $stream->next();
+        }
 
         self::assertTrue($stream->isEnd());
     }
@@ -274,23 +199,16 @@ class AngularExpressionCodeLexerTest extends TestCase
 
         $stream = $lexer->tokenize($input);
 
-        self::assertEquals(
+        $expect = [
             new ParenthesisLeftLexical(),
-            $stream->current(),
-        );
-        $stream->next();
-
-        self::assertEquals(
             new LabelLexical('bar'),
-            $stream->current(),
-        );
-        $stream->next();
-
-        self::assertEquals(
             new ParenthesisRightLexical(),
-            $stream->current(),
-        );
-        $stream->next();
+        ];
+
+        foreach ($expect as $token) {
+            self::assertEquals($token, $stream->current());
+            $stream->next();
+        }
 
         self::assertTrue($stream->isEnd());
     }
