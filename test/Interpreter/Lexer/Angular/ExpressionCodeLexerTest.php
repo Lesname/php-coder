@@ -1,15 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace LesCoderTest\Interpreter\Lexer;
+namespace LesCoderTest\Interpreter\Lexer\Angular;
 
+use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use LesCoder\Stream\String\DirectStringStream;
 use LesCoder\Interpreter\Lexer\Lexical\LabelLexical;
 use LesCoder\Interpreter\Lexer\Lexical\WhitespaceLexical;
-use LesCoder\Interpreter\Lexer\AngularExpressionCodeLexer;
-use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Interpreter\Lexer\Lexical\Value\StringLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Value\IntegerLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\DotLexical;
@@ -21,6 +20,7 @@ use LesCoder\Interpreter\Lexer\Lexical\Character\MinusLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\CommaLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\ColonLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\AsteriskLexical;
+use LesCoder\Interpreter\Lexer\Angular\ExpressionCodeLexer;
 use LesCoder\Interpreter\Lexer\Lexical\Expression\CoalescingLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\QuestionMarkLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\Slash\ForwardSlashLexical;
@@ -32,12 +32,12 @@ use LesCoder\Interpreter\Lexer\Lexical\Character\CurlyBracket\CurlyBracketRightL
 use LesCoder\Interpreter\Lexer\Lexical\Character\SquareBracket\SquareBracketLeftLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\SquareBracket\SquareBracketRightLexical;
 
-#[CoversClass(AngularExpressionCodeLexer::class)]
-class AngularExpressionCodeLexerTest extends TestCase
+#[CoversClass(ExpressionCodeLexer::class)]
+class ExpressionCodeLexerTest extends TestCase
 {
     public function testLexVariable(): void
     {
-        $lexer = new AngularExpressionCodeLexer();
+        $lexer = new ExpressionCodeLexer();
         $input = new DirectStringStream('bar');
 
         $stream = $lexer->tokenize($input);
@@ -53,7 +53,7 @@ class AngularExpressionCodeLexerTest extends TestCase
 
     public function testLexInvoke(): void
     {
-        $lexer = new AngularExpressionCodeLexer();
+        $lexer = new ExpressionCodeLexer();
         $input = new DirectStringStream('bar(biz)');
 
         $stream = $lexer->tokenize($input);
@@ -76,7 +76,7 @@ class AngularExpressionCodeLexerTest extends TestCase
     #[DataProvider('getStringQuote')]
     public function testLexString(string $quote): void
     {
-        $lexer = new AngularExpressionCodeLexer();
+        $lexer = new ExpressionCodeLexer();
         $input = new DirectStringStream("{$quote}fizbizz{$quote}");
 
         $stream = $lexer->tokenize($input);
@@ -103,7 +103,7 @@ class AngularExpressionCodeLexerTest extends TestCase
 
     public function testLexNumberInteger(): void
     {
-        $lexer = new AngularExpressionCodeLexer();
+        $lexer = new ExpressionCodeLexer();
         $input = new DirectStringStream('-123');
 
         $stream = $lexer->tokenize($input);
@@ -123,7 +123,7 @@ class AngularExpressionCodeLexerTest extends TestCase
 
     public function testLexNumberFloat(): void
     {
-        $lexer = new AngularExpressionCodeLexer();
+        $lexer = new ExpressionCodeLexer();
         $input = new DirectStringStream('123.321');
 
         $stream = $lexer->tokenize($input);
@@ -144,7 +144,7 @@ class AngularExpressionCodeLexerTest extends TestCase
 
     public function testLexList(): void
     {
-        $lexer = new AngularExpressionCodeLexer();
+        $lexer = new ExpressionCodeLexer();
         $input = new DirectStringStream('["foo",false]');
 
         $stream = $lexer->tokenize($input);
@@ -167,7 +167,7 @@ class AngularExpressionCodeLexerTest extends TestCase
 
     public function testLexDict(): void
     {
-        $lexer = new AngularExpressionCodeLexer();
+        $lexer = new ExpressionCodeLexer();
         $input = new DirectStringStream("{foo:'bar',bar:true}");
 
         $expect = [
@@ -194,7 +194,7 @@ class AngularExpressionCodeLexerTest extends TestCase
 
     public function testLexGroup(): void
     {
-        $lexer = new AngularExpressionCodeLexer();
+        $lexer = new ExpressionCodeLexer();
         $input = new DirectStringStream('(bar)');
 
         $stream = $lexer->tokenize($input);
@@ -215,7 +215,7 @@ class AngularExpressionCodeLexerTest extends TestCase
 
     public function testLexMath(): void
     {
-        $lexer = new AngularExpressionCodeLexer();
+        $lexer = new ExpressionCodeLexer();
         $input = new DirectStringStream('((bar --1) + (2 * 3)) - (6 / 2)');
 
         $stream = $lexer->tokenize($input);
@@ -262,7 +262,7 @@ class AngularExpressionCodeLexerTest extends TestCase
 
     public function testNestedAccess(): void
     {
-        $lexer = new AngularExpressionCodeLexer();
+        $lexer = new ExpressionCodeLexer();
         $input = new DirectStringStream('bar().biz.foo["bar"][1]?.fiz');
 
         $stream = $lexer->tokenize($input);
@@ -296,7 +296,7 @@ class AngularExpressionCodeLexerTest extends TestCase
 
     public function testChain(): void
     {
-        $lexer = new AngularExpressionCodeLexer();
+        $lexer = new ExpressionCodeLexer();
         $input = new DirectStringStream('bar && (foo || biz)');
 
         $stream = $lexer->tokenize($input);
@@ -325,7 +325,7 @@ class AngularExpressionCodeLexerTest extends TestCase
 
     public function testCoalesce(): void
     {
-        $lexer = new AngularExpressionCodeLexer();
+        $lexer = new ExpressionCodeLexer();
         $input = new DirectStringStream('bar ?? foo');
 
         $stream = $lexer->tokenize($input);
@@ -348,7 +348,7 @@ class AngularExpressionCodeLexerTest extends TestCase
 
     public function testFilter(): void
     {
-        $lexer = new AngularExpressionCodeLexer();
+        $lexer = new ExpressionCodeLexer();
         $input = new DirectStringStream('bar | fiz:biz');
 
         $stream = $lexer->tokenize($input);
@@ -373,7 +373,7 @@ class AngularExpressionCodeLexerTest extends TestCase
 
     public function testTernary(): void
     {
-        $lexer = new AngularExpressionCodeLexer();
+        $lexer = new ExpressionCodeLexer();
         $input = new DirectStringStream('foo ? bar : baz');
 
         $stream = $lexer->tokenize($input);
@@ -400,7 +400,7 @@ class AngularExpressionCodeLexerTest extends TestCase
 
     public function testAdditionAccess(): void
     {
-        $lexer = new AngularExpressionCodeLexer();
+        $lexer = new ExpressionCodeLexer();
         $input = new DirectStringStream('"foo" + fiz.biz | translate');
 
         $stream = $lexer->tokenize($input);
@@ -429,7 +429,7 @@ class AngularExpressionCodeLexerTest extends TestCase
 
     public function testCompareTernary(): void
     {
-        $lexer = new AngularExpressionCodeLexer();
+        $lexer = new ExpressionCodeLexer();
         $input = new DirectStringStream('\'foo\' == "bar" ? 1 : 2');
 
         $stream = $lexer->tokenize($input);
