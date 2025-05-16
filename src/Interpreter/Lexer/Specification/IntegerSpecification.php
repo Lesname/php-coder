@@ -21,6 +21,7 @@ final class IntegerSpecification implements Specification
     public function parse(StringStream $code): Lexical
     {
         $int = $code->current();
+        $code->next();
 
         if (!ctype_digit($int)) {
             throw new UnexpectedCharacter($int, 'digit');
