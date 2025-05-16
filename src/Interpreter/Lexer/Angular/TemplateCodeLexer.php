@@ -148,20 +148,24 @@ final class TemplateCodeLexer implements CodeLexer
 
     private function tokenizeWhitespace(StringStream $stream): Lexical
     {
+        $whitespace = '';
+
         do {
             $whitespace .= $stream->current();
             $stream->next();
-        } while($stream->isActive() && preg_match('/\s/', $stream->current()) === 1);
+        } while ($stream->isActive() && preg_match('/\s/', $stream->current()) === 1);
 
         return new WhitespaceLexical($whitespace);
     }
 
     private function tokenizeText(StringStream $stream): Lexical
     {
+        $text = '';
+
         do {
             $text .= $stream->current();
             $stream->next();
-        } while($stream->isActive() && !in_array($stream->current(), self::NON_TEXT_CHARACTERS, true));
+        } while ($stream->isActive() && !in_array($stream->current(), self::NON_TEXT_CHARACTERS, true));
 
         return new TextLexical($text);
     }

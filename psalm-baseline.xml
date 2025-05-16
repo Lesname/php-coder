@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="7.0.0-beta1@83dea78b8fe3a29339278e06db2830eb35af0960">
+  <file src="src/Interpreter/Parser/Specification/Typescript/HintParseSpecification.php">
+    <NoValue>
+      <code><![CDATA[$mode]]></code>
+    </NoValue>
+  </file>
+  <file src="src/Token/Block/Switch/CaseItem.php">
+    <ImpureVariable>
+      <code><![CDATA[$this]]></code>
+      <code><![CDATA[$this]]></code>
+      <code><![CDATA[$this]]></code>
+    </ImpureVariable>
+  </file>
   <file src="src/Token/Expression/FilterCodeToken.php">
     <ImpureVariable>
       <code><![CDATA[$this]]></code>

@@ -30,7 +30,10 @@ class TemplateCodeLexerTest extends TestCase
 {
     public function testTokenizeSimple(): void
     {
-        $stream = new DirectStringStream(file_get_contents(__DIR__ . '/stub/simple.html'));
+        $contents = file_get_contents(__DIR__ . '/stub/simple.html');
+        assert(is_string($contents));
+
+        $stream = new DirectStringStream($contents);
         $lexer = new TemplateCodeLexer();
 
         $lexicals = $lexer->tokenize($stream);
@@ -147,7 +150,10 @@ class TemplateCodeLexerTest extends TestCase
 
     public function testTokenizeFlowControlFor(): void
     {
-        $stream = new DirectStringStream(file_get_contents(__DIR__ . '/stub/flow-control-for.html'));
+        $contents = file_get_contents(__DIR__ . '/stub/flow-control-for.html');
+        assert(is_string($contents));
+
+        $stream = new DirectStringStream($contents);
         $lexer = new TemplateCodeLexer();
 
         $lexicals = $lexer->tokenize($stream);
@@ -209,7 +215,10 @@ class TemplateCodeLexerTest extends TestCase
 
     public function testTokenizeFlorControlIf(): void
     {
-        $stream = new DirectStringStream(file_get_contents(__DIR__ . '/stub/flow-control-if.html'));
+        $contents = file_get_contents(__DIR__ . '/stub/flow-control-if.html');
+        assert(is_string($contents));
+
+        $stream = new DirectStringStream($contents);
         $lexer = new TemplateCodeLexer();
 
         $lexicals = $lexer->tokenize($stream);
@@ -302,7 +311,10 @@ class TemplateCodeLexerTest extends TestCase
 
     public function testTokenizeFlowControlSwitch(): void
     {
-        $stream = new DirectStringStream(file_get_contents(__DIR__ . '/stub/flow-control-switch.html'));
+        $contents = file_get_contents(__DIR__ . '/stub/flow-control-switch.html');
+        assert(is_string($contents));
+
+        $stream = new DirectStringStream($contents);
         $lexer = new TemplateCodeLexer();
 
         $lexicals = $lexer->tokenize($stream);

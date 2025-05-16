@@ -91,6 +91,11 @@ final class HintParseSpecification implements ParseSpecification
         $mode = null;
         $hints = [];
 
+        $modes = [
+            AmpersandLexical::TYPE => 'intersection',
+            PipeLexical::TYPE => 'union',
+        ];
+
         do {
             $hints[] = $this->parseHint($stream, $file);
             $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
@@ -99,18 +104,14 @@ final class HintParseSpecification implements ParseSpecification
                 break;
             }
 
-            if ($this->isLexical($stream, AmpersandLexical::TYPE)) {
-                if ($mode !== 'intersection' && $mode !== null) {
-                    throw new UnexpectedMode($mode, 'intersection');
+            if (isset($modes[$stream->current()->getType()])) {
+                $useMode = $modes[$stream->current()->getType()];
+
+                if ($mode !== null && $mode !== $useMode) {
+                    throw new UnexpectedMode($mode, $useMode);
                 }
 
-                $mode = 'intersection';
-            } elseif ($this->isLexical($stream, PipeLexical::TYPE)) {
-                if ($mode !== 'union' && $mode !== null) {
-                    throw new UnexpectedMode($mode, 'union');
-                }
-
-                $mode = 'union';
+                $mode = $useMode;
             } else {
                 break;
             }
