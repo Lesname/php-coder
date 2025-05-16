@@ -31,6 +31,7 @@ import { Foo } from 'bar';
 
 export class Fiz extends Foo {
 }
+
 TS;
 
         $stream = new DirectStringStream($typescript);
@@ -38,9 +39,7 @@ TS;
         $interpreter = new TypescriptCodeInterpreter();
         $codeTokens = $interpreter->interpret($stream);
 
-        $current = $codeTokens->current();
-
-        self::assertInstanceOf(ExportCodeToken::class, $current);
+        self::assertInstanceOf(ExportCodeToken::class, $codeTokens->current());
 
         $codeTokens->next();
 
