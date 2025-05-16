@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace LesCoder\Renderer\Specification\Php\Object;
 
 use Override;
-use RuntimeException;
 use LesCoder\Utility\TextUtility;
 use LesCoder\Token\CodeToken;
 use LesCoder\Renderer\CodeRenderer;
@@ -31,6 +30,9 @@ final class InterfaceRendererSpecification implements RendererSpecification
 
     /**
      * @throws UnexpectedCodeToken
+     *
+     * @todo support interface properties
+     * @see https://github.com/Lesname/php-coder/issues/8
      */
     #[Override]
     public function render(CodeToken $token, CodeRenderer $renderer): string
@@ -50,10 +52,6 @@ final class InterfaceRendererSpecification implements RendererSpecification
             : '';
 
         $body = '';
-
-        if (count($token->properties) > 0) {
-            throw new RuntimeException('PHP has no support for interface properties');
-        }
 
         foreach ($token->methods as $method) {
             if ($body !== '') {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace LesCoder\Stream\Lexical;
 
 use Override;
-use RuntimeException;
+use LesCoder\Stream\Exception\EndOfStream;
 use LesCoder\Interpreter\Lexer\Lexical\Lexical;
 
 final class ArrayLexicalStream extends AbstractLexicalStream
@@ -21,7 +21,7 @@ final class ArrayLexicalStream extends AbstractLexicalStream
     public function current(): Lexical
     {
         if ($this->isEnd()) {
-            throw new RuntimeException();
+            throw new EndOfStream();
         }
 
         return $this->array[$this->position];

@@ -4,14 +4,15 @@ declare(strict_types=1);
 namespace LesCoder\Interpreter\Lexer\Specification;
 
 use Override;
-use RuntimeException;
 use LesCoder\Stream\String\StringStream;
+use LesCoder\Stream\Exception\EndOfStream;
 use LesCoder\Interpreter\Lexer\Lexical\Lexical;
 use LesCoder\Stream\String\Exception\ExpectedExactly;
 use LesCoder\Interpreter\Lexer\Lexical\Character\LowerThanLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\EqualsSignLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\ExclamationLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\GreaterThanLexical;
+use LesCoder\Interpreter\Lexer\Specification\Exception\UnknownOperator;
 use LesCoder\Interpreter\Lexer\Lexical\Expression\Comparison\SameLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Expression\Comparison\EqualsLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Expression\Comparison\NotSameLexical;
@@ -32,7 +33,9 @@ final class ComparisonSpecification implements Specification
     }
 
     /**
+     * @throws EndOfStream
      * @throws ExpectedExactly
+     * @throws UnknownOperator
      */
     #[Override]
     public function parse(StringStream $code): Lexical
@@ -42,7 +45,7 @@ final class ComparisonSpecification implements Specification
             '<' => $this->parseLowerThan($code),
             '=' => $this->parseEquals($code),
             '!' => $this->parseExclamation($code),
-            default => throw new RuntimeException("Unexpected '{$code->current()}'"),
+            default => throw new UnknownOperator($code->current()),
         };
     }
 

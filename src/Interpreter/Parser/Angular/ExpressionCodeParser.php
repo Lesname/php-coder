@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace LesCoder\Interpreter\Parser\Angular;
 
 use Override;
-use RuntimeException;
 use LesCoder\Token\CodeToken;
 use LesCoder\Token\InvokeCodeToken;
 use LesCoder\Token\VariableCodeToken;
@@ -16,6 +15,7 @@ use LesCoder\Token\Value\BuiltInCodeToken;
 use LesCoder\Token\Value\IntegerCodeToken;
 use LesCoder\Token\Expression\OrCodeToken;
 use LesCoder\Stream\Lexical\LexicalStream;
+use LesCoder\Stream\Exception\EndOfStream;
 use LesCoder\Token\Expression\MathOperator;
 use LesCoder\Token\Expression\AndCodeToken;
 use LesCoder\Interpreter\Parser\CodeParser;
@@ -42,6 +42,8 @@ use LesCoder\Interpreter\Lexer\Lexical\Character\PipeLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\CommaLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\MinusLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\ColonLexical;
+use LesCoder\Interpreter\Parser\Angular\Exception\InvalidName;
+use LesCoder\Interpreter\Parser\Angular\Exception\StreamActive;
 use LesCoder\Interpreter\Lexer\Lexical\Character\AsteriskLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\LowerThanLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\GreaterThanLexical;
@@ -91,9 +93,10 @@ final class ExpressionCodeParser implements CodeParser
     public function parse(LexicalStream $stream, ?string $file): CodeTokenStream
     {
         $token = $this->parseExpression($stream);
+        $stream->skip(WhitespaceLexical::TYPE);
 
         if ($stream->isActive()) {
-            throw new RuntimeException('Stream still active');
+            throw new StreamActive();
         }
 
         return new ArrayCodeTokenStream([$token]);
@@ -205,6 +208,7 @@ final class ExpressionCodeParser implements CodeParser
      * @throws UnexpectedEnd
      * @throws UnexpectedLabel
      * @throws UnexpectedLexical
+     * @throws EndOfStream
      */
     private function parseValue(LexicalStream $stream): CodeToken
     {
@@ -263,9 +267,19 @@ final class ExpressionCodeParser implements CodeParser
                     ? $this->parseInvoke($stream, $codeToken)
                     : $codeToken;
             }
+
+            throw new InvalidName((string)$lexical);
         }
 
-        throw new RuntimeException("Unexpected '{$stream->current()}'");
+        throw new UnexpectedLexical(
+            $lexical,
+            SquareBracketLeftLexical::TYPE,
+            CurlyBracketLeftLexical::TYPE,
+            ParenthesisLeftLexical::TYPE,
+            MinusLexical::TYPE,
+            IntegerLexical::TYPE,
+            StringLexical::TYPE,
+        );
     }
 
     private function parseVariable(LexicalStream $stream): CodeToken
@@ -274,7 +288,7 @@ final class ExpressionCodeParser implements CodeParser
         $stream->next();
 
         if (preg_match('/[a-zA-Z\x7f-\xff_$]/', $name) !== 1) {
-            throw new RuntimeException("Variable must start with 'a-z_', was '{$name}'");
+            throw new InvalidName($name);
         }
 
         return new VariableCodeToken($name);
@@ -464,7 +478,7 @@ final class ExpressionCodeParser implements CodeParser
         return match ($token->getType()) {
             AndLexical::TYPE => new AndCodeToken($items),
             OrLexical::TYPE => new OrCodeToken($items),
-            default => throw new RuntimeException("Unexpected '{$token->getType()}'"),
+            default => throw new UnexpectedLexical($token, AndLexical::TYPE, OrLexical::TYPE),
         };
     }
 
@@ -581,7 +595,11 @@ final class ExpressionCodeParser implements CodeParser
 
             $property = new StringCodeToken($name);
         } else {
-            throw new RuntimeException();
+            throw new UnexpectedLexical(
+                $stream->current(),
+                SquareBracketLeftLexical::TYPE,
+                LabelLexical::TYPE,
+            );
         }
 
         return new AccessCodeToken($called, $property, $nullable ? AccessCodeToken::FLAG_NULLABLE : 0);

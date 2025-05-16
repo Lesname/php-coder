@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace LesCoder\Renderer\Specification\Php\Object;
 
 use Override;
-use RuntimeException;
 use LesCoder\Utility\TextUtility;
 use LesCoder\Token\CodeToken;
 use LesCoder\Renderer\CodeRenderer;
@@ -12,6 +11,7 @@ use LesCoder\Token\Object\InterfaceMethodCodeToken;
 use LesCoder\Renderer\Specification\RendererSpecification;
 use LesCoder\Renderer\Specification\Helper\CommentRendererHelper;
 use LesCoder\Renderer\Specification\Exception\UnexpectedCodeToken;
+use LesCoder\Renderer\Specification\Php\Object\Exception\NameRequired;
 
 /**
  * @psalm-immutable
@@ -42,7 +42,7 @@ final class InterfaceMethodRendererSpecification implements RendererSpecificatio
         $name = $token->name;
 
         if ($name === null) {
-            throw new RuntimeException();
+            throw new NameRequired();
         }
 
         $parameters = [];

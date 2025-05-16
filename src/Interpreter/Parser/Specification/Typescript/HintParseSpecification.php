@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace LesCoder\Interpreter\Parser\Specification\Typescript;
 
 use Override;
-use RuntimeException;
 use LesCoder\Token\CodeToken;
 use LesCoder\Stream\Lexical\LexicalStream;
 use LesCoder\Token\ParameterCodeToken;
@@ -15,6 +14,7 @@ use LesCoder\Token\Value\StringCodeToken;
 use LesCoder\Token\Hint\GenericCodeToken;
 use LesCoder\Token\Value\IntegerCodeToken;
 use LesCoder\Token\Object\AccessCodeToken;
+use LesCoder\Stream\Exception\EndOfStream;
 use LesCoder\Token\Hint\ReferenceCodeToken;
 use LesCoder\Token\Hint\DictionaryCodeToken;
 use LesCoder\Token\Expression\GroupCodeToken;
@@ -40,6 +40,7 @@ use LesCoder\Interpreter\Lexer\Lexical\Character\SemicolonLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\EqualsSignLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\GreaterThanLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\QuestionMarkLexical;
+use LesCoder\Interpreter\Parser\Specification\Exception\UnexpectedCodeToken;
 use LesCoder\Interpreter\Parser\Specification\Typescript\Exception\UnexpectedEnd;
 use LesCoder\Interpreter\Parser\Specification\Helper\ExpectParseSpecificationHelper;
 use LesCoder\Interpreter\Lexer\Lexical\Character\Parenthesis\ParenthesisLeftLexical;
@@ -79,6 +80,8 @@ final class HintParseSpecification implements ParseSpecification
     }
 
     /**
+     * @throws UnexpectedMode
+     * @throws EndOfStream
      * @throws UnexpectedEnd
      * @throws UnexpectedLexical
      */
@@ -97,14 +100,14 @@ final class HintParseSpecification implements ParseSpecification
             }
 
             if ($this->isLexical($stream, AmpersandLexical::TYPE)) {
-                if ($mode === 'union') {
-                    throw new RuntimeException();
+                if ($mode !== 'intersection' && $mode !== null) {
+                    throw new UnexpectedMode($mode, 'intersection');
                 }
 
                 $mode = 'intersection';
             } elseif ($this->isLexical($stream, PipeLexical::TYPE)) {
-                if ($mode === 'intersection') {
-                    throw new RuntimeException();
+                if ($mode !== 'union' && $mode !== null) {
+                    throw new UnexpectedMode($mode, 'union');
                 }
 
                 $mode = 'union';
@@ -123,13 +126,14 @@ final class HintParseSpecification implements ParseSpecification
         return match ($mode) {
             'union' => new UnionCodeToken($hints),
             'intersection' => new IntersectionCodeToken($hints),
-            default => throw new RuntimeException("Cannot handle mode '{$mode}'"),
+            default => throw new UnexpectedMode($mode, 'union', 'intersection'),
         };
     }
 
     /**
      * @throws UnexpectedEnd
      * @throws UnexpectedLexical
+     * @throws EndOfStream
      */
     private function parseHint(LexicalStream $stream, ?string $file): CodeToken
     {
@@ -145,7 +149,17 @@ final class HintParseSpecification implements ParseSpecification
             default => (function () use ($stream) {
                 $current = $stream->current();
 
-                throw new RuntimeException("Unexpected '{$current->getType()}'");
+                throw new UnexpectedLexical(
+                    $current,
+                    MinusLexical::TYPE,
+                    DotLexical::TYPE,
+                    IntegerLexical::TYPE,
+                    StringLexical::TYPE,
+                    LabelLexical::TYPE,
+                    ParenthesisLeftLexical::TYPE,
+                    CurlyBracketLeftLexical::TYPE,
+                    SquareBracketLeftLexical::TYPE,
+                );
             })(),
         };
 
@@ -265,21 +279,11 @@ final class HintParseSpecification implements ParseSpecification
         return $token;
     }
 
-    /**
-     * @throws UnexpectedEnd
-     * @throws UnexpectedLexical
-     */
     private function parseHintReference(LexicalStream $stream, ?string $file): CodeToken
     {
         $hint = $this->referenceParseSpecification->parse($stream, $file);
 
         while ($stream->isActive()) {
-            if ($this->isLexical($stream, LowerThanLexical::TYPE)) {
-                $stream->next();
-
-                throw new RuntimeException('@todo support generic');
-            }
-
             if ($this->isLexical($stream, DotLexical::TYPE)) {
                 $stream->next();
 
@@ -371,7 +375,7 @@ final class HintParseSpecification implements ParseSpecification
 
         if ($this->isLexical($stream, ColonLexical::TYPE)) {
             if (!$sub instanceof ReferenceCodeToken) {
-                throw new RuntimeException();
+                throw new UnexpectedCodeToken();
             }
 
             $stream->next();

@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace LesCoder\Interpreter\Parser\Specification\Typescript;
 
 use Override;
-use RuntimeException;
 use LesCoder\Token\CodeToken;
 use LesCoder\Token\CommentCodeToken;
 use LesCoder\Stream\Lexical\LexicalStream;
@@ -33,9 +32,11 @@ use LesCoder\Interpreter\Lexer\Lexical\Character\QuestionMarkLexical;
 use LesCoder\Interpreter\Parser\Specification\Typescript\Exception\UnexpectedEnd;
 use LesCoder\Interpreter\Parser\Specification\Helper\ExpectParseSpecificationHelper;
 use LesCoder\Interpreter\Lexer\Lexical\Character\Parenthesis\ParenthesisLeftLexical;
+use LesCoder\Interpreter\Parser\Specification\Typescript\Exception\NoReadonlyMethod;
 use LesCoder\Interpreter\Parser\Specification\Typescript\Exception\UnexpectedLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\Parenthesis\ParenthesisRightLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\CurlyBracket\CurlyBracketLeftLexical;
+use LesCoder\Interpreter\Parser\Specification\Typescript\Exception\MethodMustHaveName;
 use LesCoder\Interpreter\Lexer\Lexical\Character\CurlyBracket\CurlyBracketRightLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\SquareBracket\SquareBracketLeftLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\SquareBracket\SquareBracketRightLexical;
@@ -218,7 +219,7 @@ final class InterfaceParseSpecification implements ParseSpecification
 
                 $name = new IndexSignatureCodeToken($hint);
             } else {
-                throw new RuntimeException();
+                throw new UnexpectedLexical($stream->current(), LabelLexical::TYPE, SquareBracketLeftLexical::TYPE);
             }
 
             if ($this->isLexical($stream, QuestionMarkLexical::TYPE)) {
@@ -233,11 +234,11 @@ final class InterfaceParseSpecification implements ParseSpecification
 
             if ($this->isLexical($stream, ParenthesisLeftLexical::TYPE)) {
                 if (!$name instanceof StringCodeToken) {
-                    throw new RuntimeException();
+                    throw new MethodMustHaveName();
                 }
 
                 if ($readonly) {
-                    throw new RuntimeException();
+                    throw new NoReadonlyMethod();
                 }
 
                 $methods[] = $this->parseInterfaceMethod($stream, $name->value, $required, $file);
@@ -369,7 +370,7 @@ final class InterfaceParseSpecification implements ParseSpecification
         }
 
         if ($name === '') {
-            throw new RuntimeException();
+            throw new MethodMustHaveName();
         }
 
         return new InterfaceMethodCodeToken($name, $parameters, $returns, $required);
@@ -392,7 +393,7 @@ final class InterfaceParseSpecification implements ParseSpecification
                 } elseif ($this->isLexical($stream, StringLexical::TYPE)) {
                     $reference = new StringCodeToken((string)$stream->current());
                 } else {
-                    throw new RuntimeException();
+                    throw new UnexpectedLexical($stream->current(), LabelLexical::TYPE, StringLexical::TYPE);
                 }
 
                 $stream->next();

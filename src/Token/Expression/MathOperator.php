@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace LesCoder\Token\Expression;
 
-use RuntimeException;
+use LesCoder\Token\Expression\Exception\UnknownOperator;
 
 enum MathOperator
 {
@@ -12,6 +12,9 @@ enum MathOperator
     case Multiply;
     case Subtract;
 
+    /**
+     * @throws UnknownOperator
+     */
     public static function fromOperator(string $operator): self
     {
         return match ($operator) {
@@ -19,7 +22,7 @@ enum MathOperator
             '+' => self::Addition,
             '/' => self::Divide,
             '*' => self::Multiply,
-            default => throw new RuntimeException("Unknown operator '{$operator}'"),
+            default => throw new UnknownOperator($operator),
         };
     }
 

@@ -6,6 +6,7 @@ namespace LesCoder\Stream\CodeToken;
 use Override;
 use LesCoder\Token\CodeToken;
 use LesCoder\Stream\AbstractStream;
+use LesCoder\Stream\Exception\EndOfStream;
 
 /**
  * @extends AbstractStream<CodeToken>
@@ -23,6 +24,10 @@ final class ArrayCodeTokenStream extends AbstractStream implements CodeTokenStre
     #[Override]
     public function current(): CodeToken
     {
+        if (!isset($this->tokens[$this->position])) {
+            throw new EndOfStream();
+        }
+
         return $this->tokens[$this->position];
     }
 

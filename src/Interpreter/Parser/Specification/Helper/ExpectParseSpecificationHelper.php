@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace LesCoder\Interpreter\Parser\Specification\Helper;
 
 use LesCoder\Stream\Lexical\LexicalStream;
+use LesCoder\Stream\Exception\EndOfStream;
 use LesCoder\Interpreter\Lexer\Lexical\LabelLexical;
 use LesCoder\Interpreter\Parser\Specification\Typescript\Exception\UnexpectedEnd;
 use LesCoder\Interpreter\Parser\Specification\Typescript\Exception\UnexpectedLabel;
@@ -14,6 +15,7 @@ trait ExpectParseSpecificationHelper
     /**
      * @throws UnexpectedEnd
      * @throws UnexpectedLexical
+     * @throws EndOfStream
      */
     protected function expectLexical(LexicalStream $stream, string $expect, string ...$orExpect): void
     {

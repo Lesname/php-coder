@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace LesCoder\Token\Expression;
 
-use RuntimeException;
+use LesCoder\Token\Expression\Exception\UnknownOperator;
 
 /**
  * @psalm-immutable
@@ -20,6 +20,9 @@ enum ComparisonOperator
     case GreaterThanOrEqual;
     case InstanceOf;
 
+    /**
+     * @throws UnknownOperator
+     */
     public static function fromOperator(string $operator): self
     {
         return match ($operator) {
@@ -32,7 +35,7 @@ enum ComparisonOperator
             '<=' => self::LessThanOrEqual,
             '>=' => self::GreaterThanOrEqual,
             'instanceof' => self::InstanceOf,
-            default => throw new RuntimeException("Unknown operator '{$operator}'"),
+            default => throw new UnknownOperator($operator),
         };
     }
 }
