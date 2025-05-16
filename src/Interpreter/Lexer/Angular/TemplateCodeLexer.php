@@ -1,0 +1,168 @@
+<?php
+declare(strict_types=1);
+
+namespace LesCoder\Interpreter\Lexer\Angular;
+
+use Override;
+use Iterator;
+use RuntimeException;
+use LesCoder\Stream\String\StringStream;
+use LesCoder\Interpreter\Lexer\CodeLexer;
+use LesCoder\Stream\Lexical\LexicalStream;
+use LesCoder\Interpreter\Lexer\Lexical\Lexical;
+use LesCoder\Stream\Lexical\IteratorLexicalStream;
+use LesCoder\Interpreter\Lexer\Lexical\TextLexical;
+use LesCoder\Interpreter\Lexer\Lexical\CommentLexical;
+use LesCoder\Interpreter\Lexer\Lexical\WhitespaceLexical;
+use LesCoder\Interpreter\Lexer\Lexical\Character\PipeLexical;
+use LesCoder\Interpreter\Lexer\Lexical\Character\AtSignLexical;
+use LesCoder\Interpreter\Lexer\Lexical\Character\LowerThanLexical;
+use LesCoder\Interpreter\Lexer\Lexical\Character\EqualsSignLexical;
+use LesCoder\Interpreter\Lexer\Lexical\Character\GreaterThanLexical;
+use LesCoder\Interpreter\Lexer\Lexical\Character\DoubleQuoteLexical;
+use LesCoder\Interpreter\Lexer\Lexical\Character\SingleQuoteLexical;
+use LesCoder\Interpreter\Lexer\Lexical\Angular\Expression\OpenLexical;
+use LesCoder\Interpreter\Lexer\Lexical\Angular\Expression\CloseLexical;
+use LesCoder\Interpreter\Lexer\Lexical\Character\Slash\ForwardSlashLexical;
+use LesCoder\Interpreter\Lexer\Lexical\Character\Parenthesis\ParenthesisLeftLexical;
+use LesCoder\Interpreter\Lexer\Lexical\Character\Parenthesis\ParenthesisRightLexical;
+use LesCoder\Interpreter\Lexer\Lexical\Character\CurlyBracket\CurlyBracketLeftLexical;
+use LesCoder\Interpreter\Lexer\Lexical\Character\CurlyBracket\CurlyBracketRightLexical;
+
+final class TemplateCodeLexer implements CodeLexer
+{
+    private const array CHARACTERS = [
+        GreaterThanLexical::CHARACTER => GreaterThanLexical::class,
+        EqualsSignLexical::CHARACTER => EqualsSignLexical::class,
+        ForwardSlashLexical::CHARACTER => ForwardSlashLexical::class,
+        PipeLexical::CHARACTER => PipeLexical::class,
+        DoubleQuoteLexical::CHARACTER => DoubleQuoteLexical::class,
+        SingleQuoteLexical::CHARACTER => SingleQuoteLexical::class,
+        AtSignLexical::CHARACTER => AtSignLexical::class,
+        ParenthesisLeftLexical::CHARACTER => ParenthesisLeftLexical::class,
+        ParenthesisRightLexical::CHARACTER => ParenthesisRightLexical::class,
+    ];
+
+    private const array NON_TEXT_CHARACTERS = [
+        GreaterThanLexical::CHARACTER,
+        EqualsSignLexical::CHARACTER,
+        ForwardSlashLexical::CHARACTER,
+        DoubleQuoteLexical::CHARACTER,
+        SingleQuoteLexical::CHARACTER,
+        AtSignLexical::CHARACTER,
+        ParenthesisLeftLexical::CHARACTER,
+        ParenthesisRightLexical::CHARACTER,
+        '<',
+        '{',
+        '}',
+        ' ',
+        PHP_EOL,
+        "\t",
+    ];
+
+    #[Override]
+    public function tokenize(StringStream $stream): LexicalStream
+    {
+        return new IteratorLexicalStream(
+            (function () use ($stream): Iterator {
+                while ($stream->isActive()) {
+                    yield $this->tokenizeLexical($stream);
+                }
+            })(),
+        );
+    }
+
+    private function tokenizeLexical(StringStream $stream): Lexical
+    {
+        $char = $stream->current();
+
+        if (isset(self::CHARACTERS[$char])) {
+            $class = self::CHARACTERS[$char];
+
+            $stream->next();
+
+            return new $class();
+        }
+
+        if ($char === '<') {
+            if ($stream->current(4) === '<!--') {
+                return $this->tokenizeComment($stream);
+            }
+
+            $stream->next();
+
+            return new LowerThanLexical();
+        }
+
+        if ($char === '{') {
+            $stream->next();
+
+            if ($stream->current() === '{') {
+                $stream->next();
+                return new OpenLexical('{{');
+            }
+
+            return new CurlyBracketLeftLexical();
+        }
+
+        if ($char === '}') {
+            $stream->next();
+
+            if ($stream->current() === '}') {
+                $stream->next();
+
+                return new CloseLexical('}}');
+            }
+
+            return new CurlyBracketRightLexical();
+        }
+
+        if (preg_match('/\s/', $char) === 1) {
+            return $this->tokenizeWhitespace($stream);
+        }
+
+        return $this->tokenizeText($stream);
+    }
+
+    private function tokenizeComment(StringStream $stream): Lexical
+    {
+        if ($stream->current(4) !== '<!--') {
+            throw new RuntimeException('Comment must start with <!--');
+        }
+
+        $stream->next(4);
+
+        $comment = '';
+
+        while ($stream->isActive() && $stream->current(3) !== '-->') {
+            $comment .= $stream->current();
+            $stream->next();
+        }
+
+        if ($stream->current(3) === '-->') {
+            $stream->next(3);
+        }
+
+        return new CommentLexical($comment);
+    }
+
+    private function tokenizeWhitespace(StringStream $stream): Lexical
+    {
+        do {
+            $whitespace .= $stream->current();
+            $stream->next();
+        } while($stream->isActive() && preg_match('/\s/', $stream->current()) === 1);
+
+        return new WhitespaceLexical($whitespace);
+    }
+
+    private function tokenizeText(StringStream $stream): Lexical
+    {
+        do {
+            $text .= $stream->current();
+            $stream->next();
+        } while($stream->isActive() && !in_array($stream->current(), self::NON_TEXT_CHARACTERS, true));
+
+        return new TextLexical($text);
+    }
+}
