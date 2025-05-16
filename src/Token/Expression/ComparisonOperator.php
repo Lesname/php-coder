@@ -14,8 +14,8 @@ enum ComparisonOperator
     case Identical;
     case NotEqual;
     case NotIdentical;
-    case Less;
-    case Greater;
+    case LessThan;
+    case GreaterThan;
     case LessThanOrEqual;
     case GreaterThanOrEqual;
     case InstanceOf;
@@ -30,8 +30,8 @@ enum ComparisonOperator
             '===' => self::Identical,
             '!=' => self::NotEqual,
             '!==' => self::NotIdentical,
-            '<' => self::Less,
-            '>' => self::Greater,
+            '<' => self::LessThan,
+            '>' => self::GreaterThan,
             '<=' => self::LessThanOrEqual,
             '>=' => self::GreaterThanOrEqual,
             'instanceof' => self::InstanceOf,
