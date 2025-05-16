@@ -11,9 +11,11 @@ use LesCoder\Interpreter\Lexer\Lexical\AbstractLexical;
  */
 final class StartCloseLexical extends AbstractLexical
 {
+    public const string TYPE = 'angular.element.startClose';
+
     #[Override]
     public function getType(): string
     {
-        return 'angular.element.startClose';
+        return self::TYPE;
     }
 }

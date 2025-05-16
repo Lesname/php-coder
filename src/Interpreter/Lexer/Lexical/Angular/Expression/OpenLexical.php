@@ -11,9 +11,11 @@ use LesCoder\Interpreter\Lexer\Lexical\AbstractLexical;
  */
 final class OpenLexical extends AbstractLexical
 {
+    public const string TYPE = 'angular.expression.open';
+
     #[Override]
     public function getType(): string
     {
-        return 'angular.expression.close';
+        return self::TYPE;
     }
 }
