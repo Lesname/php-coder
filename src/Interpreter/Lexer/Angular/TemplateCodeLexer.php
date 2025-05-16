@@ -23,6 +23,7 @@ use LesCoder\Interpreter\Lexer\Lexical\Character\DoubleQuoteLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\SingleQuoteLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Angular\Expression\OpenLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Angular\Expression\CloseLexical;
+use LesCoder\Interpreter\Lexer\Lexical\Angular\Element\StartCloseLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\Slash\ForwardSlashLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\Parenthesis\ParenthesisLeftLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\Parenthesis\ParenthesisRightLexical;
@@ -87,6 +88,12 @@ final class TemplateCodeLexer implements CodeLexer
         if ($char === '<') {
             if ($stream->current(4) === '<!--') {
                 return $this->tokenizeComment($stream);
+            }
+
+            if ($stream->current(2) === '</') {
+                $stream->next(2);
+
+                return new StartCloseLexical('</');
             }
 
             $stream->next();
