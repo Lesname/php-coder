@@ -226,6 +226,7 @@ final class TypescriptCodeInterpreter implements CodeInterpreter
                     ]
                 ),
             ],
+            true,
         );
     }
 
