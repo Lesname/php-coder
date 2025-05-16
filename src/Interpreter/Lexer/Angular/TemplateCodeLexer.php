@@ -15,7 +15,7 @@ use LesCoder\Interpreter\Lexer\Lexical\TextLexical;
 use LesCoder\Interpreter\Lexer\Lexical\CommentLexical;
 use LesCoder\Interpreter\Lexer\Lexical\WhitespaceLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\PipeLexical;
-use LesCoder\Interpreter\Lexer\Lexical\Character\AtSignLexical;
+use LesCoder\Interpreter\Lexer\Lexical\Character\CommaLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\LowerThanLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\SemicolonLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\EqualsSignLexical;
@@ -24,6 +24,7 @@ use LesCoder\Interpreter\Lexer\Lexical\Character\DoubleQuoteLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\SingleQuoteLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Angular\Expression\OpenLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Angular\Expression\CloseLexical;
+use LesCoder\Interpreter\Lexer\Lexical\Angular\FlowControl\StartLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Angular\Element\StartCloseLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\Slash\ForwardSlashLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\Parenthesis\ParenthesisLeftLexical;
@@ -40,10 +41,10 @@ final class TemplateCodeLexer implements CodeLexer
         PipeLexical::CHARACTER => PipeLexical::class,
         DoubleQuoteLexical::CHARACTER => DoubleQuoteLexical::class,
         SingleQuoteLexical::CHARACTER => SingleQuoteLexical::class,
-        AtSignLexical::CHARACTER => AtSignLexical::class,
         ParenthesisLeftLexical::CHARACTER => ParenthesisLeftLexical::class,
         ParenthesisRightLexical::CHARACTER => ParenthesisRightLexical::class,
         SemicolonLexical::CHARACTER => SemicolonLexical::class,
+        CommaLexical::CHARACTER => CommaLexical::class,
     ];
 
     private const array NON_TEXT_CHARACTERS = [
@@ -52,13 +53,14 @@ final class TemplateCodeLexer implements CodeLexer
         ForwardSlashLexical::CHARACTER,
         DoubleQuoteLexical::CHARACTER,
         SingleQuoteLexical::CHARACTER,
-        AtSignLexical::CHARACTER,
         ParenthesisLeftLexical::CHARACTER,
         ParenthesisRightLexical::CHARACTER,
         SemicolonLexical::CHARACTER,
+        CommaLexical::CHARACTER,
         '<',
         '{',
         '}',
+        '@',
         ' ',
         PHP_EOL,
         "\t",
@@ -125,6 +127,18 @@ final class TemplateCodeLexer implements CodeLexer
             }
 
             return new CurlyBracketRightLexical();
+        }
+
+        if ($char === '@') {
+            $stream->next();
+            $name = '';
+
+            while ($stream->isActive() && ctype_alpha($stream->current())) {
+                $name .= $stream->current();
+                $stream->next();
+            }
+
+            return new StartLexical($name);
         }
 
         if (preg_match('/\s/', $char) === 1) {

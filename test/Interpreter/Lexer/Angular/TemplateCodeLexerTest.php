@@ -11,7 +11,6 @@ use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Interpreter\Lexer\Lexical\WhitespaceLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\PipeLexical;
-use LesCoder\Interpreter\Lexer\Lexical\Character\AtSignLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\LowerThanLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\SemicolonLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\EqualsSignLexical;
@@ -20,6 +19,7 @@ use LesCoder\Interpreter\Lexer\Lexical\Character\DoubleQuoteLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\SingleQuoteLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Angular\Expression\OpenLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Angular\Expression\CloseLexical;
+use LesCoder\Interpreter\Lexer\Lexical\Angular\FlowControl\StartLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Angular\Element\StartCloseLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\Slash\ForwardSlashLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\Parenthesis\ParenthesisLeftLexical;
@@ -159,8 +159,7 @@ class TemplateCodeLexerTest extends TestCase
         $lexicals = $lexer->tokenize($stream);
 
         $expected = [
-            new AtSignLexical(),
-            new TextLexical('for'),
+            new StartLexical('for'),
             new ParenthesisLeftLexical(),
             new TextLexical('item'),
             new WhitespaceLexical(' '),
@@ -183,8 +182,7 @@ class TemplateCodeLexerTest extends TestCase
             new WhitespaceLexical(PHP_EOL),
             new CurlyBracketRightLexical(),
             new WhitespaceLexical(' '),
-            new AtSignLexical(),
-            new TextLexical('empty'),
+            new StartLexical('empty'),
             new WhitespaceLexical(' '),
             new CurlyBracketLeftLexical(),
             new WhitespaceLexical(PHP_EOL),
@@ -224,8 +222,7 @@ class TemplateCodeLexerTest extends TestCase
         $lexicals = $lexer->tokenize($stream);
 
         $expected = [
-            new AtSignLexical(),
-            new TextLexical('if'),
+            new StartLexical('if'),
             new WhitespaceLexical(' '),
             new ParenthesisLeftLexical(),
             new TextLexical('users$'),
@@ -242,8 +239,7 @@ class TemplateCodeLexerTest extends TestCase
             new WhitespaceLexical(' '),
             new CurlyBracketLeftLexical(),
             new WhitespaceLexical(PHP_EOL),
-            new AtSignLexical(),
-            new TextLexical('if'),
+            new StartLexical('if'),
             new WhitespaceLexical(' '),
             new ParenthesisLeftLexical(),
             new TextLexical('users.length'),
@@ -263,8 +259,7 @@ class TemplateCodeLexerTest extends TestCase
             new WhitespaceLexical(PHP_EOL),
             new CurlyBracketRightLexical(),
             new WhitespaceLexical(' '),
-            new AtSignLexical(),
-            new TextLexical('else'),
+            new StartLexical('else'),
             new WhitespaceLexical(' '),
             new CurlyBracketLeftLexical(),
             new WhitespaceLexical(PHP_EOL),
@@ -274,8 +269,7 @@ class TemplateCodeLexerTest extends TestCase
             new WhitespaceLexical(PHP_EOL),
             new CurlyBracketRightLexical(),
             new WhitespaceLexical(' '),
-            new AtSignLexical(),
-            new TextLexical('elseif'),
+            new StartLexical('elseif'),
             new WhitespaceLexical(' '),
             new ParenthesisLeftLexical(),
             new TextLexical('a'),
@@ -292,8 +286,7 @@ class TemplateCodeLexerTest extends TestCase
             new WhitespaceLexical(PHP_EOL),
             new CurlyBracketRightLexical(),
             new WhitespaceLexical(' '),
-            new AtSignLexical(),
-            new TextLexical('else'),
+            new StartLexical('else'),
             new WhitespaceLexical(' '),
             new CurlyBracketLeftLexical(),
             new WhitespaceLexical(PHP_EOL),
@@ -321,8 +314,7 @@ class TemplateCodeLexerTest extends TestCase
         $lexicals = $lexer->tokenize($stream);
 
         $expected = [
-            new AtSignLexical(),
-            new TextLexical('switch'),
+            new StartLexical('switch'),
             new WhitespaceLexical(' '),
             new ParenthesisLeftLexical(),
             new TextLexical('condition'),
@@ -330,8 +322,7 @@ class TemplateCodeLexerTest extends TestCase
             new WhitespaceLexical(' '),
             new CurlyBracketLeftLexical(),
             new WhitespaceLexical(PHP_EOL),
-            new AtSignLexical(),
-            new TextLexical('case'),
+            new StartLexical('case'),
             new WhitespaceLexical(' '),
             new ParenthesisLeftLexical(),
             new TextLexical('caseA'),
@@ -345,8 +336,7 @@ class TemplateCodeLexerTest extends TestCase
             new WhitespaceLexical(PHP_EOL),
             new CurlyBracketRightLexical(),
             new WhitespaceLexical(PHP_EOL),
-            new AtSignLexical(),
-            new TextLexical('case'),
+            new StartLexical('case'),
             new WhitespaceLexical(' '),
             new ParenthesisLeftLexical(),
             new TextLexical('caseB'),
@@ -360,8 +350,7 @@ class TemplateCodeLexerTest extends TestCase
             new WhitespaceLexical(PHP_EOL),
             new CurlyBracketRightLexical(),
             new WhitespaceLexical(PHP_EOL),
-            new AtSignLexical(),
-            new TextLexical('default'),
+            new StartLexical('default'),
             new WhitespaceLexical(' '),
             new CurlyBracketLeftLexical(),
             new WhitespaceLexical(PHP_EOL),
