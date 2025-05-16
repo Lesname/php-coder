@@ -43,6 +43,7 @@ trait ExpectParseSpecificationHelper
     }
 
     /**
+     * @throws EndOfStream
      * @throws UnexpectedEnd
      * @throws UnexpectedLabel
      * @throws UnexpectedLexical
