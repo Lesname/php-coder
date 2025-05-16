@@ -17,6 +17,7 @@ use LesCoder\Interpreter\Lexer\Lexical\WhitespaceLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\PipeLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\AtSignLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\LowerThanLexical;
+use LesCoder\Interpreter\Lexer\Lexical\Character\SemicolonLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\EqualsSignLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\GreaterThanLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\DoubleQuoteLexical;
@@ -42,6 +43,7 @@ final class TemplateCodeLexer implements CodeLexer
         AtSignLexical::CHARACTER => AtSignLexical::class,
         ParenthesisLeftLexical::CHARACTER => ParenthesisLeftLexical::class,
         ParenthesisRightLexical::CHARACTER => ParenthesisRightLexical::class,
+        SemicolonLexical::CHARACTER => SemicolonLexical::class,
     ];
 
     private const array NON_TEXT_CHARACTERS = [
@@ -53,6 +55,7 @@ final class TemplateCodeLexer implements CodeLexer
         AtSignLexical::CHARACTER,
         ParenthesisLeftLexical::CHARACTER,
         ParenthesisRightLexical::CHARACTER,
+        SemicolonLexical::CHARACTER,
         '<',
         '{',
         '}',

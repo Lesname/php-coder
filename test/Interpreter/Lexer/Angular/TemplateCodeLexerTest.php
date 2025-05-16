@@ -13,12 +13,14 @@ use LesCoder\Interpreter\Lexer\Lexical\WhitespaceLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\PipeLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\AtSignLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\LowerThanLexical;
+use LesCoder\Interpreter\Lexer\Lexical\Character\SemicolonLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\EqualsSignLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\GreaterThanLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\DoubleQuoteLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\SingleQuoteLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Angular\Expression\OpenLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Angular\Expression\CloseLexical;
+use LesCoder\Interpreter\Lexer\Lexical\Angular\Element\StartCloseLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\Slash\ForwardSlashLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\Parenthesis\ParenthesisLeftLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\Parenthesis\ParenthesisRightLexical;
@@ -99,8 +101,7 @@ class TemplateCodeLexerTest extends TestCase
             new WhitespaceLexical(' '),
             new CloseLexical('}}'),
             new WhitespaceLexical(PHP_EOL),
-            new LowerThanLexical(),
-            new ForwardSlashLexical(),
+            new StartCloseLexical('</'),
             new TextLexical('div'),
             new GreaterThanLexical(),
             new WhitespaceLexical(PHP_EOL),
@@ -134,8 +135,7 @@ class TemplateCodeLexerTest extends TestCase
             new WhitespaceLexical(' '),
             new CloseLexical('}}'),
             new WhitespaceLexical(PHP_EOL),
-            new LowerThanLexical(),
-            new ForwardSlashLexical(),
+            new StartCloseLexical('</'),
             new TextLexical('ng-container'),
             new GreaterThanLexical(),
         ];
@@ -166,7 +166,8 @@ class TemplateCodeLexerTest extends TestCase
             new WhitespaceLexical(' '),
             new TextLexical('of'),
             new WhitespaceLexical(' '),
-            new TextLexical('items;'),
+            new TextLexical('items'),
+            new SemicolonLexical(),
             new WhitespaceLexical(' '),
             new TextLexical('track'),
             new WhitespaceLexical(' '),
@@ -197,8 +198,7 @@ class TemplateCodeLexerTest extends TestCase
             new TextLexical('no'),
             new WhitespaceLexical(' '),
             new TextLexical('items.'),
-            new LowerThanLexical(),
-            new ForwardSlashLexical(),
+            new StartCloseLexical('</'),
             new TextLexical('li'),
             new GreaterThanLexical(),
             new WhitespaceLexical(PHP_EOL),
@@ -232,7 +232,8 @@ class TemplateCodeLexerTest extends TestCase
             new WhitespaceLexical(' '),
             new PipeLexical(),
             new WhitespaceLexical(' '),
-            new TextLexical('async;'),
+            new TextLexical('async'),
+            new SemicolonLexical(),
             new WhitespaceLexical(' '),
             new TextLexical('as'),
             new WhitespaceLexical(' '),
