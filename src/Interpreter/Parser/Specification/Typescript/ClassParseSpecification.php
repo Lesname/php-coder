@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace LesCoder\Interpreter\Parser\Specification\Typescript;
 
 use Override;
-use RuntimeException;
 use LesCoder\Token\CodeToken;
 use LesCoder\Stream\Lexical\LexicalStream;
 use LesCoder\Token\Object\Visibility;
@@ -31,6 +30,7 @@ use LesCoder\Interpreter\Lexer\Lexical\Character\LowerThanLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\EqualsSignLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\GreaterThanLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\QuestionMarkLexical;
+use LesCoder\Interpreter\Parser\Specification\Exception\UnexpectedCodeToken;
 use LesCoder\Interpreter\Parser\Specification\Typescript\Exception\UnexpectedEnd;
 use LesCoder\Interpreter\Parser\Specification\Helper\ExpectParseSpecificationHelper;
 use LesCoder\Interpreter\Lexer\Lexical\Character\Parenthesis\ParenthesisLeftLexical;
@@ -119,7 +119,7 @@ final class ClassParseSpecification implements ParseSpecification
             } elseif ($classPart instanceof ClassPropertyCodeToken || $classPart instanceof ClassGetPropertyCodeToken || $classPart instanceof ClassSetPropertyCodeToken) {
                 $properties[] = $classPart;
             } else {
-                throw new RuntimeException();
+                throw new UnexpectedCodeToken();
             }
 
             $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
@@ -664,6 +664,8 @@ final class ClassParseSpecification implements ParseSpecification
 
     /**
      * @return array<AttributeCodeToken>
+     *
+     * @throws UnexpectedCodeToken
      */
     private function parseAttributes(LexicalStream $stream, ?string $file): array
     {
@@ -674,7 +676,7 @@ final class ClassParseSpecification implements ParseSpecification
             $attribute = $attributeParser->parse($stream, $file);
 
             if (!$attribute instanceof AttributeCodeToken) {
-                throw new RuntimeException();
+                throw new UnexpectedCodeToken();
             }
 
             $attributes[] = $attribute;

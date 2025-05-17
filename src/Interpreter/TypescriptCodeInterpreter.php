@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace LesCoder\Interpreter;
 
 use Override;
-use RuntimeException;
 use LesCoder\Stream\String\StringStream;
 use LesCoder\Stream\Lexical\LexicalStream;
 use LesCoder\Interpreter\Lexer\CodeLexer;
@@ -124,9 +123,7 @@ final class TypescriptCodeInterpreter implements CodeInterpreter
             return [$name => $from];
         }
 
-        if ($stream->current()->getType() !== CurlyBracketLeftLexical::TYPE) {
-            throw new RuntimeException("Expected `{` for '{$stream->current()->getType()}'");
-        }
+        $this->expectLexical($stream, CurlyBracketLeftLexical::TYPE);
 
         $stream->next();
         $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
@@ -134,13 +131,10 @@ final class TypescriptCodeInterpreter implements CodeInterpreter
         $names = [];
 
         while ($stream->isActive()) {
-            if ($stream->current()->getType() !== LabelLexical::TYPE) {
-                throw new RuntimeException("Expected label, got " . $stream->current()->getType());
-            }
-
+            $this->expectLexical($stream, LabelLexical::TYPE);
             $names[] = (string)$stream->current();
-
             $stream->next();
+
             $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
 
             if ($stream->current()->getType() !== CommaLexical::TYPE) {
@@ -155,28 +149,18 @@ final class TypescriptCodeInterpreter implements CodeInterpreter
             }
         }
 
-        if ($stream->current()->getType() !== CurlyBracketRightLexical::TYPE) {
-            throw new RuntimeException();
-        }
+        $this->expectLexical($stream, CurlyBracketRightLexical::TYPE);
 
         $stream->next();
         $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
 
-        if ($stream->current()->getType() !== LabelLexical::TYPE) {
-            throw new RuntimeException();
-        }
+        $this->expectLexical($stream, LabelLexical::TYPE);
 
-        if ((string)$stream->current() !== 'from') {
-            throw new RuntimeException();
-        }
-
+        $this->expectKeyword($stream, 'from');
         $stream->next();
         $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
 
-        if ($stream->current()->getType() !== StringLexical::TYPE) {
-            throw new RuntimeException();
-        }
-
+        $this->expectLexical($stream, StringLexical::TYPE);
         $from = (string)$stream->current();
         $stream->next();
 

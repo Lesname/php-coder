@@ -1,0 +1,24 @@
+@if (a > b) {
+    {{a}} is greater than {{b}}
+}
+
+<div>
+    @if (a > b) {
+        {{a}} is greater than {{b}}
+    } @else if (b > a) {
+        <u>{{a}} is less than {{b}}</u>
+    } @else if (c === b) {
+        <input />
+    } @else if (a === (c)) {
+    } @else {
+        <strong>{{a}} is equal to {{b}}</strong>
+    }
+</div>
+
+@if (users$ | async; as users) {
+    @if (users.length > 0) {
+        {{ users.length }}
+    } @else {
+        none
+    }
+}

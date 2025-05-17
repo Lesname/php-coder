@@ -1,0 +1,11 @@
+@for (item of items; let i = $index, isFirst = $first; track item.id) {
+    {{ item.name }}
+}
+
+<ul>
+    @for (item of items; track item.name; let i = $index) {
+        <li> {{ item.name }}</li>
+    } @empty {
+        <li> There are no items.</li>
+    }
+</ul>

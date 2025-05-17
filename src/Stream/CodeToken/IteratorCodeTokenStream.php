@@ -5,9 +5,9 @@ namespace LesCoder\Stream\CodeToken;
 
 use Iterator;
 use Override;
-use RuntimeException;
 use LesCoder\Token\CodeToken;
 use LesCoder\Stream\AbstractStream;
+use LesCoder\Stream\Exception\EndOfStream;
 
 /**
  * @extends AbstractStream<CodeToken>
@@ -26,7 +26,7 @@ final class IteratorCodeTokenStream extends AbstractStream implements CodeTokenS
         $current = $this->iterator->current();
 
         if (!$current instanceof CodeToken) {
-            throw new RuntimeException();
+            throw new EndOfStream();
         }
 
         return $current;

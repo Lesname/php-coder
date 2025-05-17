@@ -4,10 +4,10 @@ declare(strict_types=1);
 namespace LesCoder\Interpreter\Lexer\Specification;
 
 use Override;
-use RuntimeException;
 use LesCoder\Stream\String\StringStream;
 use LesCoder\Interpreter\Lexer\Lexical\Lexical;
 use LesCoder\Interpreter\Lexer\Lexical\Value\IntegerLexical;
+use LesCoder\Interpreter\Lexer\Specification\Exception\UnexpectedCharacter;
 
 final class IntegerSpecification implements Specification
 {
@@ -20,15 +20,16 @@ final class IntegerSpecification implements Specification
     #[Override]
     public function parse(StringStream $code): Lexical
     {
-        $int = '';
+        $int = $code->current();
+        $code->next();
 
-        while (ctype_digit($code->current()) && $code->isActive()) {
-            $int .= $code->current();
-            $code->next();
+        if (!ctype_digit($int)) {
+            throw new UnexpectedCharacter($int, 'digit');
         }
 
-        if (strlen($int) === 0) {
-            throw new RuntimeException();
+        while ($code->isActive() && ctype_digit($code->current())) {
+            $int .= $code->current();
+            $code->next();
         }
 
         return new IntegerLexical($int);

@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace LesCoder\Renderer\Specification\Php\Object;
 
 use Override;
-use RuntimeException;
 use LesCoder\Utility\TextUtility;
 use LesCoder\Token\CodeToken;
 use LesCoder\Renderer\CodeRenderer;
@@ -12,6 +11,7 @@ use LesCoder\Token\Object\EnumCodeToken;
 use LesCoder\Renderer\Specification\RendererSpecification;
 use LesCoder\Renderer\Specification\Helper\CommentRendererHelper;
 use LesCoder\Renderer\Specification\Exception\UnexpectedCodeToken;
+use LesCoder\Renderer\Specification\Php\Object\Exception\ReplaceFailed;
 
 /**
  * @psalm-immutable
@@ -73,8 +73,8 @@ final class EnumRendererSpecification implements RendererSpecification
         $slugger = function (string $input): string {
             $replaced = preg_replace('/([^a-zA-Z]+|[^a-zA-Z\d])/', '', $input);
 
-            if ($replaced === null) {
-                throw new RuntimeException("Replacing failed on '{$input}'");
+            if (!is_string($replaced)) {
+                throw new ReplaceFailed($input);
             }
 
             return $replaced;

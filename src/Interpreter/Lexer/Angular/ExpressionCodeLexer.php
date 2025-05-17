@@ -1,11 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace LesCoder\Interpreter\Lexer;
+namespace LesCoder\Interpreter\Lexer\Angular;
 
 use Override;
 use LesCoder\Stream\String\StringStream;
+use LesCoder\Interpreter\Lexer\CodeLexer;
 use LesCoder\Stream\Lexical\LexicalStream;
+use LesCoder\Interpreter\Lexer\SpecificationCodeLexer;
 use LesCoder\Interpreter\Lexer\Lexical\Character\DotLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\PlusLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\ColonLexical;
@@ -33,7 +35,7 @@ use LesCoder\Interpreter\Lexer\Lexical\Character\CurlyBracket\CurlyBracketRightL
 use LesCoder\Interpreter\Lexer\Lexical\Character\SquareBracket\SquareBracketLeftLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\SquareBracket\SquareBracketRightLexical;
 
-final class AngularExpressionCodeLexer implements CodeLexer
+final class ExpressionCodeLexer implements CodeLexer
 {
     private ?CodeLexer $proxy = null;
 

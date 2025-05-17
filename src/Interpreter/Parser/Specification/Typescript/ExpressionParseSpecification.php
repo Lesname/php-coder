@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace LesCoder\Interpreter\Parser\Specification\Typescript;
 
 use Override;
-use RuntimeException;
 use LesCoder\Token\CodeToken;
 use LesCoder\Token\InvokeCodeToken;
 use LesCoder\Stream\Lexical\LexicalStream;
@@ -55,6 +54,7 @@ use LesCoder\Interpreter\Lexer\Lexical\Expression\Comparison\SameLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\Slash\ForwardSlashLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Expression\Comparison\EqualsLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Expression\Comparison\NotSameLexical;
+use LesCoder\Interpreter\Parser\Specification\Exception\UnexpectedCodeToken;
 use LesCoder\Interpreter\Lexer\Lexical\Expression\Comparison\NotEqualsLexical;
 use LesCoder\Interpreter\Parser\Specification\Typescript\Exception\UnexpectedEnd;
 use LesCoder\Interpreter\Lexer\Lexical\Character\Parenthesis\ParenthesisLeftLexical;
@@ -79,7 +79,8 @@ final class ExpressionParseSpecification implements ParseSpecification
         private readonly ParseSpecification $referenceParseSpecification,
         private readonly ParseSpecification $hintParseSpecification,
         private readonly array $imports,
-    ) {}
+    ) {
+    }
 
     #[Override]
     public function isSatisfiedBy(LexicalStream $stream): bool
@@ -239,9 +240,17 @@ final class ExpressionParseSpecification implements ParseSpecification
             CurlyBracketLeftLexical::TYPE => $this->parseValueCurlyBracket($stream, $file),
             SquareBracketLeftLexical::TYPE => $this->parseValueSquareBracket($stream, $file),
             default => (function () use ($stream) {
-                $current = $stream->current();
-
-                throw new RuntimeException("Cannot handle '{$current->getType()}'");
+                throw new UnexpectedLexical(
+                    $stream->current(),
+                    MinusLexical::TYPE,
+                    DotLexical::TYPE,
+                    IntegerLexical::TYPE,
+                    StringLexical::TYPE,
+                    LabelLexical::TYPE,
+                    ParenthesisLeftLexical::TYPE,
+                    CurlyBracketLeftLexical::TYPE,
+                    SquareBracketLeftLexical::TYPE,
+                );
             })(),
         };
 
@@ -516,10 +525,6 @@ final class ExpressionParseSpecification implements ParseSpecification
         return new InitiateCodeToken($initiated, $parameters);
     }
 
-    /**
-     * @throws UnexpectedEnd
-     * @throws UnexpectedLexical
-     */
     private function parseValueParenthesis(LexicalStream $stream, ?string $file): CodeToken
     {
         $stream->next();
@@ -535,11 +540,6 @@ final class ExpressionParseSpecification implements ParseSpecification
 
         $sub = $this->parse($stream, $file);
 
-        // Anonymous function with parameters
-        if ($this->isLexical($stream, CommaLexical::TYPE)) {
-            throw new RuntimeException('Fix support');
-        }
-
         $this->expectLexical($stream, ParenthesisRightLexical::TYPE);
         $stream->next();
         $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
@@ -548,7 +548,7 @@ final class ExpressionParseSpecification implements ParseSpecification
             if (!$sub instanceof VariableCodeToken) {
                 $type = get_debug_type($sub);
 
-                throw new RuntimeException("Unexpected {$type}");
+                throw new UnexpectedCodeToken();
             }
 
             return $this->parseValueAnonymousFunction($stream, [new ParameterCodeToken($sub->name)], $file);

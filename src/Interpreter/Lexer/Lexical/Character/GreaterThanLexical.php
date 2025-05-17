@@ -10,12 +10,13 @@ use Override;
  */
 final class GreaterThanLexical extends AbstractCharacterLexical
 {
-    public const TYPE = 'graterThan';
+    public const string TYPE = 'greaterThan';
+    public const string CHARACTER = '>';
 
     #[Override]
     protected function character(): string
     {
-        return '>';
+        return self::CHARACTER;
     }
 
     #[Override]

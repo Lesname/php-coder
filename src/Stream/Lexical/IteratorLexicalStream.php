@@ -6,7 +6,7 @@ namespace LesCoder\Stream\Lexical;
 
 use Iterator;
 use Override;
-use RuntimeException;
+use LesCoder\Stream\Exception\EndOfStream;
 use LesCoder\Interpreter\Lexer\Lexical\Lexical;
 
 final class IteratorLexicalStream extends AbstractLexicalStream
@@ -23,7 +23,7 @@ final class IteratorLexicalStream extends AbstractLexicalStream
         $current = $this->iterator->current();
 
         if (!$current instanceof Lexical) {
-            throw new RuntimeException();
+            throw new EndOfStream();
         }
 
         return $current;
