@@ -1,0 +1,25 @@
+Foo
+<div>
+    <INPUT type = "text" class=one fiz="biz"bar="baz">
+    <input
+            type="text"
+            class="two"
+    />
+    Bar
+    <form action="" *ngIf="foo">
+        <fieldset>
+            <legend [title]="'test' | translate">
+                Fiz
+            </legend>
+        </fieldset>
+    </form>
+    <button type=button disabled foo="" [class]="button">
+        {{ 'submit' | translate }}
+    </button>
+</div>
+<!--<div>-->
+<!--    Bar-->
+<!--</div>-->
+<ng-container *ngFor="let foo in bar">
+    {{ 'fiz' | biz }}
+</ng-container>
