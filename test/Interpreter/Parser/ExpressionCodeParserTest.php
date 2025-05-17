@@ -19,7 +19,6 @@ use LesCoder\Token\Value\CollectionCodeToken;
 use LesCoder\Token\Value\DictionaryCodeToken;
 use LesCoder\Token\Expression\GroupCodeToken;
 use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\DataProvider;
 use LesCoder\Token\Expression\FilterCodeToken;
 use LesCoder\Token\Expression\TernaryCodeToken;
 use LesCoder\Stream\Lexical\ArrayLexicalStream;
@@ -45,7 +44,6 @@ use LesCoder\Interpreter\Lexer\Lexical\Expression\CoalescingLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\QuestionMarkLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Expression\Comparison\SameLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\Slash\ForwardSlashLexical;
-use LesCoder\Interpreter\Lexer\Lexical\Expression\Comparison\EqualsLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\Parenthesis\ParenthesisLeftLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\Parenthesis\ParenthesisRightLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\CurlyBracket\CurlyBracketLeftLexical;
@@ -62,7 +60,7 @@ class ExpressionCodeParserTest extends TestCase
         $lexicalStream = new ArrayLexicalStream(
             [
                 new LabelLexical('bar'),
-            ]
+            ],
         );
 
         $codeStream = $parser->parse($lexicalStream, null);

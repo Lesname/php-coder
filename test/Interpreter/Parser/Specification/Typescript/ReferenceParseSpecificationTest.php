@@ -15,9 +15,7 @@ class ReferenceParseSpecificationTest extends TestCase
 {
     public function testSimpleReference(): void
     {
-        $code = <<<'TYPESCRIPT'
-foo
-TYPESCRIPT;
+        $code = 'foo';
 
         $lexer = new TypescriptCodeLexer();
         $lexicals = $lexer->tokenize(new DirectStringStream($code));
@@ -36,9 +34,7 @@ TYPESCRIPT;
 
     public function testResolvedReferenceSameDir(): void
     {
-        $code = <<<'TYPESCRIPT'
-foo
-TYPESCRIPT;
+        $code = 'foo';
 
         $lexer = new TypescriptCodeLexer();
         $lexicals = $lexer->tokenize(new DirectStringStream($code));
@@ -61,9 +57,7 @@ TYPESCRIPT;
 
     public function testResolvedReferenceUpDir(): void
     {
-        $code = <<<'TYPESCRIPT'
-foo
-TYPESCRIPT;
+        $code = 'foo';
 
         $lexer = new TypescriptCodeLexer();
         $lexicals = $lexer->tokenize(new DirectStringStream($code));
