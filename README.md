@@ -1,6 +1,6 @@
 # LesCoder
 
-Les coder is a basic utility program to render and parse code.
+Les coder is a basic utility program to render and interpret code.
 
 ## Render
 
@@ -10,11 +10,12 @@ Currently the following renderers are available:
 - PHP
 - TypeScript
 
-## Parser
+## Interpreter
 
-The job of the parser is to parse the given code and give type information about it. It is not to give execution capabilities.
+The job of the interpreter is to reason about the code, and show via the tokens what it does. It is not made so it can be executed
 
-Currently the following parsers are available:
+Currently the following interpreters are available:
 - TypeScript
 - Angular
   - Expression
+  - Template
