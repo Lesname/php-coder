@@ -15,6 +15,7 @@ export class Test {
     bar: 'biz' | 'fiz' | null = null;
 
     private biz: number;
+    private fiz: boolean;
 
     protected foo(
         a: string,

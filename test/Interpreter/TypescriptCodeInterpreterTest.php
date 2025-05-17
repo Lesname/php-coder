@@ -124,6 +124,11 @@ TXT;
                                 ],
                             ),
                         ),
+                        new ClassPropertyCodeToken(
+                            Visibility::Private,
+                            'fiz',
+                            Hint\BuiltInCodeToken::Boolean,
+                        ),
                     ],
                     methods: [
                         new ClassMethodCodeToken(

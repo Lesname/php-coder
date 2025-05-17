@@ -260,7 +260,7 @@ final class HintParseSpecification implements ParseSpecification
 
         $token = match (strtolower($label)) {
             'any' => BuiltInCodeToken::Any,
-            'bool' => BuiltInCodeToken::Boolean,
+            'boolean' => BuiltInCodeToken::Boolean,
             'false' => BuiltInCodeToken::False,
             'number' => new UnionCodeToken([BuiltInCodeToken::Float, BuiltInCodeToken::Integer]),
             'null' => BuiltInCodeToken::Null,
