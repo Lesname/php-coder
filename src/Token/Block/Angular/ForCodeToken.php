@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace LesCoder\Token\Block\Angular;
 
+use Override;
 use LesCoder\Token\CodeToken;
 use LesCoder\Token\Helper\ImportMergerHelper;
 use LesCoder\Token\Block\Angular\For\Expression;
@@ -24,6 +25,7 @@ final class ForCodeToken implements CodeToken
         public readonly array $empty = [],
     ) {}
 
+    #[Override]
     public function getImports(): array
     {
         return $this->mergeImportsFromCodeTokens(

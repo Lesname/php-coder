@@ -151,7 +151,7 @@ final class TemplateCodeParser implements CodeParser
                 break;
             }
 
-            $text .= $stream->current();
+            $text .= (string)$stream->current();
             $stream->next();
         }
 
@@ -207,7 +207,12 @@ final class TemplateCodeParser implements CodeParser
         $body = [];
 
         while ($stream->isActive() && !$this->isLexical($stream, StartCloseLexical::TYPE)) {
-            $body[] = $this->parseCodeToken($stream);
+            $token = $this->parseCodeToken($stream);
+
+            if ($token !== null) {
+                $body[] = $token;
+            }
+
             $stream->skip(WhitespaceLexical::TYPE);
         }
 
@@ -351,11 +356,14 @@ final class TemplateCodeParser implements CodeParser
     {
         $this->expectLexical($stream, StartLexical::TYPE);
 
-        return match ((string)$stream->current()) {
+        $control = (string)$stream->current();
+
+        return match ($control) {
             'switch' => $this->parseFlowControlSwitch($stream),
             'for' => $this->parseFlowControlFor($stream),
             'let' => $this->parseFlowControlLet($stream),
             'if' => $this->parseFlowControlIf($stream),
+            default => throw new RuntimeException("Unknown flow control: $control"),
         };
     }
 
@@ -658,7 +666,7 @@ final class TemplateCodeParser implements CodeParser
         return new SwitchCodeToken(
             $statement,
             $cases,
-            $default
+            $default ?? []
         );
     }
 
@@ -720,7 +728,7 @@ final class TemplateCodeParser implements CodeParser
                 }
 
                 if ($stream->isEnd()) {
-                    throw new \http\Exception\RuntimeException();
+                    throw new RuntimeException();
                 }
 
                 if ((string)$stream->current() !== $end) {
