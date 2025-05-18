@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace LesCoderTest\Interpreter\Parser\Angular;
 
 use LesCoder\Token\TextCodeToken;
+use LesCoder\Token\InvokeCodeToken;
 use LesCoder\Token\VariableCodeToken;
 use LesCoder\Token\Block\IfCodeToken;
 use LesCoder\Token\Value\StringCodeToken;
@@ -11,6 +12,7 @@ use LesCoder\Token\Block\SwitchCodeToken;
 use LesCoder\Token\Block\Switch\CaseItem;
 use LesCoder\Token\Object\AccessCodeToken;
 use LesCoder\Token\Value\IntegerCodeToken;
+use LesCoder\Token\Hint\ReferenceCodeToken;
 use LesCoder\Token\Expression\GroupCodeToken;
 use LesCoder\Token\Value\AssignmentCodeToken;
 use LesCoder\Token\Expression\FilterCodeToken;
@@ -97,6 +99,7 @@ class TemplateCodeParserTest extends TestCase
                             'disabled' => new TextCodeToken(''),
                             'foo' => new TextCodeToken(''),
                             '[class]' => new VariableCodeToken('button'),
+                            '(click)' => new TextCodeToken('foo()'),
                         ],
                         [
                             new FilterCodeToken(

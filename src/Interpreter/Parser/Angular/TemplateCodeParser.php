@@ -245,12 +245,16 @@ final class TemplateCodeParser implements CodeParser
         $attributes = [];
 
         while ($stream->isActive()) {
-            if (!$this->isLexical($stream, TextLexical::TYPE)) {
+            if ($this->isLexical($stream, ForwardSlashLexical::TYPE, GreaterThanLexical::TYPE)) {
                 break;
             }
 
-            $name = (string)$stream->current();
-            $stream->next();
+            $name = '';
+
+            do {
+                $name .= (string)$stream->current();
+                $stream->next();
+            } while($stream->isActive() && !$this->isLexical($stream, EqualsSignLexical::TYPE, WhitespaceLexical::TYPE));;
 
             $stream->skip(WhitespaceLexical::TYPE);
 
