@@ -407,11 +407,11 @@ final class ExpressionCodeParser implements CodeParser
 
                 $stream->skip(WhitespaceLexical::TYPE);
 
-                if (!$this->isLexical($stream, LabelLexical::TYPE)) {
+                if (!$this->isLexical($stream, LabelLexical::TYPE, StringLexical::TYPE)) {
                     break;
                 }
 
-                $this->expectLexical($stream, LabelLexical::TYPE);
+                $this->expectLexical($stream, LabelLexical::TYPE, StringLexical::TYPE);
                 $key = (string)$stream->current();
                 $stream->next();
 
