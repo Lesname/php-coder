@@ -338,7 +338,7 @@ final class TemplateCodeParser implements CodeParser
     {
         $expressionStream = $this
             ->expressionCodeInterpreter
-            ->interpret(new DirectStringStream($stringExpression));
+            ->interpret(new DirectStringStream(trim($stringExpression)));
 
         $expression = $expressionStream->current();
         $expressionStream->next();
@@ -716,7 +716,7 @@ final class TemplateCodeParser implements CodeParser
             $stringExpression .= $this->toAngularExpressionPart($stream);
         }
 
-        return $this->parseExpressionContent(trim($stringExpression));
+        return $this->parseExpressionContent($stringExpression);
     }
 
     public function toAngularExpressionPart(LexicalStream $stream): string
