@@ -338,7 +338,7 @@ final class TemplateCodeParser implements CodeParser
     {
         $expressionStream = $this
             ->expressionCodeInterpreter
-            ->interpret(new DirectStringStream($stringExpression));
+            ->interpret(new DirectStringStream(trim($stringExpression)));
 
         $expression = $expressionStream->current();
         $expressionStream->next();
@@ -705,9 +705,24 @@ final class TemplateCodeParser implements CodeParser
         return new AssignmentCodeToken($to, $as);
     }
 
+    /**
+     * @throws EndOfStream
+     */
     private function parseAngularExpression(LexicalStream $stream, string $stop, string ...$orStop): CodeToken
     {
         $stringExpression = '';
+
+        while ($stream->isActive() && !$this->isLexical($stream, $stop, ...$orStop)) {
+            $stringExpression .= $this->toAngularExpressionPart($stream);
+        }
+
+        return $this->parseExpressionContent($stringExpression);
+    }
+
+    public function toAngularExpressionPart(LexicalStream $stream): string
+    {
+        $expression = (string)$stream->current();
+        $stream->next();
 
         $groups = [
             '"' => '"',
@@ -717,34 +732,26 @@ final class TemplateCodeParser implements CodeParser
             '[' => ']',
         ];
 
-        while ($stream->isActive() && !$this->isLexical($stream, $stop, ...$orStop)) {
-            $current = (string)$stream->current();
+        if (isset($groups[$expression])) {
+            $end = $groups[$expression];
 
-            $stringExpression .= $current;
-            $stream->next();
-
-            if (isset($groups[$current])) {
-                $end = $groups[$current];
-
-                while ($stream->isActive() && (string)$stream->current() !== $end) {
-                    $stringExpression .= (string)$stream->current();
-                    $stream->next();
-                }
-
-                if ($stream->isEnd()) {
-                    throw new RuntimeException();
-                }
-
-                if ((string)$stream->current() !== $end) {
-                    throw new RuntimeException();
-                }
-
-                $stringExpression .= (string)$stream->current();
-                $stream->next();
+            while ($stream->isActive() && (string)$stream->current() !== $end) {
+                $expression .= $this->toAngularExpressionPart($stream);
             }
+
+            if ($stream->isEnd()) {
+                throw new RuntimeException();
+            }
+
+            if ((string)$stream->current() !== $end) {
+                throw new RuntimeException();
+            }
+
+            $expression .= (string)$stream->current();
+            $stream->next();
         }
 
-        return $this->parseExpressionContent(trim($stringExpression));
+        return $expression;
     }
 
     /**

@@ -263,6 +263,7 @@ final class HintParseSpecification implements ParseSpecification
             'boolean' => BuiltInCodeToken::Boolean,
             'false' => BuiltInCodeToken::False,
             'number' => new UnionCodeToken([BuiltInCodeToken::Float, BuiltInCodeToken::Integer]),
+            'undefined' => BuiltInCodeToken::Undefined,
             'null' => BuiltInCodeToken::Null,
             'never' => BuiltInCodeToken::Never,
             'string' => BuiltInCodeToken::String,

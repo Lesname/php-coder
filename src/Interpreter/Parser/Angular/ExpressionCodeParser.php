@@ -19,6 +19,7 @@ use LesCoder\Stream\Exception\EndOfStream;
 use LesCoder\Token\Expression\MathOperator;
 use LesCoder\Token\Expression\AndCodeToken;
 use LesCoder\Interpreter\Parser\CodeParser;
+use LesCoder\Token\Expression\NotCodeToken;
 use LesCoder\Token\Expression\GroupCodeToken;
 use LesCoder\Token\Value\CollectionCodeToken;
 use LesCoder\Token\Value\DictionaryCodeToken;
@@ -48,6 +49,7 @@ use LesCoder\Interpreter\Lexer\Lexical\Character\AsteriskLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\LowerThanLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\GreaterThanLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Expression\CoalescingLexical;
+use LesCoder\Interpreter\Lexer\Lexical\Character\ExclamationLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\QuestionMarkLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Expression\Comparison\SameLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\Slash\ForwardSlashLexical;
@@ -242,7 +244,7 @@ final class ExpressionCodeParser implements CodeParser
             return $expression;
         }
 
-        if ($this->isLexical($stream, MinusLexical::TYPE, IntegerLexical::TYPE)) {
+        if ($this->isLexical($stream, MinusLexical::TYPE, IntegerLexical::TYPE, DotLexical::TYPE)) {
             return $this->parseNumber($stream);
         }
 
@@ -269,6 +271,18 @@ final class ExpressionCodeParser implements CodeParser
             return $this->parseVariable($stream);
         }
 
+        if ($lexical instanceof ExclamationLexical) {
+            $stream->next();
+
+            if ($this->isLexical($stream, ParenthesisLeftLexical::TYPE)) {
+                $expression = $this->parseExpression($stream);
+            } else {
+                $expression = $this->parseExpression($stream, self::PRECEDENCE_ACCESS);
+            }
+
+            return new NotCodeToken($expression);
+        }
+
         throw new UnexpectedLexical(
             $lexical,
             SquareBracketLeftLexical::TYPE,
@@ -276,6 +290,7 @@ final class ExpressionCodeParser implements CodeParser
             ParenthesisLeftLexical::TYPE,
             MinusLexical::TYPE,
             IntegerLexical::TYPE,
+            DotLexical::TYPE,
             StringLexical::TYPE,
         );
     }
@@ -318,10 +333,12 @@ final class ExpressionCodeParser implements CodeParser
             $number = '';
         }
 
-        $this->expectLexical($stream, IntegerLexical::TYPE);
+        if ($this->isLexical($stream, IntegerLexical::TYPE)) {
+            $this->expectLexical($stream, IntegerLexical::TYPE);
 
-        $number .= (string)$stream->current();
-        $stream->next();
+            $number .= (string)$stream->current();
+            $stream->next();
+        }
 
         if ($this->isLexical($stream, DotLexical::TYPE)) {
             $stream->next();

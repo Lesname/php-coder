@@ -240,7 +240,9 @@ class TemplateCodeParserTest extends TestCase
                 [
                     new IfCodeToken(
                         new ComparisonCodeToken(
-                            new VariableCodeToken('a'),
+                            new GroupCodeToken(
+                                new GroupCodeToken(new VariableCodeToken('a'))
+                            ),
                             new VariableCodeToken('b'),
                             ComparisonOperator::GreaterThan,
                         ),

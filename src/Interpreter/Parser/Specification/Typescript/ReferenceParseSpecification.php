@@ -48,7 +48,7 @@ final class ReferenceParseSpecification implements ParseSpecification
         $stream->next();
         $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
 
-        $from = $this->imports[$refName] ?? null;
+        $from = $this->imports[$refName] ?? $file;
 
         if ($file !== null && $from !== null && str_starts_with($from, '.')) {
             $from = str_starts_with($from, '../')
