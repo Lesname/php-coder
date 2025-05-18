@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace LesCoderTest\Interpreter\Parser;
+namespace Interpreter\Parser\Angular;
 
 use PHPUnit\Framework\TestCase;
 use LesCoder\Token\InvokeCodeToken;
@@ -575,6 +575,46 @@ class ExpressionCodeParserTest extends TestCase
                 ),
                 new IntegerCodeToken(1),
                 new IntegerCodeToken(2),
+            ),
+            $codeStream->current(),
+        );
+    }
+
+    public function testGroupNestedInvoke(): void
+    {
+        $parser = new ExpressionCodeParser();
+        $lexicalStream = new ArrayLexicalStream(
+            [
+                new ParenthesisLeftLexical(),
+                new LabelLexical('foo'),
+                new DotLexical(),
+                new LabelLexical('bar'),
+                new ParenthesisLeftLexical(),
+                new IntegerLexical('1'),
+                new PlusLexical(),
+                new IntegerLexical('2'),
+                new ParenthesisRightLexical(),
+                new ParenthesisRightLexical(),
+            ],
+        );
+
+        $codeStream = $parser->parse($lexicalStream, null);
+
+        self::assertEquals(
+            new GroupCodeToken(
+                new InvokeCodeToken(
+                    new AccessCodeToken(
+                        new VariableCodeToken('foo'),
+                        new StringCodeToken('bar'),
+                    ),
+                    [
+                        new CalculationCodeToken(
+                            new IntegerCodeToken(1),
+                            new IntegerCodeToken(2),
+                            MathOperator::Addition,
+                        ),
+                    ],
+                ),
             ),
             $codeStream->current(),
         );
