@@ -31,6 +31,8 @@ use LesCoder\Interpreter\Lexer\Lexical\Character\Parenthesis\ParenthesisLeftLexi
 use LesCoder\Interpreter\Lexer\Lexical\Character\Parenthesis\ParenthesisRightLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\CurlyBracket\CurlyBracketLeftLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\CurlyBracket\CurlyBracketRightLexical;
+use LesCoder\Interpreter\Lexer\Lexical\Character\SquareBracket\SquareBracketLeftLexical;
+use LesCoder\Interpreter\Lexer\Lexical\Character\SquareBracket\SquareBracketRightLexical;
 
 final class TemplateCodeLexer implements CodeLexer
 {
@@ -45,6 +47,8 @@ final class TemplateCodeLexer implements CodeLexer
         ParenthesisRightLexical::CHARACTER => ParenthesisRightLexical::class,
         SemicolonLexical::CHARACTER => SemicolonLexical::class,
         CommaLexical::CHARACTER => CommaLexical::class,
+        SquareBracketLeftLexical::CHARACTER => SquareBracketLeftLexical::class,
+        SquareBracketRightLexical::CHARACTER => SquareBracketRightLexical::class,
     ];
 
     private const array NON_TEXT_CHARACTERS = [
@@ -57,6 +61,8 @@ final class TemplateCodeLexer implements CodeLexer
         ParenthesisRightLexical::CHARACTER,
         SemicolonLexical::CHARACTER,
         CommaLexical::CHARACTER,
+        SquareBracketLeftLexical::CHARACTER,
+        SquareBracketRightLexical::CHARACTER,
         '<',
         '{',
         '}',
