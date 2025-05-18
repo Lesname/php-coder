@@ -19,6 +19,7 @@ use LesCoder\Stream\Exception\EndOfStream;
 use LesCoder\Token\Expression\MathOperator;
 use LesCoder\Token\Expression\AndCodeToken;
 use LesCoder\Interpreter\Parser\CodeParser;
+use LesCoder\Token\Expression\NotCodeToken;
 use LesCoder\Token\Expression\GroupCodeToken;
 use LesCoder\Token\Value\CollectionCodeToken;
 use LesCoder\Token\Value\DictionaryCodeToken;
@@ -48,6 +49,7 @@ use LesCoder\Interpreter\Lexer\Lexical\Character\AsteriskLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\LowerThanLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\GreaterThanLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Expression\CoalescingLexical;
+use LesCoder\Interpreter\Lexer\Lexical\Character\ExclamationLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\QuestionMarkLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Expression\Comparison\SameLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\Slash\ForwardSlashLexical;
@@ -267,6 +269,18 @@ final class ExpressionCodeParser implements CodeParser
             }
 
             return $this->parseVariable($stream);
+        }
+
+        if ($lexical instanceof ExclamationLexical) {
+            $stream->next();
+
+            if ($this->isLexical($stream, ParenthesisLeftLexical::TYPE)) {
+                $expression = $this->parseExpression($stream);
+            } else {
+                $expression = $this->parseExpression($stream, self::PRECEDENCE_ACCESS);
+            }
+
+            return new NotCodeToken($expression);
         }
 
         throw new UnexpectedLexical(

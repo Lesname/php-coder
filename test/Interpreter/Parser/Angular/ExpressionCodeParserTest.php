@@ -15,6 +15,8 @@ use LesCoder\Token\Object\AccessCodeToken;
 use LesCoder\Token\Expression\OrCodeToken;
 use LesCoder\Token\Expression\MathOperator;
 use LesCoder\Token\Expression\AndCodeToken;
+use LesCoder\Token\Expression\NotCodeToken;
+use LesCoder\Token\Object\InitiateCodeToken;
 use LesCoder\Token\Value\CollectionCodeToken;
 use LesCoder\Token\Value\DictionaryCodeToken;
 use LesCoder\Token\Expression\GroupCodeToken;
@@ -41,6 +43,7 @@ use LesCoder\Interpreter\Lexer\Lexical\Character\CommaLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\ColonLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\AsteriskLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Expression\CoalescingLexical;
+use LesCoder\Interpreter\Lexer\Lexical\Character\ExclamationLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\QuestionMarkLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Expression\Comparison\SameLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\Slash\ForwardSlashLexical;
@@ -615,6 +618,45 @@ class ExpressionCodeParserTest extends TestCase
                         ),
                     ],
                 ),
+            ),
+            $codeStream->current(),
+        );
+    }
+
+    public function testNot(): void
+    {
+        $parser = new ExpressionCodeParser();
+        $lexicalStream = new ArrayLexicalStream(
+            [
+                new ExclamationLexical(),
+                new LabelLexical('foo'),
+                new DotLexical(),
+                new LabelLexical('bar'),
+                new AndLexical('&&'),
+                new ExclamationLexical(),
+                new ParenthesisLeftLexical(),
+                new IntegerLexical('1'),
+                new ParenthesisRightLexical(),
+            ],
+        );
+
+        $codeStream = $parser->parse($lexicalStream, null);
+
+        self::assertEquals(
+            new AndCodeToken(
+                [
+                    new NotCodeToken(
+                        new AccessCodeToken(
+                            new VariableCodeToken('foo'),
+                            new StringCodeToken('bar'),
+                        ),
+                    ),
+                    new NotCodeToken(
+                        new GroupCodeToken(
+                            new IntegerCodeToken(1),
+                        )
+                    )
+                ],
             ),
             $codeStream->current(),
         );
