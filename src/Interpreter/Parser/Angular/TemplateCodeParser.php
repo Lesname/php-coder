@@ -254,7 +254,7 @@ final class TemplateCodeParser implements CodeParser
             do {
                 $name .= (string)$stream->current();
                 $stream->next();
-            } while($stream->isActive() && !$this->isLexical($stream, EqualsSignLexical::TYPE, WhitespaceLexical::TYPE));;
+            } while ($stream->isActive() && !$this->isLexical($stream, EqualsSignLexical::TYPE, WhitespaceLexical::TYPE, GreaterThanLexical::TYPE));
 
             $stream->skip(WhitespaceLexical::TYPE);
 
