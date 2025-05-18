@@ -20,6 +20,6 @@ final class UnexpectedLexical extends AbstractException
     {
         $this->expected = [$expected, ...$moreExpected];
         $expectedString = implode(', ', $this->expected);
-        parent::__construct("Expected {$expectedString}, gotten {$gotten->getType()}}");
+        parent::__construct("Expected {$expectedString}, gotten {$gotten->getType()}");
     }
 }

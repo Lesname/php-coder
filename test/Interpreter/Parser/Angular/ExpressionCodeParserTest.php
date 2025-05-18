@@ -16,7 +16,6 @@ use LesCoder\Token\Expression\OrCodeToken;
 use LesCoder\Token\Expression\MathOperator;
 use LesCoder\Token\Expression\AndCodeToken;
 use LesCoder\Token\Expression\NotCodeToken;
-use LesCoder\Token\Object\InitiateCodeToken;
 use LesCoder\Token\Value\CollectionCodeToken;
 use LesCoder\Token\Value\DictionaryCodeToken;
 use LesCoder\Token\Expression\GroupCodeToken;
@@ -282,6 +281,7 @@ class ExpressionCodeParserTest extends TestCase
                 new WhitespaceLexical(' '),
                 new AsteriskLexical(),
                 new WhitespaceLexical(' '),
+                new DotLexical(),
                 new IntegerLexical('3'),
                 new ParenthesisRightLexical(),
                 new ParenthesisRightLexical(),
@@ -314,7 +314,7 @@ class ExpressionCodeParserTest extends TestCase
                         new GroupCodeToken(
                             new CalculationCodeToken(
                                 new IntegerCodeToken(2),
-                                new IntegerCodeToken(3),
+                                new FloatCodeToken(.3),
                                 MathOperator::Multiply,
                             ),
                         ),

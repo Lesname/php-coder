@@ -244,7 +244,7 @@ final class ExpressionCodeParser implements CodeParser
             return $expression;
         }
 
-        if ($this->isLexical($stream, MinusLexical::TYPE, IntegerLexical::TYPE)) {
+        if ($this->isLexical($stream, MinusLexical::TYPE, IntegerLexical::TYPE, DotLexical::TYPE)) {
             return $this->parseNumber($stream);
         }
 
@@ -290,6 +290,7 @@ final class ExpressionCodeParser implements CodeParser
             ParenthesisLeftLexical::TYPE,
             MinusLexical::TYPE,
             IntegerLexical::TYPE,
+            DotLexical::TYPE,
             StringLexical::TYPE,
         );
     }
@@ -332,10 +333,12 @@ final class ExpressionCodeParser implements CodeParser
             $number = '';
         }
 
-        $this->expectLexical($stream, IntegerLexical::TYPE);
+        if ($this->isLexical($stream, IntegerLexical::TYPE)) {
+            $this->expectLexical($stream, IntegerLexical::TYPE);
 
-        $number .= (string)$stream->current();
-        $stream->next();
+            $number .= (string)$stream->current();
+            $stream->next();
+        }
 
         if ($this->isLexical($stream, DotLexical::TYPE)) {
             $stream->next();
