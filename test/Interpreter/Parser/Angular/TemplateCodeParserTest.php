@@ -97,6 +97,7 @@ class TemplateCodeParserTest extends TestCase
                             'disabled' => new TextCodeToken(''),
                             'foo' => new TextCodeToken(''),
                             '[class]' => new VariableCodeToken('button'),
+                            '(click)' => new TextCodeToken('foo()'),
                         ],
                         [
                             new FilterCodeToken(

@@ -135,6 +135,12 @@ final class ExpressionCodeParser implements CodeParser
 
                     continue;
                 }
+
+                if ($this->isLexical($stream, ParenthesisLeftLexical::TYPE)) {
+                    $expression = $this->parseInvoke($stream, $expression);
+
+                    continue;
+                }
             }
 
             if ($precedence >= self::PRECEDENCE_OPERATORS) {
@@ -205,10 +211,11 @@ final class ExpressionCodeParser implements CodeParser
     }
 
     /**
+     * @throws EndOfStream
+     * @throws InvalidName
      * @throws UnexpectedEnd
      * @throws UnexpectedLabel
      * @throws UnexpectedLexical
-     * @throws EndOfStream
      */
     private function parseValue(LexicalStream $stream): CodeToken
     {
@@ -259,16 +266,7 @@ final class ExpressionCodeParser implements CodeParser
                 }
             }
 
-            if (preg_match('/[a-zA-Z\x7f-\xff_$]/', (string)$lexical) === 1) {
-                $codeToken = $this->parseVariable($stream);
-
-                /** @phpstan-ignore ternary.alwaysFalse */
-                return $this->isLexical($stream, ParenthesisLeftLexical::TYPE)
-                    ? $this->parseInvoke($stream, $codeToken)
-                    : $codeToken;
-            }
-
-            throw new InvalidName((string)$lexical);
+            return $this->parseVariable($stream);
         }
 
         throw new UnexpectedLexical(
@@ -388,7 +386,7 @@ final class ExpressionCodeParser implements CodeParser
         $items = [];
 
         if (!$this->isLexical($stream, CurlyBracketRightLexical::TYPE)) {
-            $this->expectLexical($stream, LabelLexical::TYPE);
+            $this->expectLexical($stream, LabelLexical::TYPE, StringLexical::TYPE);
             $key = (string)$stream->current();
             $stream->next();
 
@@ -407,11 +405,11 @@ final class ExpressionCodeParser implements CodeParser
 
                 $stream->skip(WhitespaceLexical::TYPE);
 
-                if (!$this->isLexical($stream, LabelLexical::TYPE)) {
+                if (!$this->isLexical($stream, LabelLexical::TYPE, StringLexical::TYPE)) {
                     break;
                 }
 
-                $this->expectLexical($stream, LabelLexical::TYPE);
+                $this->expectLexical($stream, LabelLexical::TYPE, StringLexical::TYPE);
                 $key = (string)$stream->current();
                 $stream->next();
 
@@ -543,8 +541,8 @@ final class ExpressionCodeParser implements CodeParser
     }
 
     /**
+     * @throws EndOfStream
      * @throws UnexpectedEnd
-     * @throws UnexpectedLabel
      * @throws UnexpectedLexical
      */
     private function parseInvoke(LexicalStream $stream, CodeToken $invoked): CodeToken
@@ -557,7 +555,7 @@ final class ExpressionCodeParser implements CodeParser
         $parameters = [];
 
         while ($stream->isActive() && !$this->isLexical($stream, ParenthesisRightLexical::TYPE)) {
-            $parameters[] = $this->parseValue($stream);
+            $parameters[] = $this->parseExpression($stream);
             $stream->skip(WhitespaceLexical::TYPE);
 
             if ($this->isLexical($stream, CommaLexical::TYPE)) {

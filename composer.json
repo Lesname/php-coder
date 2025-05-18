@@ -11,7 +11,7 @@
 
     "phpunit/phpunit": "^12.0.0",
 
-    "vimeo/psalm": "7.0.0-beta1",
+    "vimeo/psalm": "^7.0.0-beta1",
 
     "phpstan/phpstan": "^2.0.0",
     "phpstan/extension-installer": "^1.4",
