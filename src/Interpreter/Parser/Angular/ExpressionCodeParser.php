@@ -388,7 +388,7 @@ final class ExpressionCodeParser implements CodeParser
         $items = [];
 
         if (!$this->isLexical($stream, CurlyBracketRightLexical::TYPE)) {
-            $this->expectLexical($stream, LabelLexical::TYPE);
+            $this->expectLexical($stream, LabelLexical::TYPE, StringLexical::TYPE);
             $key = (string)$stream->current();
             $stream->next();
 

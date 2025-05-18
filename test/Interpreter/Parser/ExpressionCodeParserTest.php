@@ -192,7 +192,7 @@ class ExpressionCodeParserTest extends TestCase
                 new StringLexical('bar'),
                 new CommaLexical(),
 
-                new LabelLexical('biz'),
+                new StringLexical('biz'),
                 new ColonLexical(),
                 new CurlyBracketLeftLexical(),
                 new LabelLexical('fiz'),
