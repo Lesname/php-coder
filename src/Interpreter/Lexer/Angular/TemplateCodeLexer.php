@@ -22,8 +22,6 @@ use LesCoder\Interpreter\Lexer\Lexical\Character\EqualsSignLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\GreaterThanLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\DoubleQuoteLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\SingleQuoteLexical;
-use LesCoder\Interpreter\Lexer\Lexical\Angular\Expression\OpenLexical;
-use LesCoder\Interpreter\Lexer\Lexical\Angular\Expression\CloseLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Angular\FlowControl\StartLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Angular\Element\StartCloseLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\Slash\ForwardSlashLexical;
@@ -114,29 +112,6 @@ final class TemplateCodeLexer implements CodeLexer
             $stream->next();
 
             return new LowerThanLexical();
-        }
-
-        if ($char === '{') {
-            $stream->next();
-
-            if ($stream->current() === '{') {
-                $stream->next();
-                return new OpenLexical('{{');
-            }
-
-            return new CurlyBracketLeftLexical();
-        }
-
-        if ($char === '}') {
-            $stream->next();
-
-            if ($stream->current() === '}') {
-                $stream->next();
-
-                return new CloseLexical('}}');
-            }
-
-            return new CurlyBracketRightLexical();
         }
 
         if ($char === '@') {
