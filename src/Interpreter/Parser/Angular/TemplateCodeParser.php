@@ -34,9 +34,7 @@ use LesCoder\Interpreter\Lexer\Lexical\Character\EqualsSignLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\GreaterThanLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\DoubleQuoteLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\SingleQuoteLexical;
-use LesCoder\Interpreter\Lexer\Lexical\Angular\Expression\OpenLexical;
 use LesCoder\Interpreter\Parser\Angular\Exception\UnexpectedCloseName;
-use LesCoder\Interpreter\Lexer\Lexical\Angular\Expression\CloseLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Angular\FlowControl\StartLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Angular\Element\StartCloseLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\Slash\ForwardSlashLexical;
@@ -107,7 +105,7 @@ final class TemplateCodeParser implements CodeParser
             throw new RuntimeException();
         }
 
-        if ($this->isLexical($stream, OpenLexical::TYPE)) {
+        if ($this->isLexical($stream, CurlyBracketLeftLexical::TYPE)) {
             return $this->parseExpression($stream);
         }
 
@@ -143,7 +141,7 @@ final class TemplateCodeParser implements CodeParser
                     $stream,
                     LowerThanLexical::TYPE,
                     StartCloseLexical::TYPE,
-                    OpenLexical::TYPE,
+                    CurlyBracketLeftLexical::TYPE,
                     StartLexical::TYPE,
                     CurlyBracketRightLexical::TYPE
                 )
@@ -317,15 +315,24 @@ final class TemplateCodeParser implements CodeParser
      */
     private function parseExpression(LexicalStream $stream): CodeToken
     {
-        $this->expectLexical($stream, OpenLexical::TYPE);
+        $this->expectLexical($stream, CurlyBracketLeftLexical::TYPE);
+        $stream->next();
+
+        if (!$this->isLexical($stream, CurlyBracketLeftLexical::TYPE)) {
+            return new TextCodeToken('{');
+        }
+
+        $this->expectLexical($stream, CurlyBracketLeftLexical::TYPE);
         $stream->next();
 
         $stream->skip(WhitespaceLexical::TYPE);
 
-        $expression = $this->parseAngularExpression($stream, CloseLexical::TYPE);
+        $expression = $this->parseAngularExpression($stream, CurlyBracketRightLexical::TYPE);
         $stream->skip(WhitespaceLexical::TYPE);
 
-        $this->expectLexical($stream, CloseLexical::TYPE);
+        $this->expectLexical($stream, CurlyBracketRightLexical::TYPE);
+        $stream->next();
+        $this->expectLexical($stream, CurlyBracketRightLexical::TYPE);
         $stream->next();
 
         return $expression;
