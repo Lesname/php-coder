@@ -116,10 +116,10 @@ final class ComparisonSpecification implements Specification
             if ($code->matchesExactly('=')) {
                 $code->next();
 
-                return new NotSameLexical('===');
+                return new NotSameLexical('!==');
             }
 
-            return new NotEqualsLexical('==');
+            return new NotEqualsLexical('!=');
         }
 
         return new ExclamationLexical();

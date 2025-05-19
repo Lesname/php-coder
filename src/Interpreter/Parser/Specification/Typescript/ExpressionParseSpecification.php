@@ -273,6 +273,25 @@ final class ExpressionParseSpecification implements ParseSpecification
                 continue;
             }
 
+            if ($value instanceof VariableCodeToken && $this->isLexical($stream, EqualsSignLexical::TYPE)) {
+                $this->expectLexical($stream, EqualsSignLexical::TYPE);
+                $stream->next();
+
+                $this->expectLexical($stream, GreaterThanLexical::TYPE);
+                $stream->next();
+
+                $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+                $expression = $this->parse($stream, $file);
+
+                $value = new AnonymousFunctionCodeToken(
+                    [new ParameterCodeToken($value->name)],
+                    body: [$expression],
+                );
+
+                continue;
+            }
+
             break;
         }
 
