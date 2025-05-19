@@ -505,6 +505,29 @@ TS;
         self::assertTrue($lexicals->isEnd());
     }
 
+    public function testAnonymousFunctionArrowDetectionWithoutParentises(): void
+    {
+        $code = <<<'TS'
+(foo => 'bar')
+TS;
+
+        $lexer = new TypescriptCodeLexer();
+        $lexicals = $lexer->tokenize(new DirectStringStream($code));
+
+        $code = $this->specification->parse($lexicals);
+        self::assertEquals(
+            new GroupCodeToken(
+                new AnonymousFunctionCodeToken(
+                    [new ParameterCodeToken('foo')],
+                    body: [new StringCodeToken('bar')]
+                ),
+            ),
+            $code,
+        );
+
+        self::assertTrue($lexicals->isEnd());
+    }
+
     public function testAnonymousFunctionReturnsDetection(): void
     {
         $code = <<<'TS'
