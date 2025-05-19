@@ -424,7 +424,7 @@ final class TemplateCodeParser implements CodeParser
         $stream->skip(WhitespaceLexical::TYPE);
 
         $track = null;
-        $reassign = null;
+        $reassign = [];
 
         while ($stream->isActive() && !$this->isLexical($stream, ParenthesisRightLexical::TYPE)) {
             $this->expectLexical($stream, TextLexical::TYPE);
@@ -440,12 +440,6 @@ final class TemplateCodeParser implements CodeParser
 
                 $track = $this->parseAngularExpression($stream, SemicolonLexical::TYPE, ParenthesisRightLexical::TYPE);
             } elseif ($itemName === 'let') {
-                if ($reassign !== null) {
-                    throw new RuntimeException();
-                }
-
-                $reassign = [];
-
                 while ($this->isLexical($stream, TextLexical::TYPE)) {
                     $assignTo = (string)$stream->current();
                     $stream->next();
