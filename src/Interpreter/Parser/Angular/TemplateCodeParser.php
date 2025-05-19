@@ -505,7 +505,7 @@ final class TemplateCodeParser implements CodeParser
                 $iterator,
                 $as,
                 $track,
-                $reassign ?? [],
+                $reassign,
             ),
             $body,
             $empty,
