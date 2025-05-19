@@ -49,6 +49,8 @@ final class TemplateCodeLexer implements CodeLexer
         CommaLexical::CHARACTER => CommaLexical::class,
         SquareBracketLeftLexical::CHARACTER => SquareBracketLeftLexical::class,
         SquareBracketRightLexical::CHARACTER => SquareBracketRightLexical::class,
+        CurlyBracketLeftLexical::CHARACTER => CurlyBracketLeftLexical::class,
+        CurlyBracketRightLexical::CHARACTER => CurlyBracketRightLexical::class,
     ];
 
     private const array NON_TEXT_CHARACTERS = [
@@ -63,6 +65,8 @@ final class TemplateCodeLexer implements CodeLexer
         CommaLexical::CHARACTER,
         SquareBracketLeftLexical::CHARACTER,
         SquareBracketRightLexical::CHARACTER,
+        CurlyBracketLeftLexical::CHARACTER,
+        CurlyBracketRightLexical::CHARACTER,
         '<',
         '{',
         '}',
