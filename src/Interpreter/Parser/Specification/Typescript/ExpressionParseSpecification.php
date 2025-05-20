@@ -177,6 +177,15 @@ final class ExpressionParseSpecification implements ParseSpecification
 
                     continue;
                 }
+
+                if ((string)$stream->current() === 'in') {
+                    $stream->next();
+                    $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+                    $value = new ComparisonCodeToken($value, $this->parse($stream, $file), ComparisonOperator::In);
+
+                    continue;
+                }
             }
 
             break;

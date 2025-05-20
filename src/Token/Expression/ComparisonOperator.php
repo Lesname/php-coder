@@ -19,6 +19,7 @@ enum ComparisonOperator
     case LessThanOrEqual;
     case GreaterThanOrEqual;
     case InstanceOf;
+    case In;
 
     /**
      * @throws UnknownOperator
