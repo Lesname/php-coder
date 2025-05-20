@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace LesCoder\Interpreter\Parser\Specification\Typescript;
 
 use Override;
+use RuntimeException;
 use LesCoder\Token\CodeToken;
 use LesCoder\Stream\Lexical\LexicalStream;
 use LesCoder\Token\ConstantCodeToken;
@@ -50,11 +51,14 @@ final class ConstantParseSpecification implements ParseSpecification
 
         $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
 
-        $this->expectLexical($stream, ColonLexical::TYPE);
-        $stream->next();
+        if ($this->isLexical($stream, ColonLexical::TYPE)) {
+            $stream->next();
 
-        $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
-        $expression = $this->hintParseSpecification->parse($stream, $file);
+            $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+            $expression = $this->hintParseSpecification->parse($stream, $file);
+            $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+        }
 
         if ($this->isLexical($stream, EqualsSignLexical::TYPE)) {
             $stream->next();
@@ -67,6 +71,10 @@ final class ConstantParseSpecification implements ParseSpecification
         if ($this->isLexical($stream, SemicolonLexical::TYPE)) {
             $stream->next();
             $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+        }
+
+        if (!isset($expression)) {
+            throw new RuntimeException();
         }
 
         return new AssignmentCodeToken(
