@@ -50,7 +50,7 @@ final class DictionaryRendererSpecification implements RendererSpecification
             }
 
             $value = $renderer->render($item['value']);
-            $access = $item['required']
+            $access = $item['required'] || !$item['key'] instanceof StringCodeToken
                 ? ':'
                 : '?:';
 
