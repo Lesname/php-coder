@@ -11,6 +11,7 @@ use LesCoder\Token\CommentCodeToken;
 use LesCoder\Token\AttributeCodeToken;
 use LesCoder\Token\Hint\ReferenceCodeToken;
 use PHPUnit\Framework\Attributes\CoversClass;
+use LesCoder\Token\Hint\IndexSignatureCodeToken;
 use LesCoder\Token\Object\InterfacePropertyCodeToken;
 use LesCoder\Renderer\Specification\RendererSpecification;
 use LesCoder\Renderer\Specification\Typescript\Object\InterfacePropertyRendererSpecification;
@@ -70,6 +71,39 @@ class InterfacePropertyRendererSpecificationTest extends TestCase
 Attribute
 /** bar */
 name?: hint
+TXT;
+
+        self::assertSame($expected, $rendered);
+    }
+
+    public function testRenderIndexSignature(): void
+    {
+        $name = new IndexSignatureCodeToken($this->createMock(CodeToken::class));
+        $hint = $this->createMock(CodeToken::class);
+
+        $renderer = $this->createMock(CodeRenderer::class);
+        $renderer
+            ->expects(self::exactly(2))
+            ->method('render')
+            ->willReturnMap(
+                [
+                    [$name, '[key: name]'],
+                    [$hint, 'hint'],
+                ],
+            );
+
+        $token = new InterfacePropertyCodeToken(
+            $name,
+            $hint,
+            [],
+            null,
+            false,
+        );
+
+        $rendered = $this->specification->render($token, $renderer);
+
+        $expected = <<<'TXT'
+[key: name]: hint
 TXT;
 
         self::assertSame($expected, $rendered);

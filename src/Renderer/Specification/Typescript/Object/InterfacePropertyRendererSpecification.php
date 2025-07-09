@@ -7,6 +7,7 @@ use Override;
 use LesCoder\Token\CodeToken;
 use LesCoder\Renderer\CodeRenderer;
 use LesCoder\Token\Value\StringCodeToken;
+use LesCoder\Token\Hint\IndexSignatureCodeToken;
 use LesCoder\Token\Object\InterfacePropertyCodeToken;
 use LesCoder\Renderer\Specification\RendererSpecification;
 use LesCoder\Renderer\Specification\Helper\CommentRendererHelper;
@@ -48,8 +49,12 @@ final class InterfacePropertyRendererSpecification implements RendererSpecificat
             ? $this->renderComment($token->comment->comment) . PHP_EOL
             : null;
 
+        $hintOperator = $token->required || $token->name instanceof IndexSignatureCodeToken
+            ? ':'
+            : '?:';
+
         $hint = $token->hint
-            ? ($token->required ? ':' : '?:') . ' ' . $renderer->render($token->hint)
+            ? ($hintOperator) . ' ' . $renderer->render($token->hint)
             : '';
 
         if ($token->name instanceof StringCodeToken && preg_match('/^[a-z_\$][a-z\d_\$]*$/i', $token->name->value) === 1) {
