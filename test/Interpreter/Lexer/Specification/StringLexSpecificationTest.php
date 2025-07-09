@@ -49,14 +49,12 @@ class StringLexSpecificationTest extends TestCase
     public static function getTestString(): iterable
     {
         return [
-            [
-                '"foo"', 'foo',
-                "'bar'", 'bar',
-                <<<'TYPESCRIPT'
+            ['"foo"', 'foo'],
+            ["'bar'", 'bar'],
+            [<<<'TYPESCRIPT'
 `foo
 bar`
-TYPESCRIPT, 'foo' . PHP_EOL . 'bar',
-            ],
+TYPESCRIPT, 'foo' . PHP_EOL . 'bar'],
         ];
     }
 
