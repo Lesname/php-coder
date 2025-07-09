@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="7.0.0-beta1@83dea78b8fe3a29339278e06db2830eb35af0960">
+<files psalm-version="7.0.0-beta10@cd7da86976c250f9b751017fe2d7ed14f43cc18a">
+  <file src="src/Interpreter/Parser/Specification/Typescript/ConstantParseSpecification.php">
+    <MixedArgument>
+      <code><![CDATA[$expression]]></code>
+    </MixedArgument>
+  </file>
   <file src="src/Interpreter/Parser/Specification/Typescript/HintParseSpecification.php">
     <NoValue>
       <code><![CDATA[$mode]]></code>
