@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace LesCoder\Renderer\Specification\General\Expression;
 
 use Override;
+use RuntimeException;
 use LesCoder\Token\CodeToken;
 use LesCoder\Renderer\CodeRenderer;
 use LesCoder\Token\Expression\ComparisonOperator;
@@ -45,6 +46,7 @@ final class ComparisonRendererSpecification implements RendererSpecification
             ComparisonOperator::LessThanOrEqual => '<=',
             ComparisonOperator::GreaterThanOrEqual => '>=',
             ComparisonOperator::InstanceOf => 'instanceof',
+            ComparisonOperator::In => throw new RuntimeException('No supported'),
         };
 
         return "{$renderer->render($token->left)} {$operator} {$renderer->render($token->right)}";

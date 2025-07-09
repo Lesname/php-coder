@@ -25,6 +25,7 @@ use LesCoder\Token\Expression\GroupCodeToken;
 use LesCoder\Token\Value\DictionaryCodeToken;
 use LesCoder\Token\Value\CollectionCodeToken;
 use LesCoder\Token\Expression\TernaryCodeToken;
+use LesCoder\Token\Expression\DowncastCodeToken;
 use LesCoder\Token\Expression\ComparisonOperator;
 use LesCoder\Token\Expression\CoalescingCodeToken;
 use LesCoder\Token\Expression\ComparisonCodeToken;
@@ -159,6 +160,32 @@ final class ExpressionParseSpecification implements ParseSpecification
                 $value = $this->parseTernary($stream, $value, $file);
 
                 continue;
+            }
+
+            if ($stream->current()->getType() === LabelLexical::TYPE) {
+                if ((string)$stream->current() === 'as') {
+                    $stream->next();
+
+                    $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+                    $as = $this->parseValue($stream, $file);
+
+                    $value = new DowncastCodeToken(
+                        $value,
+                        $as,
+                    );
+
+                    continue;
+                }
+
+                if ((string)$stream->current() === 'in') {
+                    $stream->next();
+                    $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+                    $value = new ComparisonCodeToken($value, $this->parse($stream, $file), ComparisonOperator::In);
+
+                    continue;
+                }
             }
 
             break;
