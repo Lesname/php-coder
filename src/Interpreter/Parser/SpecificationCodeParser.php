@@ -6,6 +6,7 @@ namespace LesCoder\Interpreter\Parser;
 use Override;
 use LesCoder\Token\CodeToken;
 use LesCoder\Stream\Lexical\LexicalStream;
+use LesCoder\Stream\Exception\EndOfStream;
 use LesCoder\Stream\CodeToken\CodeTokenStream;
 use LesCoder\Stream\CodeToken\IteratorCodeTokenStream;
 use LesCoder\Interpreter\Lexer\Lexical\WhitespaceLexical;
@@ -38,6 +39,10 @@ final class SpecificationCodeParser implements CodeParser
         );
     }
 
+    /**
+     * @throws NoParseSpecification
+     * @throws EndOfStream
+     */
     private function subParse(LexicalStream $stream, ?string $file): CodeToken
     {
         foreach ($this->specifications as $specification) {
@@ -46,6 +51,6 @@ final class SpecificationCodeParser implements CodeParser
             }
         }
 
-        throw new NoParseSpecification();
+        throw new NoParseSpecification($stream->current());
     }
 }
