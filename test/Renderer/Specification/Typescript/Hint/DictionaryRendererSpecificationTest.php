@@ -6,6 +6,7 @@ namespace LesCoderTest\Renderer\Specification\Typescript\Hint;
 use Override;
 use LesCoder\Token\CodeToken;
 use LesCoder\Renderer\CodeRenderer;
+use LesCoder\Token\Value\StringCodeToken;
 use LesCoder\Token\Hint\DictionaryCodeToken;
 use PHPUnit\Framework\Attributes\CoversClass;
 use LesCoder\Renderer\Specification\RendererSpecification;
@@ -84,7 +85,7 @@ TXT;
 
     public function testRenderNotRequired(): void
     {
-        $key = $this->createMock(CodeToken::class);
+        $key = new StringCodeToken('key');
         $value = $this->createMock(CodeToken::class);
 
         $token = new DictionaryCodeToken(
@@ -99,11 +100,10 @@ TXT;
 
         $renderer = $this->createMock(CodeRenderer::class);
         $renderer
-            ->expects(self::exactly(2))
+            ->expects(self::exactly(1))
             ->method('render')
             ->willReturnMap(
                 [
-                    [$key, 'key'],
                     [$value, 'value'],
                 ],
             );
@@ -158,7 +158,7 @@ TXT;
 
     public function testRenderMultiItems(): void
     {
-        $firstKey = $this->createMock(CodeToken::class);
+        $firstKey = new StringCodeToken('fKey');
         $firstValue = $this->createMock(CodeToken::class);
         $secondKey = $this->createMock(CodeToken::class);
         $secondValue = $this->createMock(CodeToken::class);
@@ -181,11 +181,10 @@ TXT;
 
         $renderer = $this->createMock(CodeRenderer::class);
         $renderer
-            ->expects(self::exactly(4))
+            ->expects(self::exactly(3))
             ->method('render')
             ->willReturnMap(
                 [
-                    [$firstKey, 'fKey'],
                     [$firstValue, 'fValue'],
                     [$secondKey, 'sKey'],
                     [$secondValue, 'sValue'],

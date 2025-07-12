@@ -699,13 +699,17 @@ final class ExpressionParseSpecification implements ParseSpecification
                 throw new UnexpectedLexical($stream->current(), LabelLexical::TYPE);
             }
 
-            $this->expectLexical($stream, ColonLexical::TYPE);
+            if ($this->isLexical($stream, CommaLexical::TYPE, CurlyBracketRightLexical::TYPE)) {
+                $value = new VariableCodeToken($key->value);
+            } else {
+                $this->expectLexical($stream, ColonLexical::TYPE);
 
-            $stream->next();
-            $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+                $stream->next();
+                $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
 
-            $value = $this->parse($stream, $file);
-            $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+                $value = $this->parse($stream, $file);
+                $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+            }
 
             $items[] = new Item($key, $value);
 
@@ -717,13 +721,7 @@ final class ExpressionParseSpecification implements ParseSpecification
             $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
         }
 
-        if ($stream->isEnd()) {
-            throw new UnexpectedEnd(CurlyBracketRightLexical::TYPE);
-        }
-
-        if ($stream->current()->getType() !== CurlyBracketRightLexical::TYPE) {
-            throw new UnexpectedLexical($stream->current(), CurlyBracketRightLexical::TYPE);
-        }
+        $this->expectLexical($stream, CurlyBracketRightLexical::TYPE);
 
         $stream->next();
         $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);

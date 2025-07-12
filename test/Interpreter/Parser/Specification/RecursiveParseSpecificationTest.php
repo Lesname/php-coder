@@ -5,6 +5,7 @@ namespace LesCoderTest\Interpreter\Parser\Specification;
 
 use LesCoder\Token\CodeToken;
 use LesCoder\Stream\Lexical\LexicalStream;
+use LesCoder\Interpreter\Lexer\Lexical\Lexical;
 use LesCoder\Interpreter\Parser\Specification\ParseSpecification;
 use LesCoder\Interpreter\Parser\Specification\RecursiveParseSpecification;
 use PHPUnit\Framework\TestCase;
@@ -70,6 +71,9 @@ class RecursiveParseSpecificationTest extends TestCase
         self::expectException(NoParseSpecification::class);
 
         $stream = $this->createMock(LexicalStream::class);
+        $stream
+            ->method('current')
+            ->willReturn($this->createMock(Lexical::class));
 
         $specification = $this->createMock(ParseSpecification::class);
         $specification->expects(self::once())->method('isSatisfiedBy')->with($stream)->willReturn(false);

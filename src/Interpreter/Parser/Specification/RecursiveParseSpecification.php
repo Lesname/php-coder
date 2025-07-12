@@ -6,6 +6,7 @@ namespace LesCoder\Interpreter\Parser\Specification;
 use Override;
 use LesCoder\Token\CodeToken;
 use LesCoder\Stream\Lexical\LexicalStream;
+use LesCoder\Stream\Exception\EndOfStream;
 use LesCoder\Interpreter\Parser\Specification\Exception\NoParseSpecification;
 use LesCoder\Interpreter\Parser\Specification\Exception\ExpectedParseSpecification;
 
@@ -47,6 +48,7 @@ final class RecursiveParseSpecification implements ParseSpecification
 
     /**
      * @throws NoParseSpecification
+     * @throws EndOfStream
      */
     #[Override]
     public function parse(LexicalStream $stream, ?string $file = null): CodeToken
@@ -57,6 +59,6 @@ final class RecursiveParseSpecification implements ParseSpecification
             }
         }
 
-        throw new NoParseSpecification();
+        throw new NoParseSpecification($stream->current());
     }
 }
