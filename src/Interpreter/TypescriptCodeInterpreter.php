@@ -210,7 +210,7 @@ final class TypescriptCodeInterpreter implements CodeInterpreter
                     ]
                 ),
             ],
-            true,
+            flags: SpecificationCodeParser::FLAG_SKIP_WHITESPACE | SpecificationCodeParser::FLAG_SKIP_COMMENT,
         );
     }
 

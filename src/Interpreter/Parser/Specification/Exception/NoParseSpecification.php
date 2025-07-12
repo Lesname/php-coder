@@ -13,6 +13,8 @@ final class NoParseSpecification extends AbstractException
 {
     public function __construct(public readonly Lexical $for)
     {
-        parent::__construct("No parse specification found for '{$for}'");
+        $type = get_debug_type($this->for);
+
+        parent::__construct("No parse specification found for '{$type}'");
     }
 }
