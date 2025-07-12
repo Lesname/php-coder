@@ -26,7 +26,7 @@ final class SpecificationCodeParser implements CodeParser
      */
     public function __construct(
         private readonly array $specifications,
-        private readonly bool $skipWhitespace = false,
+        bool $skipWhitespace = false,
         int $flags = 0,
     ) {
         if ($skipWhitespace) {
