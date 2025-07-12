@@ -470,6 +470,38 @@ final class ExpressionParseSpecification implements ParseSpecification
             'true' => BuiltInCodeToken::True,
             'null' => BuiltInCodeToken::Null,
             'parent' => BuiltInCodeToken::Parent,
+            'function' => (function () use ($stream) {
+                $this->expectLexical($stream, LabelLexical::TYPE);
+                $label = (string)$stream->current();
+                $stream->next();
+
+                $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+                $this->expectLexical($stream, ParenthesisLeftLexical::TYPE);
+                $stream->next();
+
+                while ($stream->isActive() && $stream->current()->getType() !== ParenthesisRightLexical::TYPE) {
+                    $stream->next();
+                }
+
+                $this->expectLexical($stream, ParenthesisRightLexical::TYPE);
+                $stream->next();
+
+                $this->expectLexical($stream, ColonLexical::TYPE);
+                $stream->next();
+
+                $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+                $this->hintParseSpecification->parse($stream);
+
+                if ($this->isLexical($stream, SemicolonLexical::TYPE)) {
+                    $stream->next();
+
+                    return \LesCoder\Token\Hint\BuiltInCodeToken::Any;
+                }
+
+                throw new UnexpectedLexical($stream->current(), SemicolonLexical::TYPE);
+            })(),
             default => (function () use ($label, $stream) {
                 $codeToken = isset($this->imports[$label])
                     ? new ReferenceCodeToken($label, $this->imports[$label])
@@ -529,7 +561,6 @@ final class ExpressionParseSpecification implements ParseSpecification
                         break;
                     }
                 }
-
 
                 return $codeToken;
             })(),
