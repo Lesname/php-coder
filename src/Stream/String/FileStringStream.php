@@ -16,6 +16,8 @@ final class FileStringStream extends AbstractStringStream
     private int $bufferSize = 0;
 
     /**
+     * @param int<1, max> $minBufferSize
+     *
      * @throws CannotReadFile
      */
     public function __construct(private readonly string $file, private readonly int $minBufferSize = 256)
