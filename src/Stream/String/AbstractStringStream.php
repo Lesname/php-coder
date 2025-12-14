@@ -17,35 +17,45 @@ abstract class AbstractStringStream implements StringStream
     }
 
     /**
+     * @param non-empty-string $input
+     *
      * @throws ExpectedExactly
      */
     #[Override]
-    public function expectExactly(string $string): void
+    public function expectExactly(string $input): void
     {
-        if (!$this->matchesExactly($string)) {
+        $inputLength = mb_strlen($input);
+        assert($inputLength > 0);
+
+        if (!$this->matchesExactly($input)) {
             throw new ExpectedExactly(
-                $string,
-                $this->current(mb_strlen($string)),
+                $input,
+                $this->current($inputLength),
             );
         }
 
-        $this->next(mb_strlen($string));
+        $this->next($inputLength);
     }
 
     /**
+     * @param non-empty-string $keyword
+     *
      * @throws ExpectedKeyword
      */
     #[Override]
     public function expectKeyword(string $keyword): void
     {
+        $keywordLength = mb_strlen($keyword);
+        assert($keywordLength > 0);
+
         if (!$this->matchesKeyword($keyword)) {
             throw new ExpectedKeyword(
                 $keyword,
-                $this->current(mb_strlen($keyword)),
+                $this->current($keywordLength),
             );
         }
 
-        $this->next(mb_strlen($keyword));
+        $this->next($keywordLength);
     }
 
     #[Override]
@@ -60,12 +70,21 @@ abstract class AbstractStringStream implements StringStream
         }
     }
 
+    /**
+     * @param non-empty-string $input
+     */
     #[Override]
     public function matchesExactly(string $input): bool
     {
-        return $this->isActive() && $this->current(mb_strlen($input)) === $input;
+        $inputLength = mb_strlen($input);
+        assert($inputLength > 0);
+
+        return $this->isActive() && $this->current($inputLength) === $input;
     }
 
+    /**
+     * @param non-empty-string $keyword
+     */
     #[Override]
     public function matchesKeyword(string $keyword): bool
     {

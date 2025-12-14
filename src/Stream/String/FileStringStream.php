@@ -39,6 +39,8 @@ final class FileStringStream extends AbstractStringStream
     }
 
     /**
+     * @param int<1, max> $length
+     *
      * @throws CannotReadFile
      */
     #[Override]
@@ -52,15 +54,15 @@ final class FileStringStream extends AbstractStringStream
     }
 
     /**
+     * @param int<1, max> $size
+     *
      * @throws CannotReadFile
      */
     #[Override]
     public function next(int $size = 1): void
     {
-        $length = mb_strlen($this->bufferContent);
-
-        if ($length <= $size) {
-            $this->buffer(max($size * 4, $this->minBufferSize));
+        if (($this->bufferSize - $size) < $this->minBufferSize) {
+            $this->buffer(($size * 4) + $this->minBufferSize);
         }
 
         $this->bufferSize -= $size;
@@ -68,19 +70,19 @@ final class FileStringStream extends AbstractStringStream
     }
 
     /**
-     * @param int<1, max> $size
+     * @param int<1, max> $bytes
      *
      * @throws CannotReadFile
      */
-    private function buffer(int $size): void
+    private function buffer(int $bytes): void
     {
-        $further = fread($this->handle, $size);
+        $further = fread($this->handle, $bytes);
 
         if ($further === false) {
             throw new CannotReadFile($this->file);
         }
 
-        $this->bufferSize += $size;
+        $this->bufferSize += mb_strlen($further);
         $this->bufferContent .= $further;
     }
 }

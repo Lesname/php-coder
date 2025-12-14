@@ -10,12 +10,18 @@ final class DirectStringStream extends AbstractStringStream
     public function __construct(private string $input)
     {}
 
+    /**
+     * @param int<1, max> $length
+     */
     #[Override]
     public function current(int $length = 1): string
     {
         return mb_substr($this->input, 0, $length);
     }
 
+    /**
+     * @param int<1, max> $size
+     */
     #[Override]
     public function next(int $size = 1): void
     {
