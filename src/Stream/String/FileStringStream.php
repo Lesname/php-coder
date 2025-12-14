@@ -20,8 +20,10 @@ final class FileStringStream extends AbstractStringStream
      *
      * @throws CannotReadFile
      */
-    public function __construct(private readonly string $file, private readonly int $minBufferSize = 256)
-    {
+    public function __construct(
+        private readonly string $file,
+        private readonly int $minBufferSize = 256,
+    ) {
         $handle = fopen($file, 'r');
 
         if ($handle === false) {
@@ -47,7 +49,7 @@ final class FileStringStream extends AbstractStringStream
     public function current(int $length = 1): string
     {
         if ($this->bufferSize < $length) {
-            $this->buffer(max($length * 4, $this->minBufferSize));
+            $this->buffer(($length * 4) + $this->minBufferSize);
         }
 
         return mb_substr($this->bufferContent, 0, $length);
@@ -74,15 +76,21 @@ final class FileStringStream extends AbstractStringStream
      *
      * @throws CannotReadFile
      */
-    private function buffer(int $bytes): void
+    private function buffer(?int $bytes): void
     {
-        $further = fread($this->handle, $bytes);
+        $append = '';
 
-        if ($further === false) {
-            throw new CannotReadFile($this->file);
-        }
+        do {
+            $further = fgets($this->handle);
 
-        $this->bufferSize += mb_strlen($further);
-        $this->bufferContent .= $further;
+            if ($further === false) {
+                break;
+            }
+
+            $append .= $further;
+        } while (is_int($bytes) && mb_strlen($append) < $bytes);
+
+        $this->bufferContent .= $append;
+        $this->bufferSize = mb_strlen($this->bufferContent);
     }
 }
