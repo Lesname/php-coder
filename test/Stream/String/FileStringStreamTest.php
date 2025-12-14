@@ -13,7 +13,10 @@ class FileStringStreamTest extends TestCase
 {
     public function testSimpleStream(): void
     {
-        $stream = new FileStringStream(__DIR__ . '/stub/file-string-stream.test.txt');
+        $stream = new FileStringStream(
+            __DIR__ . '/stub/file-string-stream.test.txt',
+            3,
+        );
 
         self::assertTrue($stream->isActive());
         self::assertSame('L', $stream->current());
