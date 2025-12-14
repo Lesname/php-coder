@@ -59,6 +59,7 @@ class FileRendererSpecificationTest extends TestCase
 
         $expected = <<<'TXT'
 <?php
+
 declare(strict_types=1);
 
 use foo\bar\foo;
