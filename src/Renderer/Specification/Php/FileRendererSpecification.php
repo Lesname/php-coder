@@ -36,6 +36,7 @@ final class FileRendererSpecification implements RendererSpecification
 
         $file = <<<PHP
 <?php
+
 declare(strict_types=1);
 
 {$this->renderImports($token->getImports())}
