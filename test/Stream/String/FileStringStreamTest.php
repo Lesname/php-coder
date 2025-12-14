@@ -17,7 +17,6 @@ class FileStringStreamTest extends TestCase
 
         self::assertTrue($stream->isActive());
         self::assertSame('L', $stream->current());
-//
         self::assertSame('Lo', $stream->current(2));
 
         $stream->next(2);
