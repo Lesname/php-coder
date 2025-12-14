@@ -12,6 +12,8 @@ use LesCoder\Interpreter\Lexer\Lexical\Character\AbstractCharacterLexical;
 final class CharacterSpecification implements Specification
 {
     /**
+     * @param non-empty-string $character
+     *
      * @param class-string<AbstractCharacterLexical> $lexicon
      */
     public function __construct(
