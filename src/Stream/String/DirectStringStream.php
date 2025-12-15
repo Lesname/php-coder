@@ -7,8 +7,14 @@ use Override;
 
 final class DirectStringStream extends AbstractStringStream
 {
+    private readonly int $size;
+
+    private int $position = 0;
+
     public function __construct(private string $input)
-    {}
+    {
+        $this->size = mb_strlen($input);
+    }
 
     /**
      * @param int<1, max> $length
@@ -16,7 +22,7 @@ final class DirectStringStream extends AbstractStringStream
     #[Override]
     public function current(int $length = 1): string
     {
-        return mb_substr($this->input, 0, $length);
+        return mb_substr($this->input, $this->position, $length);
     }
 
     /**
@@ -25,12 +31,12 @@ final class DirectStringStream extends AbstractStringStream
     #[Override]
     public function next(int $size = 1): void
     {
-        $this->input = mb_substr($this->input, $size);
+        $this->position += $size;
     }
 
     #[Override]
     public function isEnd(): bool
     {
-        return strlen($this->input) === 0;
+        return $this->position >= $this->size;
     }
 }
