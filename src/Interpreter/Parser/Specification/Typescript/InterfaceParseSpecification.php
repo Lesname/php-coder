@@ -170,7 +170,11 @@ final class InterfaceParseSpecification implements ParseSpecification
              * @todo support unnamed member
              * @see https://github.com/Lesname/php-coder/issues/1
              */
-            if ($this->isLexical($stream, ParenthesisLeftLexical::TYPE)) {
+            if ($this->isLexical($stream, ParenthesisLeftLexical::TYPE, LowerThanLexical::TYPE)) {
+                if ($this->isLexical($stream, LowerThanLexical::TYPE)) {
+                    $this->parseGenerics($stream, $file);
+                }
+
                 $this->parseUnnamedMember($stream);
 
                 if ($this->isLexical($stream, CommaLexical::TYPE, SemicolonLexical::TYPE)) {
@@ -206,12 +210,16 @@ final class InterfaceParseSpecification implements ParseSpecification
                 $stream->next();
                 $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
 
-                $this->expectLexical($stream, ColonLexical::TYPE);
-                $stream->next();
-                $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+                if ($this->isLexical($stream, ColonLexical::TYPE)) {
+                    $stream->next();
+                    $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
 
-                $hint = $this->hintParseSpecification->parse($stream);
-                $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+                    $hint = $this->hintParseSpecification->parse($stream);
+                    $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+                } else {
+                    $hint = BuiltInCodeToken::Any;
+                }
 
                 $this->expectLexical($stream, SquareBracketRightLexical::TYPE);
                 $stream->next();
