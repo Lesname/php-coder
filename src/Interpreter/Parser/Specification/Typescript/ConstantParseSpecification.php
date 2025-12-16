@@ -8,6 +8,7 @@ use RuntimeException;
 use LesCoder\Token\CodeToken;
 use LesCoder\Stream\Lexical\LexicalStream;
 use LesCoder\Token\ConstantCodeToken;
+use LesCoder\Token\Hint\ReferenceCodeToken;
 use LesCoder\Token\Value\AssignmentCodeToken;
 use LesCoder\Interpreter\Lexer\Lexical\LabelLexical;
 use LesCoder\Interpreter\Lexer\Lexical\CommentLexical;
@@ -58,6 +59,13 @@ final class ConstantParseSpecification implements ParseSpecification
 
             $expression = $this->hintParseSpecification->parse($stream, $file);
             $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+            if ($expression instanceof ReferenceCodeToken && $expression->name === 'unique' && $this->isKeyword($stream, 'symbol')) {
+                $expression = new ReferenceCodeToken('unique symbol', null);
+
+                $stream->next();
+                $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+            }
         }
 
         if ($this->isLexical($stream, EqualsSignLexical::TYPE)) {
