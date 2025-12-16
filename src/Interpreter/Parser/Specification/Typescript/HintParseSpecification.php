@@ -168,7 +168,7 @@ final class HintParseSpecification implements ParseSpecification
 
         while ($stream->isActive()) {
             if ($this->isLexical($stream, LowerThanLexical::TYPE)) {
-                $hint = $this->parseGeneric($stream, $hint, $file);
+                $hint = new GenericCodeToken($hint, $this->parseGeneric($stream, $file));
 
                 continue;
             }
@@ -520,6 +520,36 @@ final class HintParseSpecification implements ParseSpecification
                 $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
 
                 $key = new IndexSignatureCodeToken($hint);
+            } elseif ($this->isLexical($stream, LowerThanLexical::TYPE, ParenthesisLeftLexical::TYPE)) {
+                if ($this->isLexical($stream, LowerThanLexical::TYPE)) {
+                    $this->parseGeneric($stream, $file);
+                }
+
+                $this->expectLexical($stream, ParenthesisLeftLexical::TYPE);
+
+                while ($stream->isActive() && !$this->isLexical($stream, ParenthesisRightLexical::TYPE)) {
+                    $stream->next();
+                }
+
+                $this->expectLexical($stream, ParenthesisRightLexical::TYPE);
+                $stream->next();
+                $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+                if ($this->isLexical($stream, ColonLexical::TYPE)) {
+                    $stream->next();
+                    $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+                    $this->parse($stream);
+                }
+
+                if (!($this->isLexical($stream, CommaLexical::TYPE) || $this->isLexical($stream, SemicolonLexical::TYPE))) {
+                    break;
+                }
+
+                $stream->next();
+                $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+                continue;
             } else {
                 throw new UnexpectedLexical($stream->current(), LabelLexical::TYPE);
             }
@@ -603,10 +633,12 @@ final class HintParseSpecification implements ParseSpecification
     }
 
     /**
+     * @return array<CodeToken>
+     *
      * @throws UnexpectedEnd
      * @throws UnexpectedLexical
      */
-    private function parseGeneric(LexicalStream $stream, CodeToken $base, ?string $file): CodeToken
+    private function parseGeneric(LexicalStream $stream, ?string $file): array
     {
         $this->expectLexical($stream, LowerThanLexical::TYPE);
         $stream->next();
@@ -628,6 +660,6 @@ final class HintParseSpecification implements ParseSpecification
         $this->expectLexical($stream, GreaterThanLexical::TYPE);
         $stream->next();
 
-        return new GenericCodeToken($base, $parameters);
+        return $parameters;
     }
 }
