@@ -67,12 +67,31 @@ final class TypescriptCodeInterpreter implements CodeInterpreter
         while ($lexicals->isActive()) {
             $current = $lexicals->current();
 
-            if (!$current instanceof LabelLexical || (string)$current !== 'import') {
-                break;
+            if ($current instanceof LabelLexical) {
+                $label = (string)$current;
+
+                if ($label === 'import') {
+                    $lexicals->next();
+                    $lexicals->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+                    $imports = array_replace($imports, $this->parseHeader($lexicals));
+                    $lexicals->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+                    continue;
+                }
+
+                if ($label === 'export') {
+                    $lexicals->next();
+                    $lexicals->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+                    $imports = array_replace($imports, $this->parseHeader($lexicals));
+                    $lexicals->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+                    continue;
+                }
             }
 
-            $imports = array_replace($imports, $this->parseImport($lexicals));
-            $lexicals->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+            break;
         }
 
         return $this->getCodeParser($imports)->parse($lexicals, $file);
@@ -85,13 +104,8 @@ final class TypescriptCodeInterpreter implements CodeInterpreter
      * @throws UnexpectedEnd
      * @throws UnexpectedLabel
      */
-    private function parseImport(LexicalStream $stream): array
+    private function parseHeader(LexicalStream $stream): array
     {
-        $this->expectKeyword($stream, 'import');
-        $stream->next();
-
-        $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
-
         if ($this->isLexical($stream, AsteriskLexical::TYPE)) {
             $stream->next();
             $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
@@ -126,6 +140,17 @@ final class TypescriptCodeInterpreter implements CodeInterpreter
                     'from' => $from,
                 ],
             ];
+        }
+
+        if ($this->isLexical($stream, StringLexical::TYPE)) {
+            $stream->next();
+            $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+            if ($stream->current()->getType() === SemicolonLexical::TYPE) {
+                $stream->next();
+            }
+
+            return [];
         }
 
         $this->expectLexical($stream, CurlyBracketLeftLexical::TYPE);
