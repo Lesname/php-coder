@@ -472,10 +472,32 @@ final class ExpressionParseSpecification implements ParseSpecification
             'parent' => BuiltInCodeToken::Parent,
             'function' => (function () use ($stream) {
                 $this->expectLexical($stream, LabelLexical::TYPE);
-                $label = (string)$stream->current();
                 $stream->next();
 
                 $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+                if ($this->isLexical($stream, LowerThanLexical::TYPE)) {
+                    $stream->next();
+
+                    while ($stream->isActive() && $stream->current()->getType() !== GreaterThanLexical::TYPE) {
+                        $this->hintParseSpecification->parse($stream);
+                        $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+                        if ($stream->isActive() && $stream->current()->getType() === CommaLexical::TYPE) {
+                            $stream->next();
+                            $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+                            continue;
+                        }
+
+                        break;
+                    }
+
+                    $this->expectLexical($stream, GreaterThanLexical::TYPE);
+                    $stream->next();
+
+                    $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+                }
 
                 $this->expectLexical($stream, ParenthesisLeftLexical::TYPE);
                 $stream->next();
