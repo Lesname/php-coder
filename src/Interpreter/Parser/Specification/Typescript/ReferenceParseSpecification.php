@@ -22,7 +22,7 @@ final class ReferenceParseSpecification implements ParseSpecification
     use ExpectParseSpecificationHelper;
 
     /**
-     * @param array<string, string> $imports
+     * @param array<string, array{from: string, name: string}> $imports
      */
     public function __construct(
         private readonly array $imports,
@@ -48,15 +48,21 @@ final class ReferenceParseSpecification implements ParseSpecification
         $stream->next();
         $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
 
-        $from = $this->imports[$refName] ?? $file;
+        if (isset($this->imports[$refName])) {
+            $import = $this->imports[$refName];
 
-        if ($file !== null && $from !== null && str_starts_with($from, '.')) {
-            $from = str_starts_with($from, '../')
-                ? dirname($file) . "/{$from}"
-                : dirname($file) . substr($from, 1);
+            if ($file !== null && str_starts_with($import['from'], '.')) {
+                $from = str_starts_with($import['from'], '../')
+                    ? dirname($file) . "/{$import['from']}"
+                    : dirname($file) . substr($import['from'], 1);
+            } else {
+                $from = $import['from'];
+            }
+
+            $reference = new ReferenceCodeToken($import['name'], $from);
+        } else {
+            $reference = new ReferenceCodeToken($refName, $file);
         }
-
-        $reference = new ReferenceCodeToken($refName, $from);
 
         if (!$this->isLexical($stream, LowerThanLexical::TYPE)) {
             return $reference;

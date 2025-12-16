@@ -60,7 +60,12 @@ class ExpressionParseSpecificationTest extends TestCase
         $this->specification = new ExpressionParseSpecification(
             $referenceParseSpecification,
             $hintParseSpecification,
-            ['fiz' => 'bar'],
+            [
+                'fiz' => [
+                    'from' => 'bar',
+                    'name' => 'fiz',
+                ],
+            ],
         );
     }
 
@@ -437,7 +442,12 @@ class ExpressionParseSpecificationTest extends TestCase
         $specification = new ExpressionParseSpecification(
             $referenceParseSpecification,
             $hintParseSpecification,
-            ['fiz' => 'bar'],
+            [
+                'fiz' => [
+                    'from' => 'bar',
+                    'name' => 'fiz',
+                ],
+            ],
         );
 
         $lexicals = new ArrayLexicalStream(
@@ -558,7 +568,12 @@ TS;
         $specification = new ExpressionParseSpecification(
             $referenceParseSpecification,
             $hintParseSpecification,
-            ['fiz' => 'bar'],
+            [
+                'fiz' => [
+                    'from' => 'bar',
+                    'name' => 'fiz',
+                ],
+            ],
         );
 
         $code = $specification->parse($lexicals);

@@ -61,7 +61,7 @@ final class TypescriptCodeInterpreter implements CodeInterpreter
         $lexicals = $this->getCodeLexer()->tokenize($stream);
         $lexicals->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
 
-        /** @var array<string, string> $imports */
+        /** @var array<string, array{from: string, name: string}> $imports */
         $imports = [];
 
         while ($lexicals->isActive()) {
@@ -79,7 +79,7 @@ final class TypescriptCodeInterpreter implements CodeInterpreter
     }
 
     /**
-     * @return array<string, string>
+     * @return array<string, array{from: string, name: string}>
      *
      * @throws UnexpectedLexical
      * @throws UnexpectedEnd
@@ -120,7 +120,12 @@ final class TypescriptCodeInterpreter implements CodeInterpreter
                 $stream->next();
             }
 
-            return [$name => $from];
+            return [
+                $name => [
+                    'name' => $name,
+                    'from' => $from,
+                ],
+            ];
         }
 
         $this->expectLexical($stream, CurlyBracketLeftLexical::TYPE);
@@ -132,10 +137,25 @@ final class TypescriptCodeInterpreter implements CodeInterpreter
 
         while ($stream->isActive()) {
             $this->expectLexical($stream, LabelLexical::TYPE);
-            $names[] = (string)$stream->current();
+            $name = $as = (string)$stream->current();
             $stream->next();
 
             $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+            if ($stream->current()->getType() === LabelLexical::TYPE) {
+                if ((string)$stream->current() === 'as') {
+                    $stream->next();
+                    $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+                    $this->expectLexical($stream, LabelLexical::TYPE);
+                    $as = (string)$stream->current();
+
+                    $stream->next();
+                    $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+                }
+            }
+
+            $names[$as] = $name;
 
             if ($stream->current()->getType() !== CommaLexical::TYPE) {
                 break;
@@ -172,15 +192,18 @@ final class TypescriptCodeInterpreter implements CodeInterpreter
 
         $imports = [];
 
-        foreach ($names as $name) {
-            $imports[$name] = $from;
+        foreach ($names as $as => $name) {
+            $imports[$as] = [
+                'from' => $from,
+                'name' => $name,
+            ];
         }
 
         return $imports;
     }
 
     /**
-     * @param array<string, string> $imports
+     * @param array<string, array{from: string, name: string}> $imports
      *
      * @throws ExpectedParseSpecification
      */

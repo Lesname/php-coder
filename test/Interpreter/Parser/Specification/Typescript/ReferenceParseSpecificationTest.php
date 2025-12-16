@@ -41,7 +41,10 @@ class ReferenceParseSpecificationTest extends TestCase
 
         $parser = new ReferenceParseSpecification(
             [
-                'foo' => './foo'
+                'foo' => [
+                    'from' => './foo',
+                    'name' => 'foo',
+                ],
             ],
         );
 
@@ -64,7 +67,10 @@ class ReferenceParseSpecificationTest extends TestCase
 
         $parser = new ReferenceParseSpecification(
             [
-                'foo' => '../bar/foo'
+                'foo' => [
+                    'from' => '../bar/foo',
+                    'name' => 'foo',
+                ],
             ],
         );
 

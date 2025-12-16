@@ -74,7 +74,7 @@ final class ExpressionParseSpecification implements ParseSpecification
     use ExpectParseSpecificationHelper;
 
     /**
-     * @param array<string, string> $imports
+     * @param array<string, array{from: string, name: string}> $imports
      */
     public function __construct(
         private readonly ParseSpecification $referenceParseSpecification,
@@ -504,7 +504,7 @@ final class ExpressionParseSpecification implements ParseSpecification
             })(),
             default => (function () use ($label, $stream) {
                 $codeToken = isset($this->imports[$label])
-                    ? new ReferenceCodeToken($label, $this->imports[$label])
+                    ? new ReferenceCodeToken($this->imports[$label]['name'], $this->imports[$label]['from'])
                     : new VariableCodeToken($label);
 
                 while ($stream->isActive()) {
