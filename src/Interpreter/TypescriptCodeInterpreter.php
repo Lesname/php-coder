@@ -22,6 +22,7 @@ use LesCoder\Interpreter\Lexer\Lexical\Character\SemicolonLexical;
 use LesCoder\Interpreter\Parser\Specification\RecursiveParseSpecification;
 use LesCoder\Interpreter\Parser\Specification\Typescript\HintParseSpecification;
 use LesCoder\Interpreter\Parser\Specification\Typescript\TypeParseSpecification;
+use LesCoder\Interpreter\Parser\Specification\Typescript\EnumParseSpecification;
 use LesCoder\Interpreter\Parser\Specification\Typescript\ClassParseSpecification;
 use LesCoder\Interpreter\Parser\Specification\Typescript\Exception\UnexpectedEnd;
 use LesCoder\Interpreter\Parser\Specification\Typescript\ExportParseSpecification;
@@ -245,6 +246,7 @@ final class TypescriptCodeInterpreter implements CodeInterpreter
                     [
                         new InterfaceParseSpecification($hintParseSpecification, $expressionParseSpecification),
                         new ConstantParseSpecification($expressionParseSpecification, $hintParseSpecification),
+                        new EnumParseSpecification($expressionParseSpecification),
                         new ClassParseSpecification(
                             new AttributeParseSpecification($expressionParseSpecification, $referenceParseSpecification),
                             $expressionParseSpecification,
