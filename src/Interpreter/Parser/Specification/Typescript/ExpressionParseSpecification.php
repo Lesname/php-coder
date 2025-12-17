@@ -510,7 +510,17 @@ final class ExpressionParseSpecification implements ParseSpecification
                 $this->expectLexical($stream, ParenthesisLeftLexical::TYPE);
                 $stream->next();
 
-                while ($stream->isActive() && $stream->current()->getType() !== ParenthesisRightLexical::TYPE) {
+                $matched = 0;
+
+                while ($stream->isActive() && ($matched > 0 || $stream->current()->getType() !== ParenthesisRightLexical::TYPE)) {
+                    if ($this->isLexical($stream, ParenthesisLeftLexical::TYPE)) {
+                        $matched += 1;
+                    }
+
+                    if ($this->isLexical($stream, ParenthesisRightLexical::TYPE)) {
+                        $matched -= 1;
+                    }
+
                     $stream->next();
                 }
 
