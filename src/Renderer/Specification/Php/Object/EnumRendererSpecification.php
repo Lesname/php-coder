@@ -39,7 +39,6 @@ final class EnumRendererSpecification implements RendererSpecification
             throw new UnexpectedCodeToken(EnumCodeToken::class, $token);
         }
 
-
         $comment = $token->comment
             ? $this->renderComment($token->comment->comment) . PHP_EOL
             : '';
