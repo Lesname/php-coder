@@ -41,6 +41,7 @@ final class IteratorLexicalStream extends AbstractLexicalStream
     /**
      * @param positive-int $step
      */
+    #[Override]
     public function lookahead(int $step = 1): ?Lexical
     {
         if ($this->active === null) {

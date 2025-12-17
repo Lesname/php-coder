@@ -12,7 +12,6 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(IteratorLexicalStream::class)]
 class IteratorLexicalStreamTest extends TestCase
 {
-
     public function testNext(): void
     {
         $f = $this->createMock(Lexical::class);

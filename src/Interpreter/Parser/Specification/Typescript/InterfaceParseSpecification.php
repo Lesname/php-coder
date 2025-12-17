@@ -217,7 +217,6 @@ final class InterfaceParseSpecification implements ParseSpecification
 
                     $hint = $this->hintParseSpecification->parse($stream);
                     $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
-
                 } else {
                     $hint = BuiltInCodeToken::Any;
                 }
@@ -464,7 +463,7 @@ final class InterfaceParseSpecification implements ParseSpecification
     }
 
     /**
-     * @return array<GenericParameterCodeToken>
+     * @return array<CodeToken>
      */
     private function parseHintGenerics(LexicalStream $stream, ?string $file): array
     {
