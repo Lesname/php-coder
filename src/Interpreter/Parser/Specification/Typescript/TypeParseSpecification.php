@@ -31,6 +31,8 @@ use LesCoder\Interpreter\Parser\Specification\Helper\ExpectParseSpecificationHel
 use LesCoder\Interpreter\Parser\Specification\Typescript\Exception\UnexpectedLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\CurlyBracket\CurlyBracketLeftLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\CurlyBracket\CurlyBracketRightLexical;
+use LesCoder\Interpreter\Lexer\Lexical\Character\SquareBracket\SquareBracketLeftLexical;
+use LesCoder\Interpreter\Lexer\Lexical\Character\SquareBracket\SquareBracketRightLexical;
 
 final class TypeParseSpecification implements ParseSpecification
 {
@@ -95,25 +97,7 @@ final class TypeParseSpecification implements ParseSpecification
         $hint = $this->hintParseSpecification->parse($stream, $file);
 
         if ($this->isKeyword($stream, 'extends')) {
-            $stream->next();
-            $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
-
-            $this->hintParseSpecification->parse($stream, $file);
-            $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
-
-            $this->expectLexical($stream, QuestionMarkLexical::TYPE);
-            $stream->next();
-            $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
-
-            $this->hintParseSpecification->parse($stream, $file);
-            $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
-
-            $this->expectLexical($stream, ColonLexical::TYPE);
-            $stream->next();
-            $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
-
-            $this->hintParseSpecification->parse($stream, $file);
-            $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+            $this->skipTypeExtend($stream, $file);
         }
 
         $this->expectLexical($stream, SemicolonLexical::TYPE);
@@ -122,6 +106,58 @@ final class TypeParseSpecification implements ParseSpecification
         $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
 
         return new AssignmentCodeToken($type, $hint);
+    }
+
+    private function skipTypeExtend(LexicalStream $stream, ?string $file = null): void
+    {
+        $this->expectKeyword($stream, 'extends');
+
+        $stream->next();
+        $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+        if ($this->isLexical($stream, SquareBracketLeftLexical::TYPE)) {
+            $matched = 0;
+
+            $stream->next();
+
+            while ($stream->isActive() && ($matched > 0 || !$this->isLexical($stream, SquareBracketRightLexical::TYPE))) {
+                if ($this->isLexical($stream, SquareBracketLeftLexical::TYPE)) {
+                    $matched += 1;
+                }
+
+                if ($this->isLexical($stream, SquareBracketRightLexical::TYPE)) {
+                    $matched -= 1;
+                }
+
+                $stream->next();
+            }
+
+            $this->expectLexical($stream, SquareBracketRightLexical::TYPE);
+            $stream->next();
+
+            $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+        } else {
+            throw new UnexpectedLexical($stream->current(), SquareBracketLeftLexical::TYPE);
+        }
+
+        $this->expectLexical($stream, QuestionMarkLexical::TYPE);
+        $stream->next();
+        $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+        $this->hintParseSpecification->parse($stream, $file);
+
+        if ($this->isKeyword($stream, 'extends')) {
+            $this->skipTypeExtend($stream, $file);
+        }
+
+        $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+        $this->expectLexical($stream, ColonLexical::TYPE);
+        $stream->next();
+        $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+        $this->hintParseSpecification->parse($stream, $file);
+        $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
     }
 
     private function parseGroup(LexicalStream $stream, ?string $file = null): CodeToken
