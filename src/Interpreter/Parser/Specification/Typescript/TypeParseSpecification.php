@@ -26,6 +26,7 @@ use LesCoder\Interpreter\Lexer\Lexical\Character\SemicolonLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\LowerThanLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\EqualsSignLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\GreaterThanLexical;
+use LesCoder\Interpreter\Lexer\Lexical\Character\QuestionMarkLexical;
 use LesCoder\Interpreter\Parser\Specification\Helper\ExpectParseSpecificationHelper;
 use LesCoder\Interpreter\Parser\Specification\Typescript\Exception\UnexpectedLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\CurlyBracket\CurlyBracketLeftLexical;
@@ -92,6 +93,28 @@ final class TypeParseSpecification implements ParseSpecification
         $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
 
         $hint = $this->hintParseSpecification->parse($stream, $file);
+
+        if ($this->isKeyword($stream, 'extends')) {
+            $stream->next();
+            $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+            $this->hintParseSpecification->parse($stream, $file);
+            $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+            $this->expectLexical($stream, QuestionMarkLexical::TYPE);
+            $stream->next();
+            $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+            $this->hintParseSpecification->parse($stream, $file);
+            $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+            $this->expectLexical($stream, ColonLexical::TYPE);
+            $stream->next();
+            $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+            $this->hintParseSpecification->parse($stream, $file);
+            $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+        }
 
         $this->expectLexical($stream, SemicolonLexical::TYPE);
         $stream->next();
