@@ -82,13 +82,23 @@ final class TypescriptCodeInterpreter implements CodeInterpreter
                 }
 
                 if ($label === 'export') {
-                    $lexicals->next();
-                    $lexicals->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+                    $lookaheadSteps = 1;
 
-                    $imports = array_replace($imports, $this->parseHeader($lexicals));
-                    $lexicals->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+                    while ($lexicals->lookahead($lookaheadSteps) instanceof WhitespaceLexical) {
+                        $lookaheadSteps += 1;
+                    }
 
-                    continue;
+                    $tokenAhead = $lexicals->lookahead($lookaheadSteps);
+
+                    if ($tokenAhead instanceof AsteriskLexical || $tokenAhead instanceof StringLexical || $tokenAhead instanceof CurlyBracketLeftLexical) {
+                        $lexicals->next();
+                        $lexicals->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+                        $imports = array_replace($imports, $this->parseHeader($lexicals));
+                        $lexicals->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+                        continue;
+                    }
                 }
             }
 
