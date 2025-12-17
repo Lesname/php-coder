@@ -21,6 +21,7 @@ use LesCoder\Token\Object\InterfacePropertyCodeToken;
 use LesCoder\Interpreter\Lexer\Lexical\CommentLexical;
 use LesCoder\Interpreter\Lexer\Lexical\WhitespaceLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Value\StringLexical;
+use LesCoder\Interpreter\Lexer\Lexical\Character\DotLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\CommaLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\ColonLexical;
 use LesCoder\Interpreter\Parser\Specification\ParseSpecification;
@@ -240,7 +241,7 @@ final class InterfaceParseSpecification implements ParseSpecification
                 $required = true;
             }
 
-            if ($this->isLexical($stream, ParenthesisLeftLexical::TYPE)) {
+            if ($this->isLexical($stream, ParenthesisLeftLexical::TYPE, LowerThanLexical::TYPE)) {
                 if (!$name instanceof StringCodeToken) {
                     throw new MethodMustHaveName();
                 }
@@ -310,6 +311,11 @@ final class InterfaceParseSpecification implements ParseSpecification
      */
     private function parseInterfaceMethod(LexicalStream $stream, ?string $name, bool $required = true, ?string $file = null): InterfaceMethodCodeToken
     {
+        if ($this->isLexical($stream, LowerThanLexical::TYPE)) {
+            $this->parseInputGenerics($stream, $file);
+            $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+        }
+
         $this->expectLexical($stream, ParenthesisLeftLexical::TYPE);
         $stream->next();
 
@@ -318,6 +324,14 @@ final class InterfaceParseSpecification implements ParseSpecification
         $parameters = [];
 
         while ($stream->isActive() && !$this->isLexical($stream, ParenthesisRightLexical::TYPE)) {
+            if ($this->isLexical($stream, DotLexical::TYPE)) {
+                $stream->next();
+                $this->expectLexical($stream, DotLexical::TYPE);
+                $stream->next();
+                $this->expectLexical($stream, DotLexical::TYPE);
+                $stream->next();
+            }
+
             $this->expectLexical($stream, LabelLexical::TYPE);
             $paramName = (string)$stream->current();
             $stream->next();
