@@ -483,6 +483,14 @@ final class ExpressionParseSpecification implements ParseSpecification
                         $this->hintParseSpecification->parse($stream);
                         $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
 
+                        if ($this->isLexical($stream, EqualsSignLexical::TYPE)) {
+                            $stream->next();
+                            $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+                            $this->parse($stream);
+                            $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+                        }
+
                         if ($stream->isActive() && $stream->current()->getType() === CommaLexical::TYPE) {
                             $stream->next();
                             $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
