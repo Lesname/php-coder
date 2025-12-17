@@ -479,26 +479,18 @@ final class ExpressionParseSpecification implements ParseSpecification
                 if ($this->isLexical($stream, LowerThanLexical::TYPE)) {
                     $stream->next();
 
-                    while ($stream->isActive() && $stream->current()->getType() !== GreaterThanLexical::TYPE) {
-                        $this->hintParseSpecification->parse($stream);
-                        $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+                    $matched = 0;
 
-                        if ($this->isLexical($stream, EqualsSignLexical::TYPE)) {
-                            $stream->next();
-                            $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
-
-                            $this->parse($stream);
-                            $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+                    while ($stream->isActive() && ($matched > 0 || !$this->isLexical($stream, GreaterThanLexical::TYPE))) {
+                        if ($this->isLexical($stream, LowerThanLexical::TYPE)) {
+                            $matched += 1;
                         }
 
-                        if ($stream->isActive() && $stream->current()->getType() === CommaLexical::TYPE) {
-                            $stream->next();
-                            $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
-
-                            continue;
+                        if ($this->isLexical($stream, GreaterThanLexical::TYPE)) {
+                            $matched -= 1;
                         }
 
-                        break;
+                        $stream->next();
                     }
 
                     $this->expectLexical($stream, GreaterThanLexical::TYPE);
