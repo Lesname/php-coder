@@ -47,6 +47,12 @@ final class ConstantParseSpecification implements ParseSpecification
         $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
 
         $this->expectLexical($stream, LabelLexical::TYPE);
+
+        if ((string)$stream->current() === 'enum') {
+            return (new EnumParseSpecification($this->expressionSpecification))
+                ->parse($stream, $file);
+        }
+
         $name = (string)$stream->current();
         $stream->next();
 
