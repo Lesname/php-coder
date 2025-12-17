@@ -5,6 +5,7 @@ namespace LesCoder\Token\Object;
 
 use Override;
 use LesCoder\Token\CodeToken;
+use LesCoder\Token\CommentCodeToken;
 use LesCoder\Token\Helper\ImportMergerHelper;
 
 /**
@@ -15,19 +16,39 @@ final class EnumCodeToken implements CodeToken
     use ImportMergerHelper;
 
     /**
-     * @param array<string, CodeToken> $options
+     * @param array<string> | array<string, CodeToken> $cases
+     * @param array<CodeToken> $implements
+     * @param array<CodeToken> $uses
      */
     public function __construct(
         public readonly string $name,
-        public readonly array $options,
+        public readonly array $cases,
+        public readonly ?CodeToken $backs = null,
+        public readonly array $implements = [],
+        public readonly array $uses = [],
+        public readonly ?CommentCodeToken $comment = null,
     ) {}
 
-    /**
-     * @return array<string, string>
-     */
     #[Override]
     public function getImports(): array
     {
-        return $this->mergeImportsFromCodeTokens($this->options);
+        $filtered = [];
+
+        foreach ($this->cases as $case) {
+            if ($case instanceof CodeToken) {
+                $filtered[] = $case;
+            }
+        }
+
+        return $this->mergeImportsFromCodeTokens(
+            array_merge(
+                $filtered,
+                $this->implements,
+                $this->uses,
+            ),
+            $this->backs
+                ? $this->backs->getImports()
+                : [],
+        );
     }
 }
