@@ -12,4 +12,9 @@ use LesCoder\Interpreter\Lexer\Lexical\Lexical;
 interface LexicalStream extends Stream
 {
     public function skip(string $type, string ...$types): LexicalStream;
+
+    /**
+     * @param positive-int $step
+     */
+    public function lookahead(int $step = 1): ?Lexical;
 }
