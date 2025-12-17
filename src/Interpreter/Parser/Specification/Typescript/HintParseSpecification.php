@@ -616,6 +616,14 @@ final class HintParseSpecification implements ParseSpecification
         $items = [];
 
         while ($stream->isActive() && $stream->current()->getType() !== SquareBracketRightLexical::TYPE) {
+            if ($this->isLexical($stream, DotLexical::TYPE)) {
+                $stream->next();
+                $this->expectLexical($stream, DotLexical::TYPE);
+                $stream->next();
+                $this->expectLexical($stream, DotLexical::TYPE);
+                $stream->next();
+            }
+
             $items[] = $this->parse($stream, $file);
             $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
 
