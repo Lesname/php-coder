@@ -284,6 +284,15 @@ final class HintParseSpecification implements ParseSpecification
     private function parseHintReference(LexicalStream $stream, ?string $file): CodeToken
     {
         $hint = $this->referenceParseSpecification->parse($stream, $file);
+        $isInfered = $hint instanceof ReferenceCodeToken
+            && $hint->name === 'infer'
+            && $hint->from === null
+            && $stream->isActive()
+            && $stream->current() instanceof LabelLexical;
+
+        if ($isInfered) {
+            $hint = $this->referenceParseSpecification->parse($stream, $file);
+        }
 
         while ($stream->isActive()) {
             if ($this->isLexical($stream, DotLexical::TYPE)) {
