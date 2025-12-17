@@ -624,7 +624,7 @@ final class HintParseSpecification implements ParseSpecification
                 $stream->next();
             }
 
-            $items[] = $this->parse($stream, $file);
+            $item = $this->parse($stream, $file);
             $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
 
             // Item is optional
@@ -632,6 +632,17 @@ final class HintParseSpecification implements ParseSpecification
                 $stream->next();
                 $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
             }
+
+            if ($this->isLexical($stream, ColonLexical::TYPE)) {
+                $stream->next();
+                $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+                $item = $this->parse($stream, $file);
+                $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+            }
+
+            $items[] = $item;
+
 
             if ($stream->current()->getType() !== CommaLexical::TYPE) {
                 break;
