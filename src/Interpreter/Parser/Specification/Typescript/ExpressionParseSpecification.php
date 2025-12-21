@@ -74,7 +74,7 @@ final class ExpressionParseSpecification implements ParseSpecification
     use ExpectParseSpecificationHelper;
 
     /**
-     * @param array<string, string> $imports
+     * @param array<string, array{from: string, name: string}> $imports
      */
     public function __construct(
         private readonly ParseSpecification $referenceParseSpecification,
@@ -472,15 +472,47 @@ final class ExpressionParseSpecification implements ParseSpecification
             'parent' => BuiltInCodeToken::Parent,
             'function' => (function () use ($stream) {
                 $this->expectLexical($stream, LabelLexical::TYPE);
-                $label = (string)$stream->current();
                 $stream->next();
 
                 $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
 
+                if ($this->isLexical($stream, LowerThanLexical::TYPE)) {
+                    $stream->next();
+
+                    $matched = 0;
+
+                    while ($stream->isActive() && ($matched > 0 || !$this->isLexical($stream, GreaterThanLexical::TYPE))) {
+                        if ($this->isLexical($stream, LowerThanLexical::TYPE)) {
+                            $matched += 1;
+                        }
+
+                        if ($this->isLexical($stream, GreaterThanLexical::TYPE)) {
+                            $matched -= 1;
+                        }
+
+                        $stream->next();
+                    }
+
+                    $this->expectLexical($stream, GreaterThanLexical::TYPE);
+                    $stream->next();
+
+                    $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+                }
+
                 $this->expectLexical($stream, ParenthesisLeftLexical::TYPE);
                 $stream->next();
 
-                while ($stream->isActive() && $stream->current()->getType() !== ParenthesisRightLexical::TYPE) {
+                $matched = 0;
+
+                while ($stream->isActive() && ($matched > 0 || $stream->current()->getType() !== ParenthesisRightLexical::TYPE)) {
+                    if ($this->isLexical($stream, ParenthesisLeftLexical::TYPE)) {
+                        $matched += 1;
+                    }
+
+                    if ($this->isLexical($stream, ParenthesisRightLexical::TYPE)) {
+                        $matched -= 1;
+                    }
+
                     $stream->next();
                 }
 
@@ -504,7 +536,7 @@ final class ExpressionParseSpecification implements ParseSpecification
             })(),
             default => (function () use ($label, $stream) {
                 $codeToken = isset($this->imports[$label])
-                    ? new ReferenceCodeToken($label, $this->imports[$label])
+                    ? new ReferenceCodeToken($this->imports[$label]['name'], $this->imports[$label]['from'])
                     : new VariableCodeToken($label);
 
                 while ($stream->isActive()) {

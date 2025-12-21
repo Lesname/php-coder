@@ -27,6 +27,15 @@ final class ArrayLexicalStream extends AbstractLexicalStream
         return $this->array[$this->position];
     }
 
+    /**
+     * @param positive-int $step
+     */
+    #[Override]
+    public function lookahead(int $step = 1): ?Lexical
+    {
+        return $this->array[$this->position + $step] ?? null;
+    }
+
     #[Override]
     public function next(): void
     {

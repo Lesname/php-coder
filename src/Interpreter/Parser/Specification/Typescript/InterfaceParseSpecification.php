@@ -21,6 +21,7 @@ use LesCoder\Token\Object\InterfacePropertyCodeToken;
 use LesCoder\Interpreter\Lexer\Lexical\CommentLexical;
 use LesCoder\Interpreter\Lexer\Lexical\WhitespaceLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Value\StringLexical;
+use LesCoder\Interpreter\Lexer\Lexical\Character\DotLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\CommaLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\ColonLexical;
 use LesCoder\Interpreter\Parser\Specification\ParseSpecification;
@@ -73,7 +74,7 @@ final class InterfaceParseSpecification implements ParseSpecification
         $name = (string)$stream->current();
         $stream->next();
 
-        $generics = $this->parseGenerics($stream, $file);
+        $generics = $this->parseInputGenerics($stream, $file);
 
         $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
 
@@ -121,7 +122,7 @@ final class InterfaceParseSpecification implements ParseSpecification
                 $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
 
                 if ($this->isLexical($stream, LowerThanLexical::TYPE)) {
-                    $generics = $this->parseGenerics($stream, $file);
+                    $generics = $this->parseHintGenerics($stream, $file);
 
                     $extend = new GenericCodeToken($extend, $generics);
                     $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
@@ -170,7 +171,11 @@ final class InterfaceParseSpecification implements ParseSpecification
              * @todo support unnamed member
              * @see https://github.com/Lesname/php-coder/issues/1
              */
-            if ($this->isLexical($stream, ParenthesisLeftLexical::TYPE)) {
+            if ($this->isLexical($stream, ParenthesisLeftLexical::TYPE, LowerThanLexical::TYPE)) {
+                if ($this->isLexical($stream, LowerThanLexical::TYPE)) {
+                    $this->parseInputGenerics($stream, $file);
+                }
+
                 $this->parseUnnamedMember($stream);
 
                 if ($this->isLexical($stream, CommaLexical::TYPE, SemicolonLexical::TYPE)) {
@@ -206,12 +211,15 @@ final class InterfaceParseSpecification implements ParseSpecification
                 $stream->next();
                 $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
 
-                $this->expectLexical($stream, ColonLexical::TYPE);
-                $stream->next();
-                $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+                if ($this->isLexical($stream, ColonLexical::TYPE)) {
+                    $stream->next();
+                    $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
 
-                $hint = $this->hintParseSpecification->parse($stream);
-                $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+                    $hint = $this->hintParseSpecification->parse($stream);
+                    $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+                } else {
+                    $hint = BuiltInCodeToken::Any;
+                }
 
                 $this->expectLexical($stream, SquareBracketRightLexical::TYPE);
                 $stream->next();
@@ -232,7 +240,7 @@ final class InterfaceParseSpecification implements ParseSpecification
                 $required = true;
             }
 
-            if ($this->isLexical($stream, ParenthesisLeftLexical::TYPE)) {
+            if ($this->isLexical($stream, ParenthesisLeftLexical::TYPE, LowerThanLexical::TYPE)) {
                 if (!$name instanceof StringCodeToken) {
                     throw new MethodMustHaveName();
                 }
@@ -302,6 +310,11 @@ final class InterfaceParseSpecification implements ParseSpecification
      */
     private function parseInterfaceMethod(LexicalStream $stream, ?string $name, bool $required = true, ?string $file = null): InterfaceMethodCodeToken
     {
+        if ($this->isLexical($stream, LowerThanLexical::TYPE)) {
+            $this->parseInputGenerics($stream, $file);
+            $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+        }
+
         $this->expectLexical($stream, ParenthesisLeftLexical::TYPE);
         $stream->next();
 
@@ -310,6 +323,14 @@ final class InterfaceParseSpecification implements ParseSpecification
         $parameters = [];
 
         while ($stream->isActive() && !$this->isLexical($stream, ParenthesisRightLexical::TYPE)) {
+            if ($this->isLexical($stream, DotLexical::TYPE)) {
+                $stream->next();
+                $this->expectLexical($stream, DotLexical::TYPE);
+                $stream->next();
+                $this->expectLexical($stream, DotLexical::TYPE);
+                $stream->next();
+            }
+
             $this->expectLexical($stream, LabelLexical::TYPE);
             $paramName = (string)$stream->current();
             $stream->next();
@@ -379,7 +400,7 @@ final class InterfaceParseSpecification implements ParseSpecification
     /**
      * @return array<GenericParameterCodeToken>
      */
-    private function parseGenerics(LexicalStream $stream, ?string $file): array
+    private function parseInputGenerics(LexicalStream $stream, ?string $file): array
     {
         $generics = [];
 
@@ -424,6 +445,39 @@ final class InterfaceParseSpecification implements ParseSpecification
                     $extends,
                     $assigned,
                 );
+
+                if (!$this->isLexical($stream, CommaLexical::TYPE)) {
+                    break;
+                }
+
+                $stream->next();
+                $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+            }
+
+            $this->expectLexical($stream, GreaterThanLexical::TYPE);
+            $stream->next();
+            $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+        }
+
+        return $generics;
+    }
+
+    /**
+     * @return array<CodeToken>
+     */
+    private function parseHintGenerics(LexicalStream $stream, ?string $file): array
+    {
+        $generics = [];
+
+        if ($this->isLexical($stream, LowerThanLexical::TYPE)) {
+            $stream->next();
+            $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+            while ($stream->isActive() && !$this->isLexical($stream, GreaterThanLexical::TYPE)) {
+                $hint = $this->hintParseSpecification->parse($stream, $file);
+                $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+                $generics[] = $hint;
 
                 if (!$this->isLexical($stream, CommaLexical::TYPE)) {
                     break;

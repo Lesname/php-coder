@@ -22,6 +22,7 @@ use LesCoder\Interpreter\Lexer\Lexical\Character\SemicolonLexical;
 use LesCoder\Interpreter\Parser\Specification\RecursiveParseSpecification;
 use LesCoder\Interpreter\Parser\Specification\Typescript\HintParseSpecification;
 use LesCoder\Interpreter\Parser\Specification\Typescript\TypeParseSpecification;
+use LesCoder\Interpreter\Parser\Specification\Typescript\EnumParseSpecification;
 use LesCoder\Interpreter\Parser\Specification\Typescript\ClassParseSpecification;
 use LesCoder\Interpreter\Parser\Specification\Typescript\Exception\UnexpectedEnd;
 use LesCoder\Interpreter\Parser\Specification\Typescript\ExportParseSpecification;
@@ -61,37 +62,61 @@ final class TypescriptCodeInterpreter implements CodeInterpreter
         $lexicals = $this->getCodeLexer()->tokenize($stream);
         $lexicals->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
 
-        /** @var array<string, string> $imports */
+        /** @var array<string, array{from: string, name: string}> $imports */
         $imports = [];
 
         while ($lexicals->isActive()) {
             $current = $lexicals->current();
 
-            if (!$current instanceof LabelLexical || (string)$current !== 'import') {
-                break;
+            if ($current instanceof LabelLexical) {
+                $label = (string)$current;
+
+                if ($label === 'import') {
+                    $lexicals->next();
+                    $lexicals->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+                    $imports = array_replace($imports, $this->parseHeader($lexicals));
+                    $lexicals->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+                    continue;
+                }
+
+                if ($label === 'export') {
+                    $lookaheadSteps = 1;
+
+                    while ($lexicals->lookahead($lookaheadSteps) instanceof WhitespaceLexical) {
+                        $lookaheadSteps += 1;
+                    }
+
+                    $tokenAhead = $lexicals->lookahead($lookaheadSteps);
+
+                    if ($tokenAhead instanceof AsteriskLexical || $tokenAhead instanceof StringLexical || $tokenAhead instanceof CurlyBracketLeftLexical) {
+                        $lexicals->next();
+                        $lexicals->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+                        $imports = array_replace($imports, $this->parseHeader($lexicals));
+                        $lexicals->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+                        continue;
+                    }
+                }
             }
 
-            $imports = array_replace($imports, $this->parseImport($lexicals));
-            $lexicals->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+            break;
         }
 
         return $this->getCodeParser($imports)->parse($lexicals, $file);
     }
 
     /**
-     * @return array<string, string>
+     * @return array<string, array{from: string, name: string}>
      *
      * @throws UnexpectedLexical
      * @throws UnexpectedEnd
      * @throws UnexpectedLabel
      */
-    private function parseImport(LexicalStream $stream): array
+    private function parseHeader(LexicalStream $stream): array
     {
-        $this->expectKeyword($stream, 'import');
-        $stream->next();
-
-        $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
-
         if ($this->isLexical($stream, AsteriskLexical::TYPE)) {
             $stream->next();
             $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
@@ -120,7 +145,23 @@ final class TypescriptCodeInterpreter implements CodeInterpreter
                 $stream->next();
             }
 
-            return [$name => $from];
+            return [
+                $name => [
+                    'name' => $name,
+                    'from' => $from,
+                ],
+            ];
+        }
+
+        if ($this->isLexical($stream, StringLexical::TYPE)) {
+            $stream->next();
+            $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+            if ($stream->current()->getType() === SemicolonLexical::TYPE) {
+                $stream->next();
+            }
+
+            return [];
         }
 
         $this->expectLexical($stream, CurlyBracketLeftLexical::TYPE);
@@ -132,10 +173,25 @@ final class TypescriptCodeInterpreter implements CodeInterpreter
 
         while ($stream->isActive()) {
             $this->expectLexical($stream, LabelLexical::TYPE);
-            $names[] = (string)$stream->current();
+            $name = $as = (string)$stream->current();
             $stream->next();
 
             $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+            if ($stream->current()->getType() === LabelLexical::TYPE) {
+                if ((string)$stream->current() === 'as') {
+                    $stream->next();
+                    $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+
+                    $this->expectLexical($stream, LabelLexical::TYPE);
+                    $as = (string)$stream->current();
+
+                    $stream->next();
+                    $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
+                }
+            }
+
+            $names[$as] = $name;
 
             if ($stream->current()->getType() !== CommaLexical::TYPE) {
                 break;
@@ -172,15 +228,18 @@ final class TypescriptCodeInterpreter implements CodeInterpreter
 
         $imports = [];
 
-        foreach ($names as $name) {
-            $imports[$name] = $from;
+        foreach ($names as $as => $name) {
+            $imports[$as] = [
+                'from' => $from,
+                'name' => $name,
+            ];
         }
 
         return $imports;
     }
 
     /**
-     * @param array<string, string> $imports
+     * @param array<string, array{from: string, name: string}> $imports
      *
      * @throws ExpectedParseSpecification
      */
@@ -197,6 +256,7 @@ final class TypescriptCodeInterpreter implements CodeInterpreter
                     [
                         new InterfaceParseSpecification($hintParseSpecification, $expressionParseSpecification),
                         new ConstantParseSpecification($expressionParseSpecification, $hintParseSpecification),
+                        new EnumParseSpecification($expressionParseSpecification),
                         new ClassParseSpecification(
                             new AttributeParseSpecification($expressionParseSpecification, $referenceParseSpecification),
                             $expressionParseSpecification,
