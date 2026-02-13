@@ -1,15 +1,16 @@
 Foo
 <div>
 <input type="text" class='one'>
-<input
-*ngIf="foo"
-type="text"
-class="two"
-/>
+@if (foo) {
+    <input
+        type="text"
+        class="two"
+    />
+}
 Bar
 {{ 'submit' | translate }}
 </div>
 <!--<div>-->
-<ng-container *ngFor="let foo in bar">
-{{ 'fiz' | biz }}
-</ng-container>
+@for (foo of bar; track $index) {
+    {{ 'fiz' | biz }}
+}
