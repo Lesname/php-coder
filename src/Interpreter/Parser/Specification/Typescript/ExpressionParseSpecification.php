@@ -17,6 +17,7 @@ use LesCoder\Token\Value\IntegerCodeToken;
 use LesCoder\Token\Value\BuiltInCodeToken;
 use LesCoder\Token\Object\AccessCodeToken;
 use LesCoder\Token\Expression\OrCodeToken;
+use LesCoder\Token\Hint\FunctionCodeToken;
 use LesCoder\Token\Expression\AndCodeToken;
 use LesCoder\Token\Expression\MathOperator;
 use LesCoder\Token\Hint\ReferenceCodeToken;
@@ -472,6 +473,7 @@ final class ExpressionParseSpecification implements ParseSpecification
             'parent' => BuiltInCodeToken::Parent,
             'function' => (function () use ($stream) {
                 $this->expectLexical($stream, LabelLexical::TYPE);
+                $name = (string)$stream->current();
                 $stream->next();
 
                 $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
@@ -529,7 +531,7 @@ final class ExpressionParseSpecification implements ParseSpecification
                 if ($this->isLexical($stream, SemicolonLexical::TYPE)) {
                     $stream->next();
 
-                    return \LesCoder\Token\Hint\BuiltInCodeToken::Any;
+                    return new FunctionCodeToken($name);
                 }
 
                 throw new UnexpectedLexical($stream->current(), SemicolonLexical::TYPE);

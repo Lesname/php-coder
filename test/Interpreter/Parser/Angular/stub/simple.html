@@ -6,13 +6,15 @@ Foo
             class="two"
     />
     Bar
-    <form action="" *ngIf="foo">
-        <fieldset>
-            <legend [title]="'test' | translate">
-                Fiz
-            </legend>
-        </fieldset>
-    </form>
+    @if (foo) {
+        <form action="">
+            <fieldset>
+                <legend [title]="'test' | translate">
+                    Fiz
+                </legend>
+            </fieldset>
+        </form>
+    }
     <button type=button disabled foo="" [class]="button" (click)="foo()">
         {{ 'submit' | translate }}
     </button>
@@ -20,6 +22,6 @@ Foo
 <!--<div>-->
 <!--    Bar-->
 <!--</div>-->
-<ng-container *ngFor="let foo in bar">
+@for (foo of bar; track $index) {
     {{ 'fiz' | biz }}
-</ng-container>
+}

@@ -65,26 +65,28 @@ class TemplateCodeParserTest extends TestCase
                         ],
                     ),
                     new TextCodeToken('Bar'),
-                    new NonVoidElementCodeToken(
-                        'form',
-                        [
-                            'action' => new TextCodeToken(''),
-                            '*ngIf' => new TextCodeToken('foo'),
-                        ],
+                    new IfCodeToken(
+                        new VariableCodeToken('foo'),
                         [
                             new NonVoidElementCodeToken(
-                                'fieldset',
-                                [],
+                                'form',
+                                ['action' => new TextCodeToken('')],
                                 [
                                     new NonVoidElementCodeToken(
-                                        'legend',
+                                        'fieldset',
+                                        [],
                                         [
-                                            '[title]' => new FilterCodeToken(
-                                                'translate',
-                                                new StringCodeToken('test'),
+                                            new NonVoidElementCodeToken(
+                                                'legend',
+                                                [
+                                                    '[title]' => new FilterCodeToken(
+                                                        'translate',
+                                                        new StringCodeToken('test'),
+                                                    ),
+                                                ],
+                                                [new TextCodeToken('Fiz')],
                                             ),
                                         ],
-                                        [new TextCodeToken('Fiz')],
                                     ),
                                 ],
                             ),
@@ -108,15 +110,18 @@ class TemplateCodeParserTest extends TestCase
                     ),
                 ],
             ),
-            new NonVoidElementCodeToken(
-                'ng-container',
-                ['*ngFor' => new TextCodeToken('let foo in bar')],
+            new ForCodeToken(
+                new Expression(
+                    new VariableCodeToken('bar'),
+                    'foo',
+                    new VariableCodeToken('$index'),
+                ),
                 [
                     new FilterCodeToken(
                         'biz',
                         new StringCodeToken('fiz'),
                     ),
-                ]
+                ],
             ),
         ];
 
