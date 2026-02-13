@@ -71,6 +71,7 @@ final class HintParseSpecification implements ParseSpecification
                 IntegerLexical::TYPE,
                 StringLexical::TYPE,
                 LabelLexical::TYPE,
+                LowerThanLexical::TYPE,
                 ParenthesisLeftLexical::TYPE,
                 CurlyBracketLeftLexical::TYPE,
                 SquareBracketLeftLexical::TYPE,
@@ -144,6 +145,7 @@ final class HintParseSpecification implements ParseSpecification
             IntegerLexical::TYPE => $this->parseHintNumber($stream),
             StringLexical::TYPE => $this->parseHintString($stream),
             LabelLexical::TYPE => $this->parseHintLabel($stream, $file),
+            LowerThanLexical::TYPE => $this->parseGenericHint($stream, $file),
             ParenthesisLeftLexical::TYPE => $this->parseHintParenthesis($stream, $file),
             CurlyBracketLeftLexical::TYPE => $this->parseHintCurlyBracket($stream, $file),
             SquareBracketLeftLexical::TYPE => $this->parseHintSquareBracket($stream, $file),
@@ -202,6 +204,16 @@ final class HintParseSpecification implements ParseSpecification
         }
 
         return $hint;
+    }
+
+    private function parseGenericHint(LexicalStream $stream, ?string $file): CodeToken
+    {
+        $genericParameters = $this->parseGeneric($stream, $file);
+
+        $this->expectLexical($stream, ParenthesisLeftLexical::TYPE);
+        $func = $this->parseHintParenthesis($stream, $file);
+
+        return new GenericCodeToken($func, $genericParameters);
     }
 
     private function parseHintLabel(LexicalStream $stream, ?string $file): CodeToken
