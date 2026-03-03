@@ -15,5 +15,10 @@
     </projectFiles>
     <issueHandlers>
         <MixedAssignment errorLevel="suppress"/>
+
+        <MissingPureAnnotation errorLevel="suppress" />
+        <MissingInterfaceImmutableAnnotation errorLevel="suppress" />
+        <MissingAbstractPureAnnotation errorLevel="suppress" />
+        <MissingImmutableAnnotation errorLevel="suppress" />
     </issueHandlers>
 </psalm>

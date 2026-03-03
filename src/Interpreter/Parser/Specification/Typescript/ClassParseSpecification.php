@@ -346,7 +346,7 @@ final class ClassParseSpecification implements ParseSpecification
                 $matched = 0;
                 $stream->next();
 
-                while ($stream->isActive() && $matched === 0 && !$this->isLexical($stream, CurlyBracketRightLexical::TYPE)) {
+                while ($stream->isActive() && ($matched > 0 || !$this->isLexical($stream, CurlyBracketRightLexical::TYPE))) {
                     if ($this->isLexical($stream, CurlyBracketLeftLexical::TYPE)) {
                         $matched += 1;
                     } elseif ($this->isLexical($stream, CurlyBracketRightLexical::TYPE)) {
