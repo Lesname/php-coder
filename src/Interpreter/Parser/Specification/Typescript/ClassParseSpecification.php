@@ -342,9 +342,29 @@ final class ClassParseSpecification implements ParseSpecification
                 $parameterVisibility = null;
             }
 
-            $this->expectLexical($stream, LabelLexical::TYPE);
-            $parameterName = (string)$stream->current();
-            $stream->next();
+            if ($this->isLexical($stream, CurlyBracketLeftLexical::TYPE)) {
+                $matched = 0;
+                $stream->next();
+
+                while ($stream->isActive() && ($matched > 0 || !$this->isLexical($stream, CurlyBracketRightLexical::TYPE))) {
+                    if ($this->isLexical($stream, CurlyBracketLeftLexical::TYPE)) {
+                        $matched += 1;
+                    } elseif ($this->isLexical($stream, CurlyBracketRightLexical::TYPE)) {
+                        $matched -= 1;
+                    }
+
+                    $stream->next();
+                }
+
+                $this->expectLexical($stream, CurlyBracketRightLexical::TYPE);
+                $stream->next();
+
+                $parameterName = null;
+            } else {
+                $this->expectLexical($stream, LabelLexical::TYPE);
+                $parameterName = (string)$stream->current();
+                $stream->next();
+            }
 
             $stream->skip(WhitespaceLexical::TYPE, CommentLexical::TYPE);
 
@@ -380,21 +400,23 @@ final class ClassParseSpecification implements ParseSpecification
                 $assigned = null;
             }
 
-            if ($parameterVisibility) {
-                $parameters[] = new ClassPropertyCodeToken(
-                    $parameterVisibility,
-                    $parameterName,
-                    $hint,
-                    $assigned,
-                    attributes: $parameterAttributes,
-                );
-            } else {
-                $parameters[] = new ParameterCodeToken(
-                    $parameterName,
-                    $hint,
-                    $assigned,
-                    $parameterAttributes,
-                );
+            if (is_string($parameterName)) {
+                if ($parameterVisibility) {
+                    $parameters[] = new ClassPropertyCodeToken(
+                        $parameterVisibility,
+                        $parameterName,
+                        $hint,
+                        $assigned,
+                        attributes: $parameterAttributes,
+                    );
+                } else {
+                    $parameters[] = new ParameterCodeToken(
+                        $parameterName,
+                        $hint,
+                        $assigned,
+                        $parameterAttributes,
+                    );
+                }
             }
 
             if (!$this->isLexical($stream, CommaLexical::TYPE)) {
