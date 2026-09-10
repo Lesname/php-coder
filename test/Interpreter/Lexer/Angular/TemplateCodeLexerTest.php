@@ -67,7 +67,7 @@ class TemplateCodeLexerTest extends TestCase
             new TextLexical('foo'),
             new ParenthesisRightLexical(),
             new WhitespaceLexical(' '),
-            new CurLyBracketLeftLexical(),
+            new CurlyBracketLeftLexical(),
             new WhitespaceLexical("\n    "),
             new LowerThanLexical(),
             new TextLexical('input'),
