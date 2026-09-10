@@ -7,6 +7,8 @@ use Override;
 
 /**
  * @psalm-immutable
+ *
+ * @deprecated
  */
 final class SemicolonLexical extends AbstractCharacterLexical
 {

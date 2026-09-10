@@ -8,6 +8,8 @@ use LesCoder\Token\CodeToken;
 
 /**
  * @extends Stream<CodeToken>
+ *
+ * @deprecated
  */
 interface CodeTokenStream extends Stream
 {

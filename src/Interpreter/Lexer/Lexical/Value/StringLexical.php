@@ -8,6 +8,8 @@ use LesCoder\Interpreter\Lexer\Lexical\AbstractLexical;
 
 /**
  * @psalm-immutable
+ *
+ * @deprecated
  */
 final class StringLexical extends AbstractLexical implements ValueLexical
 {

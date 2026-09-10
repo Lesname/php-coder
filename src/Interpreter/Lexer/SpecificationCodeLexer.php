@@ -12,6 +12,9 @@ use LesCoder\Interpreter\Lexer\Lexical\Lexical;
 use LesCoder\Interpreter\Lexer\Lexical\TextLexical;
 use LesCoder\Interpreter\Lexer\Specification\Specification;
 
+/**
+ * @deprecated
+ */
 final class SpecificationCodeLexer implements CodeLexer
 {
     /**

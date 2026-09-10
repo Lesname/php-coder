@@ -5,6 +5,9 @@ namespace LesCoder\Stream\String;
 
 use Override;
 
+/**
+ * @deprecated
+ */
 final class DirectStringStream extends AbstractStringStream
 {
     private readonly int $size;

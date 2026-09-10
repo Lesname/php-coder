@@ -20,5 +20,9 @@
         <MissingInterfaceImmutableAnnotation errorLevel="suppress" />
         <MissingAbstractPureAnnotation errorLevel="suppress" />
         <MissingImmutableAnnotation errorLevel="suppress" />
+
+        <DeprecatedClass errorLevel="suppress" />
+        <DeprecatedInterface errorLevel="suppress" />
+        <DeprecatedTrait errorLevel="suppress" />
     </issueHandlers>
 </psalm>

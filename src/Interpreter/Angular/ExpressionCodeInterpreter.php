@@ -10,6 +10,9 @@ use LesCoder\Stream\CodeToken\CodeTokenStream;
 use LesCoder\Interpreter\Parser\Angular\ExpressionCodeParser;
 use LesCoder\Interpreter\Lexer\Angular\ExpressionCodeLexer;
 
+/**
+ * @deprecated
+ */
 final class ExpressionCodeInterpreter implements CodeInterpreter
 {
     #[Override]

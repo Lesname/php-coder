@@ -7,6 +7,8 @@ use LesCoder\Exception\AbstractException;
 
 /**
  * @psalm-immutable
+ *
+ * @deprecated
  */
 final class UnexpectedCloseName extends AbstractException
 {

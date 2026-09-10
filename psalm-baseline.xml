@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="7.0.0-beta10@cd7da86976c250f9b751017fe2d7ed14f43cc18a">
+<files psalm-version="7.0.0-beta19@7e751c06a756fa64dc4c759c09fe4a173afcb433">
   <file src="src/Interpreter/Parser/Specification/Typescript/ConstantParseSpecification.php">
     <MixedArgument>
       <code><![CDATA[$expression]]></code>

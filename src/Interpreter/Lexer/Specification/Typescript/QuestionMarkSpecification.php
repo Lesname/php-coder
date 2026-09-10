@@ -12,6 +12,9 @@ use LesCoder\Interpreter\Lexer\Lexical\Expression\CoalescingLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\QuestionMarkLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Assignment\CoalescingAssignmentLexical;
 
+/**
+ * @deprecated
+ */
 final class QuestionMarkSpecification implements Specification
 {
     #[Override]

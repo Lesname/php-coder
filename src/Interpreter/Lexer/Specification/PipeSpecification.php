@@ -10,6 +10,9 @@ use LesCoder\Stream\String\Exception\ExpectedExactly;
 use LesCoder\Interpreter\Lexer\Lexical\Expression\OrLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\PipeLexical;
 
+/**
+ * @deprecated
+ */
 final class PipeSpecification implements Specification
 {
     #[Override]

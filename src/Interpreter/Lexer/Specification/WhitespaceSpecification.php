@@ -8,6 +8,9 @@ use LesCoder\Stream\String\StringStream;
 use LesCoder\Interpreter\Lexer\Lexical\Lexical;
 use LesCoder\Interpreter\Lexer\Lexical\WhitespaceLexical;
 
+/**
+ * @deprecated
+ */
 final class WhitespaceSpecification implements Specification
 {
     #[Override]

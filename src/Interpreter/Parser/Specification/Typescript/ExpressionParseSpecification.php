@@ -70,6 +70,9 @@ use LesCoder\Interpreter\Lexer\Lexical\Character\SquareBracket\SquareBracketLeft
 use LesCoder\Interpreter\Lexer\Lexical\Expression\Comparison\GreaterThanOrEqualsLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\SquareBracket\SquareBracketRightLexical;
 
+/**
+ * @deprecated
+ */
 final class ExpressionParseSpecification implements ParseSpecification
 {
     use ExpectParseSpecificationHelper;

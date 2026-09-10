@@ -9,6 +9,9 @@ use LesCoder\Interpreter\Lexer\Lexical\Lexical;
 use LesCoder\Stream\String\Exception\ExpectedExactly;
 use LesCoder\Interpreter\Lexer\Lexical\Character\AbstractCharacterLexical;
 
+/**
+ * @deprecated
+ */
 final class CharacterSpecification implements Specification
 {
     /**

@@ -8,6 +8,8 @@ use LesCoder\Interpreter\Lexer\Lexical\Character\AbstractCharacterLexical;
 
 /**
  * @psalm-immutable
+ *
+ * @deprecated
  */
 final class ParenthesisLeftLexical extends AbstractCharacterLexical
 {

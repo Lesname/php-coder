@@ -7,6 +7,8 @@ use LesCoder\Interpreter\Lexer\Lexical\Lexical;
 
 /**
  * @psalm-immutable
+ *
+ * @deprecated
  */
 interface AssignmentLexical extends Lexical
 {

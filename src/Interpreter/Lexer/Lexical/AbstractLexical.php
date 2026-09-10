@@ -7,6 +7,8 @@ use Override;
 
 /**
  * @psalm-immutable
+ *
+ * @deprecated
  */
 abstract class AbstractLexical implements Lexical
 {

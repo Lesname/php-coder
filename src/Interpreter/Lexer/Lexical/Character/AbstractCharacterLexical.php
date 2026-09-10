@@ -7,6 +7,8 @@ use LesCoder\Interpreter\Lexer\Lexical\AbstractLexical;
 
 /**
  * @psalm-immutable
+ *
+ * @deprecated
  */
 abstract class AbstractCharacterLexical extends AbstractLexical
 {

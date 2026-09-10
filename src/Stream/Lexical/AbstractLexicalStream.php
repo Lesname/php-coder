@@ -9,6 +9,8 @@ use LesCoder\Interpreter\Lexer\Lexical\Lexical;
 
 /**
  * @extends AbstractStream<Lexical>
+ *
+ * @deprecated
  */
 abstract class AbstractLexicalStream extends AbstractStream implements LexicalStream
 {

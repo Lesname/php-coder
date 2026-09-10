@@ -32,6 +32,9 @@ use LesCoder\Interpreter\Lexer\Lexical\Character\CurlyBracket\CurlyBracketRightL
 use LesCoder\Interpreter\Lexer\Lexical\Character\SquareBracket\SquareBracketLeftLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\SquareBracket\SquareBracketRightLexical;
 
+/**
+ * @deprecated
+ */
 final class TemplateCodeLexer implements CodeLexer
 {
     private const array CHARACTERS = [

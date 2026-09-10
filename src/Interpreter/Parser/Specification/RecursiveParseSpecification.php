@@ -10,6 +10,9 @@ use LesCoder\Stream\Exception\EndOfStream;
 use LesCoder\Interpreter\Parser\Specification\Exception\NoParseSpecification;
 use LesCoder\Interpreter\Parser\Specification\Exception\ExpectedParseSpecification;
 
+/**
+ * @deprecated
+ */
 final class RecursiveParseSpecification implements ParseSpecification
 {
     /** @var array<ParseSpecification> */

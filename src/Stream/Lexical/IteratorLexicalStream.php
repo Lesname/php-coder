@@ -9,6 +9,9 @@ use Override;
 use LesCoder\Stream\Exception\EndOfStream;
 use LesCoder\Interpreter\Lexer\Lexical\Lexical;
 
+/**
+ * @deprecated
+ */
 final class IteratorLexicalStream extends AbstractLexicalStream
 {
     /** @var array<Lexical>  */

@@ -10,6 +10,9 @@ use LesCoder\Stream\String\Exception\ExpectedExactly;
 use LesCoder\Interpreter\Lexer\Lexical\Expression\AndLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\AmpersandLexical;
 
+/**
+ * @deprecated
+ */
 final class AmpersandSpecification implements Specification
 {
     #[Override]

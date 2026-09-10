@@ -5,6 +5,9 @@ namespace LesCoder\Interpreter\Lexer\Lexical\Value;
 
 use LesCoder\Interpreter\Lexer\Lexical\Lexical;
 
+/**
+ * @deprecated
+ */
 interface ValueLexical extends Lexical
 {
 }

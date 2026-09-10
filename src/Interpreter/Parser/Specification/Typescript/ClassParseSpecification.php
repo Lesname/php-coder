@@ -39,6 +39,9 @@ use LesCoder\Interpreter\Lexer\Lexical\Character\Parenthesis\ParenthesisRightLex
 use LesCoder\Interpreter\Lexer\Lexical\Character\CurlyBracket\CurlyBracketLeftLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\CurlyBracket\CurlyBracketRightLexical;
 
+/**
+ * @deprecated
+ */
 final class ClassParseSpecification implements ParseSpecification
 {
     use ExpectParseSpecificationHelper;

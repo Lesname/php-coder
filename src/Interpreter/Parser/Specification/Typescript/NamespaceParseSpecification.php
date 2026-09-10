@@ -15,6 +15,9 @@ use LesCoder\Interpreter\Parser\Specification\Helper\ExpectParseSpecificationHel
 use LesCoder\Interpreter\Lexer\Lexical\Character\CurlyBracket\CurlyBracketLeftLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\CurlyBracket\CurlyBracketRightLexical;
 
+/**
+ * @deprecated
+ */
 final class NamespaceParseSpecification implements ParseSpecification
 {
     use ExpectParseSpecificationHelper;

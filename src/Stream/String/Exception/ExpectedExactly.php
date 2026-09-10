@@ -5,6 +5,9 @@ namespace LesCoder\Stream\String\Exception;
 
 use Exception;
 
+/**
+ * @deprecated
+ */
 final class ExpectedExactly extends Exception
 {
     public function __construct(

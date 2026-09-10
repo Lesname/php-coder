@@ -8,6 +8,9 @@ use LesCoder\Stream\String\StringStream;
 use LesCoder\Interpreter\Lexer\Lexical\Lexical;
 use LesCoder\Interpreter\Lexer\Lexical\LabelLexical;
 
+/**
+ * @deprecated
+ */
 final class LabelSpecification implements Specification
 {
     #[Override]

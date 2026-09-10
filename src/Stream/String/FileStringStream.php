@@ -7,6 +7,9 @@ namespace LesCoder\Stream\String;
 use Override;
 use LesCoder\Stream\String\Exception\CannotReadFile;
 
+/**
+ * @deprecated
+ */
 final class FileStringStream extends AbstractStringStream
 {
     /** @var resource */

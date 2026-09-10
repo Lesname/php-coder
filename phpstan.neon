@@ -5,6 +5,27 @@ parameters:
     checkMissingOverrideMethodAttribute: true
     treatPhpDocTypesAsCertain: false
     level: max
+    ignoreErrors:
+        -
+            identifier: method.deprecatedClass
+        -
+            identifier: new.deprecatedClass
+        -
+            identifier: classConstant.deprecatedClass
+        -
+            identifier: classConstant.deprecatedInterface
+        -
+            identifier: method.deprecatedInterface
+        -
+            identifier: instanceof.deprecatedClass
+        -
+            identifier: parameter.deprecatedInterface
+        -
+            identifier: property.deprecatedInterface
+        -
+            identifier: varTag.deprecatedClass
+        -
+            identifier: return.deprecatedInterface
     paths:
         - src
         - test

@@ -14,6 +14,9 @@ use LesCoder\Interpreter\Lexer\Lexical\WhitespaceLexical;
 use LesCoder\Interpreter\Parser\Specification\ParseSpecification;
 use LesCoder\Interpreter\Parser\Specification\Exception\NoParseSpecification;
 
+/**
+ * @deprecated
+ */
 final class SpecificationCodeParser implements CodeParser
 {
     public const int FLAG_SKIP_WHITESPACE = 1;

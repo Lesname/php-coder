@@ -19,6 +19,9 @@ use LesCoder\Interpreter\Lexer\Lexical\Character\SemicolonLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\EqualsSignLexical;
 use LesCoder\Interpreter\Parser\Specification\Helper\ExpectParseSpecificationHelper;
 
+/**
+ * @deprecated
+ */
 final class ConstantParseSpecification implements ParseSpecification
 {
     use ExpectParseSpecificationHelper;

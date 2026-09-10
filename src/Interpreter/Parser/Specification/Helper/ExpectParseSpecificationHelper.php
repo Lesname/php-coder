@@ -10,6 +10,9 @@ use LesCoder\Interpreter\Parser\Specification\Typescript\Exception\UnexpectedEnd
 use LesCoder\Interpreter\Parser\Specification\Typescript\Exception\UnexpectedLabel;
 use LesCoder\Interpreter\Parser\Specification\Typescript\Exception\UnexpectedLexical;
 
+/**
+ * @deprecated
+ */
 trait ExpectParseSpecificationHelper
 {
     /**

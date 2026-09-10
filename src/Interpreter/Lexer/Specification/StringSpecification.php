@@ -9,6 +9,9 @@ use LesCoder\Interpreter\Lexer\Lexical\Lexical;
 use LesCoder\Interpreter\Lexer\Lexical\Value\StringLexical;
 use LesCoder\Interpreter\Lexer\Specification\Exception\MissesClosingIdentifier;
 
+/**
+ * @deprecated
+ */
 final class StringSpecification implements Specification
 {
     /**

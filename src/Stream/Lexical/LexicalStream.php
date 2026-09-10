@@ -8,6 +8,8 @@ use LesCoder\Interpreter\Lexer\Lexical\Lexical;
 
 /**
  * @extends Stream<Lexical>
+ *
+ * @deprecated
  */
 interface LexicalStream extends Stream
 {

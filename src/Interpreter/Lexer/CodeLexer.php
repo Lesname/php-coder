@@ -6,6 +6,9 @@ namespace LesCoder\Interpreter\Lexer;
 use LesCoder\Stream\String\StringStream;
 use LesCoder\Stream\Lexical\LexicalStream;
 
+/**
+ * @deprecated
+ */
 interface CodeLexer
 {
     public function tokenize(StringStream $stream): LexicalStream;

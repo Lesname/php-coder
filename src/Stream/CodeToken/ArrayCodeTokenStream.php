@@ -10,6 +10,8 @@ use LesCoder\Stream\Exception\EndOfStream;
 
 /**
  * @extends AbstractStream<CodeToken>
+ *
+ * @deprecated
  */
 final class ArrayCodeTokenStream extends AbstractStream implements CodeTokenStream
 {

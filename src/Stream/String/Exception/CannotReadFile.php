@@ -6,6 +6,9 @@ namespace LesCoder\Stream\String\Exception;
 
 use Exception;
 
+/**
+ * @deprecated
+ */
 final class CannotReadFile extends Exception
 {
     public function __construct(
