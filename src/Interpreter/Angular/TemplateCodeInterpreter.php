@@ -10,6 +10,9 @@ use LesCoder\Stream\CodeToken\CodeTokenStream;
 use LesCoder\Interpreter\Lexer\Angular\TemplateCodeLexer;
 use LesCoder\Interpreter\Parser\Angular\TemplateCodeParser;
 
+/**
+ * @deprecated
+ */
 final class TemplateCodeInterpreter implements CodeInterpreter
 {
     #[Override]

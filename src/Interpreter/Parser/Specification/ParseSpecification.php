@@ -6,6 +6,9 @@ namespace LesCoder\Interpreter\Parser\Specification;
 use LesCoder\Token\CodeToken;
 use LesCoder\Stream\Lexical\LexicalStream;
 
+/**
+ * @deprecated
+ */
 interface ParseSpecification
 {
     public function isSatisfiedBy(LexicalStream $stream): bool;

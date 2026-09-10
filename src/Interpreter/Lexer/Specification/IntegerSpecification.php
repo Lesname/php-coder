@@ -9,6 +9,9 @@ use LesCoder\Interpreter\Lexer\Lexical\Lexical;
 use LesCoder\Interpreter\Lexer\Lexical\Value\IntegerLexical;
 use LesCoder\Interpreter\Lexer\Specification\Exception\UnexpectedCharacter;
 
+/**
+ * @deprecated
+ */
 final class IntegerSpecification implements Specification
 {
     #[Override]

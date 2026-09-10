@@ -7,6 +7,9 @@ use Override;
 use LesCoder\Stream\Exception\EndOfStream;
 use LesCoder\Interpreter\Lexer\Lexical\Lexical;
 
+/**
+ * @deprecated
+ */
 final class ArrayLexicalStream extends AbstractLexicalStream
 {
     private int $position = 0;

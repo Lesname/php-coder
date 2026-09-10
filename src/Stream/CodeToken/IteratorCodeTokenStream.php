@@ -11,6 +11,8 @@ use LesCoder\Stream\Exception\EndOfStream;
 
 /**
  * @extends AbstractStream<CodeToken>
+ *
+ * @deprecated
  */
 final class IteratorCodeTokenStream extends AbstractStream implements CodeTokenStream
 {

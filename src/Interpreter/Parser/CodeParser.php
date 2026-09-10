@@ -6,6 +6,9 @@ namespace LesCoder\Interpreter\Parser;
 use LesCoder\Stream\Lexical\LexicalStream;
 use LesCoder\Stream\CodeToken\CodeTokenStream;
 
+/**
+ * @deprecated
+ */
 interface CodeParser
 {
     public function parse(LexicalStream $stream, ?string $file): CodeTokenStream;

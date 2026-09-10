@@ -7,6 +7,8 @@ use LesCoder\Interpreter\Lexer\Lexical\Expression\ExpressionLexical;
 
 /**
  * @psalm-immutable
+ *
+ * @deprecated
  */
 interface ComparisonLexical extends ExpressionLexical
 {

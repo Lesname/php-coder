@@ -17,6 +17,9 @@ use LesCoder\Interpreter\Parser\Specification\Helper\ExpectParseSpecificationHel
 use LesCoder\Interpreter\Lexer\Lexical\Character\Parenthesis\ParenthesisLeftLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\Parenthesis\ParenthesisRightLexical;
 
+/**
+ * @deprecated
+ */
 final class AttributeParseSpecification implements ParseSpecification
 {
     use ExpectParseSpecificationHelper;

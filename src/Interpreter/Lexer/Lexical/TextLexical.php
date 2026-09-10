@@ -6,6 +6,8 @@ use Override;
 
 /**
  * @psalm-immutable
+ *
+ * @deprecated
  */
 final class TextLexical extends AbstractLexical
 {

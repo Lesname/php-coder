@@ -7,6 +7,8 @@ use Override;
 
 /**
  * @psalm-immutable
+ *
+ * @deprecated
  */
 final class TildeLexical extends AbstractCharacterLexical
 {

@@ -33,6 +33,9 @@ use LesCoder\Interpreter\Lexer\Lexical\Character\CurlyBracket\CurlyBracketRightL
 use LesCoder\Interpreter\Lexer\Lexical\Character\SquareBracket\SquareBracketLeftLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\SquareBracket\SquareBracketRightLexical;
 
+/**
+ * @deprecated
+ */
 final class TypescriptCodeLexer implements CodeLexer
 {
     private ?CodeLexer $proxy = null;

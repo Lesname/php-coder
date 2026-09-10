@@ -9,6 +9,8 @@ use Override;
  * @implements Stream<T>
  *
  * @template T
+ *
+ * @deprecated
  */
 abstract class AbstractStream implements Stream
 {

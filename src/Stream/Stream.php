@@ -7,6 +7,8 @@ use LesCoder\Stream\Exception\EndOfStream;
 
 /**
  * @template T
+ *
+ * @deprecated
  */
 interface Stream
 {

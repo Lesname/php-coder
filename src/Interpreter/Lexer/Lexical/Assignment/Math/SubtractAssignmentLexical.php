@@ -9,6 +9,8 @@ use LesCoder\Interpreter\Lexer\Lexical\Assignment\AssignmentLexical;
 
 /**
  * @psalm-immutable
+ *
+ * @deprecated
  */
 final class SubtractAssignmentLexical extends AbstractLexical implements AssignmentLexical
 {

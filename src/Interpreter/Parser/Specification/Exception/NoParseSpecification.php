@@ -8,6 +8,8 @@ use LesCoder\Interpreter\Lexer\Lexical\Lexical;
 
 /**
  * @psalm-immutable
+ *
+ * @deprecated
  */
 final class NoParseSpecification extends AbstractException
 {

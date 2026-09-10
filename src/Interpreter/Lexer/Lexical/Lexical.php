@@ -7,6 +7,8 @@ use Stringable;
 
 /**
  * @psalm-immutable
+ *
+ * @deprecated
  */
 interface Lexical extends Stringable
 {

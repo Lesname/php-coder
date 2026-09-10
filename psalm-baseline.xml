@@ -1,14 +1,2769 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="7.0.0-beta10@cd7da86976c250f9b751017fe2d7ed14f43cc18a">
+<files psalm-version="7.0.0-beta16@491dd740b8862db7d4fe8c1f6c161055c32ad651">
+  <file src="src/Interpreter/Angular/ExpressionCodeInterpreter.php">
+    <DeprecatedClass>
+      <code><![CDATA[new ExpressionCodeLexer()]]></code>
+      <code><![CDATA[new ExpressionCodeParser()]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[CodeTokenStream]]></code>
+      <code><![CDATA[ExpressionCodeInterpreter]]></code>
+      <code><![CDATA[StringStream]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Angular/TemplateCodeInterpreter.php">
+    <DeprecatedClass>
+      <code><![CDATA[new TemplateCodeLexer()]]></code>
+      <code><![CDATA[new TemplateCodeParser()]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[CodeTokenStream]]></code>
+      <code><![CDATA[StringStream]]></code>
+      <code><![CDATA[TemplateCodeInterpreter]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/CodeInterpreter.php">
+    <DeprecatedInterface>
+      <code><![CDATA[CodeTokenStream]]></code>
+      <code><![CDATA[StringStream]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Angular/ExpressionCodeLexer.php">
+    <DeprecatedClass>
+      <code><![CDATA[AsteriskLexical::CHARACTER]]></code>
+      <code><![CDATA[AsteriskLexical::class]]></code>
+      <code><![CDATA[AtSignLexical::CHARACTER]]></code>
+      <code><![CDATA[AtSignLexical::class]]></code>
+      <code><![CDATA[ColonLexical::CHARACTER]]></code>
+      <code><![CDATA[ColonLexical::class]]></code>
+      <code><![CDATA[CommaLexical::CHARACTER]]></code>
+      <code><![CDATA[CommaLexical::class]]></code>
+      <code><![CDATA[CurlyBracketLeftLexical::CHARACTER]]></code>
+      <code><![CDATA[CurlyBracketLeftLexical::class]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::CHARACTER]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::class]]></code>
+      <code><![CDATA[DotLexical::CHARACTER]]></code>
+      <code><![CDATA[DotLexical::class]]></code>
+      <code><![CDATA[ForwardSlashLexical::CHARACTER]]></code>
+      <code><![CDATA[ForwardSlashLexical::class]]></code>
+      <code><![CDATA[MinusLexical::CHARACTER]]></code>
+      <code><![CDATA[MinusLexical::class]]></code>
+      <code><![CDATA[ParenthesisLeftLexical::CHARACTER]]></code>
+      <code><![CDATA[ParenthesisLeftLexical::class]]></code>
+      <code><![CDATA[ParenthesisRightLexical::CHARACTER]]></code>
+      <code><![CDATA[ParenthesisRightLexical::class]]></code>
+      <code><![CDATA[PercentageLexical::CHARACTER]]></code>
+      <code><![CDATA[PercentageLexical::class]]></code>
+      <code><![CDATA[PlusLexical::CHARACTER]]></code>
+      <code><![CDATA[PlusLexical::class]]></code>
+      <code><![CDATA[SemicolonLexical::CHARACTER]]></code>
+      <code><![CDATA[SemicolonLexical::class]]></code>
+      <code><![CDATA[SquareBracketLeftLexical::CHARACTER]]></code>
+      <code><![CDATA[SquareBracketLeftLexical::class]]></code>
+      <code><![CDATA[SquareBracketRightLexical::CHARACTER]]></code>
+      <code><![CDATA[SquareBracketRightLexical::class]]></code>
+      <code><![CDATA[TildeLexical::CHARACTER]]></code>
+      <code><![CDATA[TildeLexical::class]]></code>
+      <code><![CDATA[new AmpersandSpecification()]]></code>
+      <code><![CDATA[new CharacterSpecification(AsteriskLexical::CHARACTER, AsteriskLexical::class)]]></code>
+      <code><![CDATA[new CharacterSpecification(AtSignLexical::CHARACTER, AtSignLexical::class)]]></code>
+      <code><![CDATA[new CharacterSpecification(ColonLexical::CHARACTER, ColonLexical::class)]]></code>
+      <code><![CDATA[new CharacterSpecification(CommaLexical::CHARACTER, CommaLexical::class)]]></code>
+      <code><![CDATA[new CharacterSpecification(CurlyBracketLeftLexical::CHARACTER, CurlyBracketLeftLexical::class)]]></code>
+      <code><![CDATA[new CharacterSpecification(CurlyBracketRightLexical::CHARACTER, CurlyBracketRightLexical::class)]]></code>
+      <code><![CDATA[new CharacterSpecification(DotLexical::CHARACTER, DotLexical::class)]]></code>
+      <code><![CDATA[new CharacterSpecification(ForwardSlashLexical::CHARACTER, ForwardSlashLexical::class)]]></code>
+      <code><![CDATA[new CharacterSpecification(MinusLexical::CHARACTER, MinusLexical::class)]]></code>
+      <code><![CDATA[new CharacterSpecification(ParenthesisLeftLexical::CHARACTER, ParenthesisLeftLexical::class)]]></code>
+      <code><![CDATA[new CharacterSpecification(ParenthesisRightLexical::CHARACTER, ParenthesisRightLexical::class)]]></code>
+      <code><![CDATA[new CharacterSpecification(PercentageLexical::CHARACTER, PercentageLexical::class)]]></code>
+      <code><![CDATA[new CharacterSpecification(PlusLexical::CHARACTER, PlusLexical::class)]]></code>
+      <code><![CDATA[new CharacterSpecification(SemicolonLexical::CHARACTER, SemicolonLexical::class)]]></code>
+      <code><![CDATA[new CharacterSpecification(SquareBracketLeftLexical::CHARACTER, SquareBracketLeftLexical::class)]]></code>
+      <code><![CDATA[new CharacterSpecification(SquareBracketRightLexical::CHARACTER, SquareBracketRightLexical::class)]]></code>
+      <code><![CDATA[new CharacterSpecification(TildeLexical::CHARACTER, TildeLexical::class)]]></code>
+      <code><![CDATA[new ComparisonSpecification()]]></code>
+      <code><![CDATA[new IntegerSpecification()]]></code>
+      <code><![CDATA[new LabelSpecification()]]></code>
+      <code><![CDATA[new PipeSpecification()]]></code>
+      <code><![CDATA[new QuestionMarkSpecification()]]></code>
+      <code><![CDATA[new SpecificationCodeLexer(
+            [
+                new AmpersandSpecification(),
+                new ComparisonSpecification(),
+                new PipeSpecification(),
+                new QuestionMarkSpecification(),
+
+                new StringSpecification(["'", '"']),
+                new IntegerSpecification(),
+
+                new LabelSpecification(),
+
+                new WhitespaceSpecification(),
+
+                new CharacterSpecification(ForwardSlashLexical::CHARACTER, ForwardSlashLexical::class),
+                new CharacterSpecification(AsteriskLexical::CHARACTER, AsteriskLexical::class),
+                new CharacterSpecification(ColonLexical::CHARACTER, ColonLexical::class),
+                new CharacterSpecification(CommaLexical::CHARACTER, CommaLexical::class),
+                new CharacterSpecification(DotLexical::CHARACTER, DotLexical::class),
+                new CharacterSpecification(PercentageLexical::CHARACTER, PercentageLexical::class),
+                new CharacterSpecification(SemicolonLexical::CHARACTER, SemicolonLexical::class),
+                new CharacterSpecification(TildeLexical::CHARACTER, TildeLexical::class),
+                new CharacterSpecification(AtSignLexical::CHARACTER, AtSignLexical::class),
+                new CharacterSpecification(MinusLexical::CHARACTER, MinusLexical::class),
+                new CharacterSpecification(PlusLexical::CHARACTER, PlusLexical::class),
+
+                new CharacterSpecification(CurlyBracketLeftLexical::CHARACTER, CurlyBracketLeftLexical::class),
+                new CharacterSpecification(CurlyBracketRightLexical::CHARACTER, CurlyBracketRightLexical::class),
+                new CharacterSpecification(ParenthesisLeftLexical::CHARACTER, ParenthesisLeftLexical::class),
+                new CharacterSpecification(ParenthesisRightLexical::CHARACTER, ParenthesisRightLexical::class),
+                new CharacterSpecification(SquareBracketLeftLexical::CHARACTER, SquareBracketLeftLexical::class),
+                new CharacterSpecification(SquareBracketRightLexical::CHARACTER, SquareBracketRightLexical::class),
+            ],
+        )]]></code>
+      <code><![CDATA[new StringSpecification(["'", '"'])]]></code>
+      <code><![CDATA[new WhitespaceSpecification()]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[?CodeLexer]]></code>
+      <code><![CDATA[CodeLexer]]></code>
+      <code><![CDATA[ExpressionCodeLexer]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[StringStream]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Angular/TemplateCodeLexer.php">
+    <DeprecatedClass>
+      <code><![CDATA[CommaLexical::CHARACTER]]></code>
+      <code><![CDATA[CommaLexical::CHARACTER]]></code>
+      <code><![CDATA[CommaLexical::class]]></code>
+      <code><![CDATA[CurlyBracketLeftLexical::CHARACTER]]></code>
+      <code><![CDATA[CurlyBracketLeftLexical::CHARACTER]]></code>
+      <code><![CDATA[CurlyBracketLeftLexical::class]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::CHARACTER]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::CHARACTER]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::class]]></code>
+      <code><![CDATA[DoubleQuoteLexical::CHARACTER]]></code>
+      <code><![CDATA[DoubleQuoteLexical::CHARACTER]]></code>
+      <code><![CDATA[DoubleQuoteLexical::class]]></code>
+      <code><![CDATA[EqualsSignLexical::CHARACTER]]></code>
+      <code><![CDATA[EqualsSignLexical::CHARACTER]]></code>
+      <code><![CDATA[EqualsSignLexical::class]]></code>
+      <code><![CDATA[ForwardSlashLexical::CHARACTER]]></code>
+      <code><![CDATA[ForwardSlashLexical::CHARACTER]]></code>
+      <code><![CDATA[ForwardSlashLexical::class]]></code>
+      <code><![CDATA[GreaterThanLexical::CHARACTER]]></code>
+      <code><![CDATA[GreaterThanLexical::CHARACTER]]></code>
+      <code><![CDATA[GreaterThanLexical::class]]></code>
+      <code><![CDATA[ParenthesisLeftLexical::CHARACTER]]></code>
+      <code><![CDATA[ParenthesisLeftLexical::CHARACTER]]></code>
+      <code><![CDATA[ParenthesisLeftLexical::class]]></code>
+      <code><![CDATA[ParenthesisRightLexical::CHARACTER]]></code>
+      <code><![CDATA[ParenthesisRightLexical::CHARACTER]]></code>
+      <code><![CDATA[ParenthesisRightLexical::class]]></code>
+      <code><![CDATA[PipeLexical::CHARACTER]]></code>
+      <code><![CDATA[PipeLexical::class]]></code>
+      <code><![CDATA[SemicolonLexical::CHARACTER]]></code>
+      <code><![CDATA[SemicolonLexical::CHARACTER]]></code>
+      <code><![CDATA[SemicolonLexical::class]]></code>
+      <code><![CDATA[SingleQuoteLexical::CHARACTER]]></code>
+      <code><![CDATA[SingleQuoteLexical::CHARACTER]]></code>
+      <code><![CDATA[SingleQuoteLexical::class]]></code>
+      <code><![CDATA[SquareBracketLeftLexical::CHARACTER]]></code>
+      <code><![CDATA[SquareBracketLeftLexical::CHARACTER]]></code>
+      <code><![CDATA[SquareBracketLeftLexical::class]]></code>
+      <code><![CDATA[SquareBracketRightLexical::CHARACTER]]></code>
+      <code><![CDATA[SquareBracketRightLexical::CHARACTER]]></code>
+      <code><![CDATA[SquareBracketRightLexical::class]]></code>
+      <code><![CDATA[new CommentLexical($comment)]]></code>
+      <code><![CDATA[new IteratorLexicalStream(
+            (function () use ($stream): Iterator {
+                while ($stream->isActive()) {
+                    yield $this->tokenizeLexical($stream);
+                }
+            })(),
+        )]]></code>
+      <code><![CDATA[new LowerThanLexical()]]></code>
+      <code><![CDATA[new StartCloseLexical('</')]]></code>
+      <code><![CDATA[new StartLexical($name)]]></code>
+      <code><![CDATA[new TextLexical($text)]]></code>
+      <code><![CDATA[new WhitespaceLexical($whitespace)]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[Lexical]]></code>
+      <code><![CDATA[Lexical]]></code>
+      <code><![CDATA[Lexical]]></code>
+      <code><![CDATA[Lexical]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[StringStream]]></code>
+      <code><![CDATA[StringStream]]></code>
+      <code><![CDATA[StringStream]]></code>
+      <code><![CDATA[StringStream]]></code>
+      <code><![CDATA[StringStream]]></code>
+      <code><![CDATA[TemplateCodeLexer]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/CodeLexer.php">
+    <DeprecatedInterface>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[StringStream]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/AbstractLexical.php">
+    <DeprecatedInterface>
+      <code><![CDATA[AbstractLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Angular/Element/StartCloseLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[StartCloseLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Angular/FlowControl/StartLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[StartLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Assignment/CoalescingAssignmentLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[CoalescingAssignmentLexical]]></code>
+      <code><![CDATA[CoalescingAssignmentLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Assignment/Math/AdditionAssignmentLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[AdditionAssignmentLexical]]></code>
+      <code><![CDATA[AdditionAssignmentLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Assignment/Math/SubtractAssignmentLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[SubtractAssignmentLexical]]></code>
+      <code><![CDATA[SubtractAssignmentLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Character/AbstractCharacterLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractLexical]]></code>
+      <code><![CDATA[parent::__construct($this->character())]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[AbstractCharacterLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Character/AmpersandLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractCharacterLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[AmpersandLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Character/AsteriskLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractCharacterLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[AsteriskLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Character/AtSignLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractCharacterLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[AtSignLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Character/ColonLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractCharacterLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[ColonLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Character/CommaLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractCharacterLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[CommaLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Character/CurlyBracket/CurlyBracketLeftLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractCharacterLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[CurlyBracketLeftLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Character/CurlyBracket/CurlyBracketRightLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractCharacterLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[CurlyBracketRightLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Character/DotLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractCharacterLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[DotLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Character/DoubleQuoteLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractCharacterLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[DoubleQuoteLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Character/EqualsSignLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractCharacterLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[EqualsSignLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Character/ExclamationLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractCharacterLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[ExclamationLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Character/GreaterThanLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractCharacterLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[GreaterThanLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Character/LowerThanLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractCharacterLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[LowerThanLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Character/MinusLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractCharacterLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[MinusLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Character/Parenthesis/ParenthesisLeftLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractCharacterLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[ParenthesisLeftLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Character/Parenthesis/ParenthesisRightLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractCharacterLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[ParenthesisRightLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Character/PercentageLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractCharacterLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[PercentageLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Character/PipeLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractCharacterLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[PipeLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Character/PlusLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractCharacterLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[PlusLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Character/QuestionMarkLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractCharacterLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[QuestionMarkLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Character/SemicolonLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractCharacterLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[SemicolonLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Character/SingleQuoteLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractCharacterLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[SingleQuoteLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Character/Slash/ForwardSlashLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractCharacterLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[ForwardSlashLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Character/SquareBracket/SquareBracketLeftLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractCharacterLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[SquareBracketLeftLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Character/SquareBracket/SquareBracketRightLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractCharacterLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[SquareBracketRightLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Character/TildeLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractCharacterLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[TildeLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/CommentLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[CommentLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Expression/AndLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[AndLexical]]></code>
+      <code><![CDATA[AndLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Expression/CoalescingLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[CoalescingLexical]]></code>
+      <code><![CDATA[CoalescingLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Expression/Comparison/EqualsLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[EqualsLexical]]></code>
+      <code><![CDATA[EqualsLexical]]></code>
+      <code><![CDATA[EqualsLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Expression/Comparison/GreaterThanOrEqualsLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[GreaterThanOrEqualsLexical]]></code>
+      <code><![CDATA[GreaterThanOrEqualsLexical]]></code>
+      <code><![CDATA[GreaterThanOrEqualsLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Expression/Comparison/LowerThanOrEqualsLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[LowerThanOrEqualsLexical]]></code>
+      <code><![CDATA[LowerThanOrEqualsLexical]]></code>
+      <code><![CDATA[LowerThanOrEqualsLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Expression/Comparison/NotEqualsLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[NotEqualsLexical]]></code>
+      <code><![CDATA[NotEqualsLexical]]></code>
+      <code><![CDATA[NotEqualsLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Expression/Comparison/NotSameLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[NotSameLexical]]></code>
+      <code><![CDATA[NotSameLexical]]></code>
+      <code><![CDATA[NotSameLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Expression/Comparison/SameLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[SameLexical]]></code>
+      <code><![CDATA[SameLexical]]></code>
+      <code><![CDATA[SameLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Expression/OrLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[OrLexical]]></code>
+      <code><![CDATA[OrLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/LabelLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[LabelLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/TextLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[TextLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Value/IntegerLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[IntegerLexical]]></code>
+      <code><![CDATA[IntegerLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/Value/StringLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[StringLexical]]></code>
+      <code><![CDATA[StringLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Lexical/WhitespaceLexical.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractLexical]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[WhitespaceLexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Specification/AmpersandSpecification.php">
+    <DeprecatedClass>
+      <code><![CDATA[new AmpersandLexical()]]></code>
+      <code><![CDATA[new AndLexical('&&')]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[AmpersandSpecification]]></code>
+      <code><![CDATA[Lexical]]></code>
+      <code><![CDATA[StringStream]]></code>
+      <code><![CDATA[StringStream]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Specification/CharacterSpecification.php">
+    <DeprecatedClass>
+      <code><![CDATA[class-string<AbstractCharacterLexical>]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[CharacterSpecification]]></code>
+      <code><![CDATA[Lexical]]></code>
+      <code><![CDATA[StringStream]]></code>
+      <code><![CDATA[StringStream]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Specification/ComparisonSpecification.php">
+    <DeprecatedClass>
+      <code><![CDATA[new EqualsLexical('==')]]></code>
+      <code><![CDATA[new EqualsSignLexical()]]></code>
+      <code><![CDATA[new ExclamationLexical()]]></code>
+      <code><![CDATA[new GreaterThanLexical()]]></code>
+      <code><![CDATA[new GreaterThanOrEqualsLexical('>=')]]></code>
+      <code><![CDATA[new LowerThanLexical()]]></code>
+      <code><![CDATA[new LowerThanOrEqualsLexical('<=')]]></code>
+      <code><![CDATA[new NotEqualsLexical('!=')]]></code>
+      <code><![CDATA[new NotSameLexical('!==')]]></code>
+      <code><![CDATA[new SameLexical('===')]]></code>
+      <code><![CDATA[new UnknownOperator($code->current())]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[ComparisonSpecification]]></code>
+      <code><![CDATA[Lexical]]></code>
+      <code><![CDATA[Lexical]]></code>
+      <code><![CDATA[Lexical]]></code>
+      <code><![CDATA[Lexical]]></code>
+      <code><![CDATA[Lexical]]></code>
+      <code><![CDATA[StringStream]]></code>
+      <code><![CDATA[StringStream]]></code>
+      <code><![CDATA[StringStream]]></code>
+      <code><![CDATA[StringStream]]></code>
+      <code><![CDATA[StringStream]]></code>
+      <code><![CDATA[StringStream]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Specification/IntegerSpecification.php">
+    <DeprecatedClass>
+      <code><![CDATA[new IntegerLexical($int)]]></code>
+      <code><![CDATA[new UnexpectedCharacter($int, 'digit')]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[IntegerSpecification]]></code>
+      <code><![CDATA[Lexical]]></code>
+      <code><![CDATA[StringStream]]></code>
+      <code><![CDATA[StringStream]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Specification/LabelSpecification.php">
+    <DeprecatedClass>
+      <code><![CDATA[new LabelLexical($label)]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[LabelSpecification]]></code>
+      <code><![CDATA[Lexical]]></code>
+      <code><![CDATA[StringStream]]></code>
+      <code><![CDATA[StringStream]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Specification/PipeSpecification.php">
+    <DeprecatedClass>
+      <code><![CDATA[new OrLexical('||')]]></code>
+      <code><![CDATA[new PipeLexical()]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[Lexical]]></code>
+      <code><![CDATA[PipeSpecification]]></code>
+      <code><![CDATA[StringStream]]></code>
+      <code><![CDATA[StringStream]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Specification/Specification.php">
+    <DeprecatedInterface>
+      <code><![CDATA[Lexical]]></code>
+      <code><![CDATA[StringStream]]></code>
+      <code><![CDATA[StringStream]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Specification/StringSpecification.php">
+    <DeprecatedClass>
+      <code><![CDATA[new MissesClosingIdentifier('string')]]></code>
+      <code><![CDATA[new StringLexical("{$text}")]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[Lexical]]></code>
+      <code><![CDATA[StringSpecification]]></code>
+      <code><![CDATA[StringStream]]></code>
+      <code><![CDATA[StringStream]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Specification/Typescript/ForwardSlashStartSpecification.php">
+    <DeprecatedClass>
+      <code><![CDATA[new CommentLexical(trim($comment))]]></code>
+      <code><![CDATA[new CommentLexical(trim($comment))]]></code>
+      <code><![CDATA[new ForwardSlashLexical()]]></code>
+      <code><![CDATA[new MissesClosingIdentifier('multi line comment')]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[ForwardSlashStartSpecification]]></code>
+      <code><![CDATA[Lexical]]></code>
+      <code><![CDATA[Lexical]]></code>
+      <code><![CDATA[Lexical]]></code>
+      <code><![CDATA[StringStream]]></code>
+      <code><![CDATA[StringStream]]></code>
+      <code><![CDATA[StringStream]]></code>
+      <code><![CDATA[StringStream]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Specification/Typescript/MinusSpecification.php">
+    <DeprecatedClass>
+      <code><![CDATA[new MinusLexical()]]></code>
+      <code><![CDATA[new SubtractAssignmentLexical('-=')]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[Lexical]]></code>
+      <code><![CDATA[MinusSpecification]]></code>
+      <code><![CDATA[StringStream]]></code>
+      <code><![CDATA[StringStream]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Specification/Typescript/PlusSpecification.php">
+    <DeprecatedClass>
+      <code><![CDATA[new AdditionAssignmentLexical('+=')]]></code>
+      <code><![CDATA[new PlusLexical()]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[Lexical]]></code>
+      <code><![CDATA[PlusSpecification]]></code>
+      <code><![CDATA[StringStream]]></code>
+      <code><![CDATA[StringStream]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Specification/Typescript/QuestionMarkSpecification.php">
+    <DeprecatedClass>
+      <code><![CDATA[new CoalescingAssignmentLexical('??=')]]></code>
+      <code><![CDATA[new CoalescingLexical('??')]]></code>
+      <code><![CDATA[new QuestionMarkLexical()]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[Lexical]]></code>
+      <code><![CDATA[QuestionMarkSpecification]]></code>
+      <code><![CDATA[StringStream]]></code>
+      <code><![CDATA[StringStream]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/Specification/WhitespaceSpecification.php">
+    <DeprecatedClass>
+      <code><![CDATA[new WhitespaceLexical($whitespace)]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[Lexical]]></code>
+      <code><![CDATA[StringStream]]></code>
+      <code><![CDATA[StringStream]]></code>
+      <code><![CDATA[WhitespaceSpecification]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/SpecificationCodeLexer.php">
+    <DeprecatedClass>
+      <code><![CDATA[new IteratorLexicalStream($this->generate($stream))]]></code>
+      <code><![CDATA[new TextLexical($text)]]></code>
+      <code><![CDATA[new TextLexical($text)]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[Generator<Lexical>]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[SpecificationCodeLexer]]></code>
+      <code><![CDATA[StringStream]]></code>
+      <code><![CDATA[StringStream]]></code>
+      <code><![CDATA[array<Specification>]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Lexer/TypescriptCodeLexer.php">
+    <DeprecatedClass>
+      <code><![CDATA[AsteriskLexical::CHARACTER]]></code>
+      <code><![CDATA[AsteriskLexical::class]]></code>
+      <code><![CDATA[AtSignLexical::CHARACTER]]></code>
+      <code><![CDATA[AtSignLexical::class]]></code>
+      <code><![CDATA[ColonLexical::CHARACTER]]></code>
+      <code><![CDATA[ColonLexical::class]]></code>
+      <code><![CDATA[CommaLexical::CHARACTER]]></code>
+      <code><![CDATA[CommaLexical::class]]></code>
+      <code><![CDATA[CurlyBracketLeftLexical::CHARACTER]]></code>
+      <code><![CDATA[CurlyBracketLeftLexical::class]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::CHARACTER]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::class]]></code>
+      <code><![CDATA[DotLexical::CHARACTER]]></code>
+      <code><![CDATA[DotLexical::class]]></code>
+      <code><![CDATA[ParenthesisLeftLexical::CHARACTER]]></code>
+      <code><![CDATA[ParenthesisLeftLexical::class]]></code>
+      <code><![CDATA[ParenthesisRightLexical::CHARACTER]]></code>
+      <code><![CDATA[ParenthesisRightLexical::class]]></code>
+      <code><![CDATA[PercentageLexical::CHARACTER]]></code>
+      <code><![CDATA[PercentageLexical::class]]></code>
+      <code><![CDATA[SemicolonLexical::CHARACTER]]></code>
+      <code><![CDATA[SemicolonLexical::class]]></code>
+      <code><![CDATA[SquareBracketLeftLexical::CHARACTER]]></code>
+      <code><![CDATA[SquareBracketLeftLexical::class]]></code>
+      <code><![CDATA[SquareBracketRightLexical::CHARACTER]]></code>
+      <code><![CDATA[SquareBracketRightLexical::class]]></code>
+      <code><![CDATA[TildeLexical::CHARACTER]]></code>
+      <code><![CDATA[TildeLexical::class]]></code>
+      <code><![CDATA[new AmpersandSpecification()]]></code>
+      <code><![CDATA[new CharacterSpecification(AsteriskLexical::CHARACTER, AsteriskLexical::class)]]></code>
+      <code><![CDATA[new CharacterSpecification(AtSignLexical::CHARACTER, AtSignLexical::class)]]></code>
+      <code><![CDATA[new CharacterSpecification(ColonLexical::CHARACTER, ColonLexical::class)]]></code>
+      <code><![CDATA[new CharacterSpecification(CommaLexical::CHARACTER, CommaLexical::class)]]></code>
+      <code><![CDATA[new CharacterSpecification(CurlyBracketLeftLexical::CHARACTER, CurlyBracketLeftLexical::class)]]></code>
+      <code><![CDATA[new CharacterSpecification(CurlyBracketRightLexical::CHARACTER, CurlyBracketRightLexical::class)]]></code>
+      <code><![CDATA[new CharacterSpecification(DotLexical::CHARACTER, DotLexical::class)]]></code>
+      <code><![CDATA[new CharacterSpecification(ParenthesisLeftLexical::CHARACTER, ParenthesisLeftLexical::class)]]></code>
+      <code><![CDATA[new CharacterSpecification(ParenthesisRightLexical::CHARACTER, ParenthesisRightLexical::class)]]></code>
+      <code><![CDATA[new CharacterSpecification(PercentageLexical::CHARACTER, PercentageLexical::class)]]></code>
+      <code><![CDATA[new CharacterSpecification(SemicolonLexical::CHARACTER, SemicolonLexical::class)]]></code>
+      <code><![CDATA[new CharacterSpecification(SquareBracketLeftLexical::CHARACTER, SquareBracketLeftLexical::class)]]></code>
+      <code><![CDATA[new CharacterSpecification(SquareBracketRightLexical::CHARACTER, SquareBracketRightLexical::class)]]></code>
+      <code><![CDATA[new CharacterSpecification(TildeLexical::CHARACTER, TildeLexical::class)]]></code>
+      <code><![CDATA[new ComparisonSpecification()]]></code>
+      <code><![CDATA[new ForwardSlashStartSpecification()]]></code>
+      <code><![CDATA[new IntegerSpecification()]]></code>
+      <code><![CDATA[new LabelSpecification()]]></code>
+      <code><![CDATA[new MinusSpecification()]]></code>
+      <code><![CDATA[new PipeSpecification()]]></code>
+      <code><![CDATA[new PlusSpecification()]]></code>
+      <code><![CDATA[new QuestionMarkSpecification()]]></code>
+      <code><![CDATA[new SpecificationCodeLexer(
+            [
+                new AmpersandSpecification(),
+                new ComparisonSpecification(),
+                new ForwardSlashStartSpecification(),
+                new PipeSpecification(),
+                new QuestionMarkSpecification(),
+                new MinusSpecification(),
+                new PlusSpecification(),
+
+                new StringSpecification(["'", '"', '`']),
+                new IntegerSpecification(),
+
+                new LabelSpecification(),
+
+                new WhitespaceSpecification(),
+
+                new CharacterSpecification(AsteriskLexical::CHARACTER, AsteriskLexical::class),
+                new CharacterSpecification(ColonLexical::CHARACTER, ColonLexical::class),
+                new CharacterSpecification(CommaLexical::CHARACTER, CommaLexical::class),
+                new CharacterSpecification(DotLexical::CHARACTER, DotLexical::class),
+                new CharacterSpecification(PercentageLexical::CHARACTER, PercentageLexical::class),
+                new CharacterSpecification(SemicolonLexical::CHARACTER, SemicolonLexical::class),
+                new CharacterSpecification(TildeLexical::CHARACTER, TildeLexical::class),
+                new CharacterSpecification(AtSignLexical::CHARACTER, AtSignLexical::class),
+
+                new CharacterSpecification(CurlyBracketLeftLexical::CHARACTER, CurlyBracketLeftLexical::class),
+                new CharacterSpecification(CurlyBracketRightLexical::CHARACTER, CurlyBracketRightLexical::class),
+                new CharacterSpecification(ParenthesisLeftLexical::CHARACTER, ParenthesisLeftLexical::class),
+                new CharacterSpecification(ParenthesisRightLexical::CHARACTER, ParenthesisRightLexical::class),
+                new CharacterSpecification(SquareBracketLeftLexical::CHARACTER, SquareBracketLeftLexical::class),
+                new CharacterSpecification(SquareBracketRightLexical::CHARACTER, SquareBracketRightLexical::class),
+            ],
+        )]]></code>
+      <code><![CDATA[new StringSpecification(["'", '"', '`'])]]></code>
+      <code><![CDATA[new WhitespaceSpecification()]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[?CodeLexer]]></code>
+      <code><![CDATA[CodeLexer]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[StringStream]]></code>
+      <code><![CDATA[TypescriptCodeLexer]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Parser/Angular/ExpressionCodeParser.php">
+    <DeprecatedClass>
+      <code><![CDATA[AndLexical::TYPE]]></code>
+      <code><![CDATA[AndLexical::TYPE]]></code>
+      <code><![CDATA[AndLexical::TYPE]]></code>
+      <code><![CDATA[AsteriskLexical::TYPE]]></code>
+      <code><![CDATA[CoalescingLexical::TYPE]]></code>
+      <code><![CDATA[ColonLexical::TYPE]]></code>
+      <code><![CDATA[ColonLexical::TYPE]]></code>
+      <code><![CDATA[ColonLexical::TYPE]]></code>
+      <code><![CDATA[ColonLexical::TYPE]]></code>
+      <code><![CDATA[CommaLexical::TYPE]]></code>
+      <code><![CDATA[CommaLexical::TYPE]]></code>
+      <code><![CDATA[CommaLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[DotLexical::TYPE]]></code>
+      <code><![CDATA[DotLexical::TYPE]]></code>
+      <code><![CDATA[DotLexical::TYPE]]></code>
+      <code><![CDATA[DotLexical::TYPE]]></code>
+      <code><![CDATA[DotLexical::TYPE]]></code>
+      <code><![CDATA[EqualsLexical::TYPE]]></code>
+      <code><![CDATA[ForwardSlashLexical::TYPE]]></code>
+      <code><![CDATA[GreaterThanLexical::TYPE]]></code>
+      <code><![CDATA[GreaterThanOrEqualsLexical::TYPE]]></code>
+      <code><![CDATA[IntegerLexical::TYPE]]></code>
+      <code><![CDATA[IntegerLexical::TYPE]]></code>
+      <code><![CDATA[IntegerLexical::TYPE]]></code>
+      <code><![CDATA[IntegerLexical::TYPE]]></code>
+      <code><![CDATA[IntegerLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LowerThanLexical::TYPE]]></code>
+      <code><![CDATA[LowerThanOrEqualsLexical::TYPE]]></code>
+      <code><![CDATA[MinusLexical::TYPE]]></code>
+      <code><![CDATA[MinusLexical::TYPE]]></code>
+      <code><![CDATA[MinusLexical::TYPE]]></code>
+      <code><![CDATA[MinusLexical::TYPE]]></code>
+      <code><![CDATA[NotEqualsLexical::TYPE]]></code>
+      <code><![CDATA[NotSameLexical::TYPE]]></code>
+      <code><![CDATA[OrLexical::TYPE]]></code>
+      <code><![CDATA[OrLexical::TYPE]]></code>
+      <code><![CDATA[OrLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisLeftLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisLeftLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisLeftLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisLeftLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisLeftLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisRightLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisRightLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisRightLexical::TYPE]]></code>
+      <code><![CDATA[PipeLexical::TYPE]]></code>
+      <code><![CDATA[PipeLexical::TYPE]]></code>
+      <code><![CDATA[PlusLexical::TYPE]]></code>
+      <code><![CDATA[QuestionMarkLexical::TYPE]]></code>
+      <code><![CDATA[SameLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[StringLexical::TYPE]]></code>
+      <code><![CDATA[StringLexical::TYPE]]></code>
+      <code><![CDATA[StringLexical::TYPE]]></code>
+      <code><![CDATA[StringLexical::TYPE]]></code>
+      <code><![CDATA[StringLexical::TYPE]]></code>
+      <code><![CDATA[StringLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[new ArrayCodeTokenStream([$token])]]></code>
+      <code><![CDATA[new InvalidName($name)]]></code>
+      <code><![CDATA[new StreamActive()]]></code>
+      <code><![CDATA[new UnexpectedLexical(
+                $stream->current(),
+                SquareBracketLeftLexical::TYPE,
+                LabelLexical::TYPE,
+            )]]></code>
+      <code><![CDATA[new UnexpectedLexical(
+            $lexical,
+            SquareBracketLeftLexical::TYPE,
+            CurlyBracketLeftLexical::TYPE,
+            ParenthesisLeftLexical::TYPE,
+            MinusLexical::TYPE,
+            IntegerLexical::TYPE,
+            DotLexical::TYPE,
+            StringLexical::TYPE,
+        )]]></code>
+      <code><![CDATA[new UnexpectedLexical($token, AndLexical::TYPE, OrLexical::TYPE)]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[CodeTokenStream]]></code>
+      <code><![CDATA[ExpressionCodeParser]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+    </DeprecatedInterface>
+    <DeprecatedTrait>
+      <code><![CDATA[ExpectParseSpecificationHelper]]></code>
+    </DeprecatedTrait>
+  </file>
+  <file src="src/Interpreter/Parser/Angular/TemplateCodeParser.php">
+    <DeprecatedClass>
+      <code><![CDATA[CommaLexical::TYPE]]></code>
+      <code><![CDATA[CommaLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[DoubleQuoteLexical::TYPE]]></code>
+      <code><![CDATA[DoubleQuoteLexical::TYPE]]></code>
+      <code><![CDATA[EqualsSignLexical::TYPE]]></code>
+      <code><![CDATA[EqualsSignLexical::TYPE]]></code>
+      <code><![CDATA[EqualsSignLexical::TYPE]]></code>
+      <code><![CDATA[EqualsSignLexical::TYPE]]></code>
+      <code><![CDATA[ForwardSlashLexical::TYPE]]></code>
+      <code><![CDATA[ForwardSlashLexical::TYPE]]></code>
+      <code><![CDATA[GreaterThanLexical::TYPE]]></code>
+      <code><![CDATA[GreaterThanLexical::TYPE]]></code>
+      <code><![CDATA[GreaterThanLexical::TYPE]]></code>
+      <code><![CDATA[GreaterThanLexical::TYPE]]></code>
+      <code><![CDATA[GreaterThanLexical::TYPE]]></code>
+      <code><![CDATA[LowerThanLexical::TYPE]]></code>
+      <code><![CDATA[LowerThanLexical::TYPE]]></code>
+      <code><![CDATA[LowerThanLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisLeftLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisLeftLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisLeftLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisLeftLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisRightLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisRightLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisRightLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisRightLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisRightLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisRightLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisRightLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisRightLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisRightLexical::TYPE]]></code>
+      <code><![CDATA[SemicolonLexical::TYPE]]></code>
+      <code><![CDATA[SemicolonLexical::TYPE]]></code>
+      <code><![CDATA[SemicolonLexical::TYPE]]></code>
+      <code><![CDATA[SemicolonLexical::TYPE]]></code>
+      <code><![CDATA[SemicolonLexical::TYPE]]></code>
+      <code><![CDATA[SemicolonLexical::TYPE]]></code>
+      <code><![CDATA[SemicolonLexical::TYPE]]></code>
+      <code><![CDATA[SemicolonLexical::TYPE]]></code>
+      <code><![CDATA[SemicolonLexical::TYPE]]></code>
+      <code><![CDATA[SingleQuoteLexical::CHARACTER]]></code>
+      <code><![CDATA[SingleQuoteLexical::TYPE]]></code>
+      <code><![CDATA[StartCloseLexical::TYPE]]></code>
+      <code><![CDATA[StartCloseLexical::TYPE]]></code>
+      <code><![CDATA[StartCloseLexical::TYPE]]></code>
+      <code><![CDATA[StartCloseLexical::TYPE]]></code>
+      <code><![CDATA[StartLexical::TYPE]]></code>
+      <code><![CDATA[StartLexical::TYPE]]></code>
+      <code><![CDATA[StartLexical::TYPE]]></code>
+      <code><![CDATA[StartLexical::TYPE]]></code>
+      <code><![CDATA[StartLexical::TYPE]]></code>
+      <code><![CDATA[StartLexical::TYPE]]></code>
+      <code><![CDATA[StartLexical::TYPE]]></code>
+      <code><![CDATA[StartLexical::TYPE]]></code>
+      <code><![CDATA[StartLexical::TYPE]]></code>
+      <code><![CDATA[StartLexical::TYPE]]></code>
+      <code><![CDATA[TextLexical::TYPE]]></code>
+      <code><![CDATA[TextLexical::TYPE]]></code>
+      <code><![CDATA[TextLexical::TYPE]]></code>
+      <code><![CDATA[TextLexical::TYPE]]></code>
+      <code><![CDATA[TextLexical::TYPE]]></code>
+      <code><![CDATA[TextLexical::TYPE]]></code>
+      <code><![CDATA[TextLexical::TYPE]]></code>
+      <code><![CDATA[TextLexical::TYPE]]></code>
+      <code><![CDATA[TextLexical::TYPE]]></code>
+      <code><![CDATA[TextLexical::TYPE]]></code>
+      <code><![CDATA[TextLexical::TYPE]]></code>
+      <code><![CDATA[TextLexical::TYPE]]></code>
+      <code><![CDATA[TextLexical::TYPE]]></code>
+      <code><![CDATA[TextLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[new DirectStringStream(trim($stringExpression))]]></code>
+      <code><![CDATA[new ExpressionCodeInterpreter()]]></code>
+      <code><![CDATA[new IteratorCodeTokenStream(
+            (function () use ($stream) {
+                while ($stream->isActive()) {
+                    $token = $this->parseCodeToken($stream);
+
+                    if ($token !== null) {
+                        yield $token;
+                    }
+                }
+            })(),
+        )]]></code>
+      <code><![CDATA[new UnexpectedCloseName($closer, $name)]]></code>
+      <code><![CDATA[new UnexpectedLexical(
+                $stream->current(),
+                TextLexical::TYPE,
+                SingleQuoteLexical::TYPE,
+                DoubleQuoteLexical::TYPE,
+            )]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[?CodeInterpreter]]></code>
+      <code><![CDATA[CodeInterpreter]]></code>
+      <code><![CDATA[CodeTokenStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[TemplateCodeParser]]></code>
+    </DeprecatedInterface>
+    <DeprecatedTrait>
+      <code><![CDATA[ExpectParseSpecificationHelper]]></code>
+    </DeprecatedTrait>
+  </file>
+  <file src="src/Interpreter/Parser/CodeParser.php">
+    <DeprecatedInterface>
+      <code><![CDATA[CodeTokenStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Parser/Specification/Exception/NoParseSpecification.php">
+    <DeprecatedInterface>
+      <code><![CDATA[public]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Parser/Specification/Helper/ExpectParseSpecificationHelper.php">
+    <DeprecatedClass>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[new UnexpectedEnd($expect)]]></code>
+      <code><![CDATA[new UnexpectedEnd(LabelLexical::TYPE)]]></code>
+      <code><![CDATA[new UnexpectedLabel($current, $keyword)]]></code>
+      <code><![CDATA[new UnexpectedLexical($current, LabelLexical::TYPE)]]></code>
+      <code><![CDATA[new UnexpectedLexical($stream->current(), $expect)]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Parser/Specification/ParseSpecification.php">
+    <DeprecatedInterface>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Parser/Specification/RecursiveParseSpecification.php">
+    <DeprecatedClass>
+      <code><![CDATA[new ExpectedParseSpecification($specification)]]></code>
+      <code><![CDATA[new NoParseSpecification($stream->current())]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[RecursiveParseSpecification]]></code>
+      <code><![CDATA[array]]></code>
+      <code><![CDATA[non-empty-array<class-string<ParseSpecification>|ParseSpecification|callable(ParseSpecification): ParseSpecification>]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Parser/Specification/Typescript/AttributeParseSpecification.php">
+    <DeprecatedClass>
+      <code><![CDATA[AtSignLexical::TYPE]]></code>
+      <code><![CDATA[AtSignLexical::TYPE]]></code>
+      <code><![CDATA[CommaLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisLeftLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisRightLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisRightLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[AttributeParseSpecification]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[private]]></code>
+      <code><![CDATA[private]]></code>
+    </DeprecatedInterface>
+    <DeprecatedTrait>
+      <code><![CDATA[ExpectParseSpecificationHelper]]></code>
+    </DeprecatedTrait>
+  </file>
+  <file src="src/Interpreter/Parser/Specification/Typescript/ClassParseSpecification.php">
+    <DeprecatedClass>
+      <code><![CDATA[ColonLexical::TYPE]]></code>
+      <code><![CDATA[ColonLexical::TYPE]]></code>
+      <code><![CDATA[ColonLexical::TYPE]]></code>
+      <code><![CDATA[ColonLexical::TYPE]]></code>
+      <code><![CDATA[ColonLexical::TYPE]]></code>
+      <code><![CDATA[ColonLexical::TYPE]]></code>
+      <code><![CDATA[CommaLexical::TYPE]]></code>
+      <code><![CDATA[CommaLexical::TYPE]]></code>
+      <code><![CDATA[CommaLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[EqualsSignLexical::TYPE]]></code>
+      <code><![CDATA[EqualsSignLexical::TYPE]]></code>
+      <code><![CDATA[EqualsSignLexical::TYPE]]></code>
+      <code><![CDATA[GreaterThanLexical::TYPE]]></code>
+      <code><![CDATA[GreaterThanLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LowerThanLexical::TYPE]]></code>
+      <code><![CDATA[LowerThanLexical::TYPE]]></code>
+      <code><![CDATA[LowerThanLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisLeftLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisLeftLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisLeftLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisLeftLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisRightLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisRightLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisRightLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisRightLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisRightLexical::TYPE]]></code>
+      <code><![CDATA[QuestionMarkLexical::TYPE]]></code>
+      <code><![CDATA[QuestionMarkLexical::TYPE]]></code>
+      <code><![CDATA[SemicolonLexical::TYPE]]></code>
+      <code><![CDATA[SemicolonLexical::TYPE]]></code>
+      <code><![CDATA[SemicolonLexical::TYPE]]></code>
+      <code><![CDATA[SemicolonLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[new UnexpectedCodeToken()]]></code>
+      <code><![CDATA[new UnexpectedCodeToken()]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[ClassParseSpecification]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[private]]></code>
+      <code><![CDATA[private]]></code>
+      <code><![CDATA[private]]></code>
+      <code><![CDATA[private]]></code>
+    </DeprecatedInterface>
+    <DeprecatedTrait>
+      <code><![CDATA[ExpectParseSpecificationHelper]]></code>
+    </DeprecatedTrait>
+  </file>
   <file src="src/Interpreter/Parser/Specification/Typescript/ConstantParseSpecification.php">
+    <DeprecatedClass>
+      <code><![CDATA[ColonLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[EqualsSignLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[SemicolonLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[new EnumParseSpecification($this->expressionSpecification)]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[ConstantParseSpecification]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[private]]></code>
+      <code><![CDATA[private]]></code>
+    </DeprecatedInterface>
+    <DeprecatedTrait>
+      <code><![CDATA[ExpectParseSpecificationHelper]]></code>
+    </DeprecatedTrait>
     <MixedArgument>
       <code><![CDATA[$expression]]></code>
     </MixedArgument>
   </file>
+  <file src="src/Interpreter/Parser/Specification/Typescript/DeclareParseSpecification.php">
+    <DeprecatedClass>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[DeclareParseSpecification]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[private]]></code>
+    </DeprecatedInterface>
+    <DeprecatedTrait>
+      <code><![CDATA[ExpectParseSpecificationHelper]]></code>
+    </DeprecatedTrait>
+  </file>
+  <file src="src/Interpreter/Parser/Specification/Typescript/EnumParseSpecification.php">
+    <DeprecatedClass>
+      <code><![CDATA[CommaLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[EqualsSignLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[EnumParseSpecification]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[private]]></code>
+    </DeprecatedInterface>
+    <DeprecatedTrait>
+      <code><![CDATA[ExpectParseSpecificationHelper]]></code>
+    </DeprecatedTrait>
+  </file>
+  <file src="src/Interpreter/Parser/Specification/Typescript/Exception/UnexpectedLabel.php">
+    <DeprecatedInterface>
+      <code><![CDATA[Lexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Parser/Specification/Typescript/Exception/UnexpectedLexical.php">
+    <DeprecatedInterface>
+      <code><![CDATA[public]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/Parser/Specification/Typescript/ExportParseSpecification.php">
+    <DeprecatedClass>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[SemicolonLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[ExportParseSpecification]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[private]]></code>
+    </DeprecatedInterface>
+    <DeprecatedTrait>
+      <code><![CDATA[ExpectParseSpecificationHelper]]></code>
+    </DeprecatedTrait>
+  </file>
+  <file src="src/Interpreter/Parser/Specification/Typescript/ExpressionParseSpecification.php">
+    <DeprecatedClass>
+      <code><![CDATA[AndLexical::TYPE]]></code>
+      <code><![CDATA[AsteriskLexical::TYPE]]></code>
+      <code><![CDATA[CoalescingLexical::TYPE]]></code>
+      <code><![CDATA[ColonLexical::TYPE]]></code>
+      <code><![CDATA[ColonLexical::TYPE]]></code>
+      <code><![CDATA[ColonLexical::TYPE]]></code>
+      <code><![CDATA[ColonLexical::TYPE]]></code>
+      <code><![CDATA[ColonLexical::TYPE]]></code>
+      <code><![CDATA[ColonLexical::TYPE]]></code>
+      <code><![CDATA[ColonLexical::TYPE]]></code>
+      <code><![CDATA[CommaLexical::TYPE]]></code>
+      <code><![CDATA[CommaLexical::TYPE]]></code>
+      <code><![CDATA[CommaLexical::TYPE]]></code>
+      <code><![CDATA[CommaLexical::TYPE]]></code>
+      <code><![CDATA[CommaLexical::TYPE]]></code>
+      <code><![CDATA[CommaLexical::TYPE]]></code>
+      <code><![CDATA[CommaLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[DotLexical::TYPE]]></code>
+      <code><![CDATA[DotLexical::TYPE]]></code>
+      <code><![CDATA[DotLexical::TYPE]]></code>
+      <code><![CDATA[DotLexical::TYPE]]></code>
+      <code><![CDATA[DotLexical::TYPE]]></code>
+      <code><![CDATA[DotLexical::TYPE]]></code>
+      <code><![CDATA[DotLexical::TYPE]]></code>
+      <code><![CDATA[EqualsLexical::TYPE]]></code>
+      <code><![CDATA[EqualsSignLexical::TYPE]]></code>
+      <code><![CDATA[EqualsSignLexical::TYPE]]></code>
+      <code><![CDATA[EqualsSignLexical::TYPE]]></code>
+      <code><![CDATA[EqualsSignLexical::TYPE]]></code>
+      <code><![CDATA[ForwardSlashLexical::TYPE]]></code>
+      <code><![CDATA[GreaterThanLexical::TYPE]]></code>
+      <code><![CDATA[GreaterThanLexical::TYPE]]></code>
+      <code><![CDATA[GreaterThanLexical::TYPE]]></code>
+      <code><![CDATA[GreaterThanLexical::TYPE]]></code>
+      <code><![CDATA[GreaterThanLexical::TYPE]]></code>
+      <code><![CDATA[GreaterThanLexical::TYPE]]></code>
+      <code><![CDATA[GreaterThanLexical::TYPE]]></code>
+      <code><![CDATA[GreaterThanLexical::TYPE]]></code>
+      <code><![CDATA[GreaterThanOrEqualsLexical::TYPE]]></code>
+      <code><![CDATA[IntegerLexical::TYPE]]></code>
+      <code><![CDATA[IntegerLexical::TYPE]]></code>
+      <code><![CDATA[IntegerLexical::TYPE]]></code>
+      <code><![CDATA[IntegerLexical::TYPE]]></code>
+      <code><![CDATA[IntegerLexical::TYPE]]></code>
+      <code><![CDATA[IntegerLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LowerThanLexical::TYPE]]></code>
+      <code><![CDATA[LowerThanLexical::TYPE]]></code>
+      <code><![CDATA[LowerThanLexical::TYPE]]></code>
+      <code><![CDATA[LowerThanLexical::TYPE]]></code>
+      <code><![CDATA[LowerThanOrEqualsLexical::TYPE]]></code>
+      <code><![CDATA[MinusLexical::TYPE]]></code>
+      <code><![CDATA[MinusLexical::TYPE]]></code>
+      <code><![CDATA[MinusLexical::TYPE]]></code>
+      <code><![CDATA[MinusLexical::TYPE]]></code>
+      <code><![CDATA[MinusLexical::TYPE]]></code>
+      <code><![CDATA[NotEqualsLexical::TYPE]]></code>
+      <code><![CDATA[NotSameLexical::TYPE]]></code>
+      <code><![CDATA[OrLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisLeftLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisLeftLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisLeftLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisLeftLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisLeftLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisLeftLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisLeftLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisLeftLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisRightLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisRightLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisRightLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisRightLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisRightLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisRightLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisRightLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisRightLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisRightLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisRightLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisRightLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisRightLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisRightLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisRightLexical::TYPE]]></code>
+      <code><![CDATA[PlusLexical::TYPE]]></code>
+      <code><![CDATA[QuestionMarkLexical::TYPE]]></code>
+      <code><![CDATA[SameLexical::TYPE]]></code>
+      <code><![CDATA[SemicolonLexical::TYPE]]></code>
+      <code><![CDATA[SemicolonLexical::TYPE]]></code>
+      <code><![CDATA[SemicolonLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[StringLexical::TYPE]]></code>
+      <code><![CDATA[StringLexical::TYPE]]></code>
+      <code><![CDATA[StringLexical::TYPE]]></code>
+      <code><![CDATA[StringLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[new UnexpectedCodeToken()]]></code>
+      <code><![CDATA[new UnexpectedEnd(ColonLexical::TYPE)]]></code>
+      <code><![CDATA[new UnexpectedEnd(ParenthesisRightLexical::TYPE)]]></code>
+      <code><![CDATA[new UnexpectedEnd(SquareBracketRightLexical::TYPE)]]></code>
+      <code><![CDATA[new UnexpectedEnd(SquareBracketRightLexical::TYPE)]]></code>
+      <code><![CDATA[new UnexpectedLexical(
+                    $stream->current(),
+                    MinusLexical::TYPE,
+                    DotLexical::TYPE,
+                    IntegerLexical::TYPE,
+                    StringLexical::TYPE,
+                    LabelLexical::TYPE,
+                    ParenthesisLeftLexical::TYPE,
+                    CurlyBracketLeftLexical::TYPE,
+                    SquareBracketLeftLexical::TYPE,
+                )]]></code>
+      <code><![CDATA[new UnexpectedLexical($stream->current(), ColonLexical::TYPE)]]></code>
+      <code><![CDATA[new UnexpectedLexical($stream->current(), LabelLexical::TYPE)]]></code>
+      <code><![CDATA[new UnexpectedLexical($stream->current(), ParenthesisRightLexical::TYPE)]]></code>
+      <code><![CDATA[new UnexpectedLexical($stream->current(), SemicolonLexical::TYPE)]]></code>
+      <code><![CDATA[new UnexpectedLexical($stream->current(), SquareBracketRightLexical::TYPE)]]></code>
+      <code><![CDATA[new UnexpectedLexical($stream->current(), SquareBracketRightLexical::TYPE)]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[ExpressionParseSpecification]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[private]]></code>
+      <code><![CDATA[private]]></code>
+    </DeprecatedInterface>
+    <DeprecatedTrait>
+      <code><![CDATA[ExpectParseSpecificationHelper]]></code>
+    </DeprecatedTrait>
+  </file>
   <file src="src/Interpreter/Parser/Specification/Typescript/HintParseSpecification.php">
+    <DeprecatedClass>
+      <code><![CDATA[AmpersandLexical::TYPE]]></code>
+      <code><![CDATA[ColonLexical::TYPE]]></code>
+      <code><![CDATA[ColonLexical::TYPE]]></code>
+      <code><![CDATA[ColonLexical::TYPE]]></code>
+      <code><![CDATA[ColonLexical::TYPE]]></code>
+      <code><![CDATA[ColonLexical::TYPE]]></code>
+      <code><![CDATA[ColonLexical::TYPE]]></code>
+      <code><![CDATA[ColonLexical::TYPE]]></code>
+      <code><![CDATA[CommaLexical::TYPE]]></code>
+      <code><![CDATA[CommaLexical::TYPE]]></code>
+      <code><![CDATA[CommaLexical::TYPE]]></code>
+      <code><![CDATA[CommaLexical::TYPE]]></code>
+      <code><![CDATA[CommaLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[DotLexical::TYPE]]></code>
+      <code><![CDATA[DotLexical::TYPE]]></code>
+      <code><![CDATA[DotLexical::TYPE]]></code>
+      <code><![CDATA[DotLexical::TYPE]]></code>
+      <code><![CDATA[DotLexical::TYPE]]></code>
+      <code><![CDATA[DotLexical::TYPE]]></code>
+      <code><![CDATA[DotLexical::TYPE]]></code>
+      <code><![CDATA[DotLexical::TYPE]]></code>
+      <code><![CDATA[DotLexical::TYPE]]></code>
+      <code><![CDATA[EqualsSignLexical::TYPE]]></code>
+      <code><![CDATA[GreaterThanLexical::TYPE]]></code>
+      <code><![CDATA[GreaterThanLexical::TYPE]]></code>
+      <code><![CDATA[GreaterThanLexical::TYPE]]></code>
+      <code><![CDATA[IntegerLexical::TYPE]]></code>
+      <code><![CDATA[IntegerLexical::TYPE]]></code>
+      <code><![CDATA[IntegerLexical::TYPE]]></code>
+      <code><![CDATA[IntegerLexical::TYPE]]></code>
+      <code><![CDATA[IntegerLexical::TYPE]]></code>
+      <code><![CDATA[IntegerLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LowerThanLexical::TYPE]]></code>
+      <code><![CDATA[LowerThanLexical::TYPE]]></code>
+      <code><![CDATA[LowerThanLexical::TYPE]]></code>
+      <code><![CDATA[LowerThanLexical::TYPE]]></code>
+      <code><![CDATA[LowerThanLexical::TYPE]]></code>
+      <code><![CDATA[LowerThanLexical::TYPE]]></code>
+      <code><![CDATA[MinusLexical::TYPE]]></code>
+      <code><![CDATA[MinusLexical::TYPE]]></code>
+      <code><![CDATA[MinusLexical::TYPE]]></code>
+      <code><![CDATA[MinusLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisLeftLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisLeftLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisLeftLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisLeftLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisLeftLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisLeftLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisLeftLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisRightLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisRightLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisRightLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisRightLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisRightLexical::TYPE]]></code>
+      <code><![CDATA[PipeLexical::TYPE]]></code>
+      <code><![CDATA[QuestionMarkLexical::TYPE]]></code>
+      <code><![CDATA[QuestionMarkLexical::TYPE]]></code>
+      <code><![CDATA[QuestionMarkLexical::TYPE]]></code>
+      <code><![CDATA[SemicolonLexical::TYPE]]></code>
+      <code><![CDATA[SemicolonLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[StringLexical::TYPE]]></code>
+      <code><![CDATA[StringLexical::TYPE]]></code>
+      <code><![CDATA[StringLexical::TYPE]]></code>
+      <code><![CDATA[StringLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[new UnexpectedCodeToken()]]></code>
+      <code><![CDATA[new UnexpectedEnd(ColonLexical::TYPE, QuestionMarkLexical::TYPE)]]></code>
+      <code><![CDATA[new UnexpectedLexical(
+                    $current,
+                    MinusLexical::TYPE,
+                    DotLexical::TYPE,
+                    IntegerLexical::TYPE,
+                    StringLexical::TYPE,
+                    LabelLexical::TYPE,
+                    ParenthesisLeftLexical::TYPE,
+                    CurlyBracketLeftLexical::TYPE,
+                    SquareBracketLeftLexical::TYPE,
+                )]]></code>
+      <code><![CDATA[new UnexpectedLexical($stream->current(), LabelLexical::TYPE)]]></code>
+      <code><![CDATA[new UnexpectedMode($mode, $useMode)]]></code>
+      <code><![CDATA[new UnexpectedMode($mode, 'union', 'intersection')]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[HintParseSpecification]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[private]]></code>
+    </DeprecatedInterface>
+    <DeprecatedTrait>
+      <code><![CDATA[ExpectParseSpecificationHelper]]></code>
+    </DeprecatedTrait>
     <NoValue>
       <code><![CDATA[$mode]]></code>
     </NoValue>
+  </file>
+  <file src="src/Interpreter/Parser/Specification/Typescript/InterfaceParseSpecification.php">
+    <DeprecatedClass>
+      <code><![CDATA[ColonLexical::TYPE]]></code>
+      <code><![CDATA[ColonLexical::TYPE]]></code>
+      <code><![CDATA[ColonLexical::TYPE]]></code>
+      <code><![CDATA[ColonLexical::TYPE]]></code>
+      <code><![CDATA[ColonLexical::TYPE]]></code>
+      <code><![CDATA[ColonLexical::TYPE]]></code>
+      <code><![CDATA[CommaLexical::TYPE]]></code>
+      <code><![CDATA[CommaLexical::TYPE]]></code>
+      <code><![CDATA[CommaLexical::TYPE]]></code>
+      <code><![CDATA[CommaLexical::TYPE]]></code>
+      <code><![CDATA[CommaLexical::TYPE]]></code>
+      <code><![CDATA[CommaLexical::TYPE]]></code>
+      <code><![CDATA[CommaLexical::TYPE]]></code>
+      <code><![CDATA[CommaLexical::TYPE]]></code>
+      <code><![CDATA[CommaLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[DotLexical::TYPE]]></code>
+      <code><![CDATA[DotLexical::TYPE]]></code>
+      <code><![CDATA[DotLexical::TYPE]]></code>
+      <code><![CDATA[EqualsSignLexical::TYPE]]></code>
+      <code><![CDATA[EqualsSignLexical::TYPE]]></code>
+      <code><![CDATA[GreaterThanLexical::TYPE]]></code>
+      <code><![CDATA[GreaterThanLexical::TYPE]]></code>
+      <code><![CDATA[GreaterThanLexical::TYPE]]></code>
+      <code><![CDATA[GreaterThanLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LowerThanLexical::TYPE]]></code>
+      <code><![CDATA[LowerThanLexical::TYPE]]></code>
+      <code><![CDATA[LowerThanLexical::TYPE]]></code>
+      <code><![CDATA[LowerThanLexical::TYPE]]></code>
+      <code><![CDATA[LowerThanLexical::TYPE]]></code>
+      <code><![CDATA[LowerThanLexical::TYPE]]></code>
+      <code><![CDATA[LowerThanLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisLeftLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisLeftLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisLeftLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisLeftLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisRightLexical::TYPE]]></code>
+      <code><![CDATA[ParenthesisRightLexical::TYPE]]></code>
+      <code><![CDATA[QuestionMarkLexical::TYPE]]></code>
+      <code><![CDATA[QuestionMarkLexical::TYPE]]></code>
+      <code><![CDATA[SemicolonLexical::TYPE]]></code>
+      <code><![CDATA[SemicolonLexical::TYPE]]></code>
+      <code><![CDATA[SemicolonLexical::TYPE]]></code>
+      <code><![CDATA[SemicolonLexical::TYPE]]></code>
+      <code><![CDATA[SemicolonLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[StringLexical::TYPE]]></code>
+      <code><![CDATA[StringLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[new MethodMustHaveName()]]></code>
+      <code><![CDATA[new MethodMustHaveName()]]></code>
+      <code><![CDATA[new NoReadonlyMethod()]]></code>
+      <code><![CDATA[new UnexpectedEnd()]]></code>
+      <code><![CDATA[new UnexpectedLexical(
+                    $stream->current(),
+                    ParenthesisLeftLexical::TYPE,
+                    CommentLexical::TYPE,
+                    CommaLexical::TYPE,
+                    SemicolonLexical::TYPE,
+                    CurlyBracketRightLexical::TYPE,
+                )]]></code>
+      <code><![CDATA[new UnexpectedLexical($stream->current(), LabelLexical::TYPE, SquareBracketLeftLexical::TYPE)]]></code>
+      <code><![CDATA[new UnexpectedLexical($stream->current(), LabelLexical::TYPE, StringLexical::TYPE)]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[InterfaceParseSpecification]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[private]]></code>
+      <code><![CDATA[private]]></code>
+    </DeprecatedInterface>
+    <DeprecatedTrait>
+      <code><![CDATA[ExpectParseSpecificationHelper]]></code>
+    </DeprecatedTrait>
+  </file>
+  <file src="src/Interpreter/Parser/Specification/Typescript/NamespaceParseSpecification.php">
+    <DeprecatedClass>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[NamespaceParseSpecification]]></code>
+      <code><![CDATA[private]]></code>
+    </DeprecatedInterface>
+    <DeprecatedTrait>
+      <code><![CDATA[ExpectParseSpecificationHelper]]></code>
+    </DeprecatedTrait>
+  </file>
+  <file src="src/Interpreter/Parser/Specification/Typescript/ReferenceParseSpecification.php">
+    <DeprecatedClass>
+      <code><![CDATA[CommaLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[GreaterThanLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LowerThanLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[new HintParseSpecification($this)]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[ParseSpecification]]></code>
+      <code><![CDATA[ReferenceParseSpecification]]></code>
+      <code><![CDATA[private]]></code>
+    </DeprecatedInterface>
+    <DeprecatedTrait>
+      <code><![CDATA[ExpectParseSpecificationHelper]]></code>
+    </DeprecatedTrait>
+  </file>
+  <file src="src/Interpreter/Parser/Specification/Typescript/TypeParseSpecification.php">
+    <DeprecatedClass>
+      <code><![CDATA[ColonLexical::TYPE]]></code>
+      <code><![CDATA[ColonLexical::TYPE]]></code>
+      <code><![CDATA[CommaLexical::TYPE]]></code>
+      <code><![CDATA[CommaLexical::TYPE]]></code>
+      <code><![CDATA[CommaLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[EqualsSignLexical::TYPE]]></code>
+      <code><![CDATA[EqualsSignLexical::TYPE]]></code>
+      <code><![CDATA[GreaterThanLexical::TYPE]]></code>
+      <code><![CDATA[GreaterThanLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LowerThanLexical::TYPE]]></code>
+      <code><![CDATA[QuestionMarkLexical::TYPE]]></code>
+      <code><![CDATA[SemicolonLexical::TYPE]]></code>
+      <code><![CDATA[SemicolonLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[SquareBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[StringLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[new UnexpectedLexical($stream->current(), LabelLexical::TYPE)]]></code>
+      <code><![CDATA[new UnexpectedLexical($stream->current(), LabelLexical::TYPE, CurlyBracketLeftLexical::TYPE)]]></code>
+      <code><![CDATA[new UnexpectedLexical($stream->current(), SquareBracketLeftLexical::TYPE)]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[TypeParseSpecification]]></code>
+      <code><![CDATA[private]]></code>
+    </DeprecatedInterface>
+    <DeprecatedTrait>
+      <code><![CDATA[ExpectParseSpecificationHelper]]></code>
+    </DeprecatedTrait>
+  </file>
+  <file src="src/Interpreter/Parser/SpecificationCodeParser.php">
+    <DeprecatedClass>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[new IteratorCodeTokenStream(
+            (function () use ($stream, $file, $skip) {
+                while ($stream->isActive()) {
+                    yield $this->subParse($stream, $file);
+
+                    if (count($skip) > 0) {
+                        $stream->skip(...$skip);
+                    }
+                }
+            })(),
+        )]]></code>
+      <code><![CDATA[new NoParseSpecification($stream->current())]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[CodeTokenStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[SpecificationCodeParser]]></code>
+      <code><![CDATA[non-empty-array<ParseSpecification>]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Interpreter/TypescriptCodeInterpreter.php">
+    <DeprecatedClass>
+      <code><![CDATA[AsteriskLexical::TYPE]]></code>
+      <code><![CDATA[CommaLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CommentLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketLeftLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[CurlyBracketRightLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[LabelLexical::TYPE]]></code>
+      <code><![CDATA[SemicolonLexical::TYPE]]></code>
+      <code><![CDATA[SemicolonLexical::TYPE]]></code>
+      <code><![CDATA[SemicolonLexical::TYPE]]></code>
+      <code><![CDATA[SpecificationCodeParser::FLAG_SKIP_COMMENT]]></code>
+      <code><![CDATA[SpecificationCodeParser::FLAG_SKIP_WHITESPACE]]></code>
+      <code><![CDATA[StringLexical::TYPE]]></code>
+      <code><![CDATA[StringLexical::TYPE]]></code>
+      <code><![CDATA[StringLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[WhitespaceLexical::TYPE]]></code>
+      <code><![CDATA[new AttributeParseSpecification($expressionParseSpecification, $referenceParseSpecification)]]></code>
+      <code><![CDATA[new ClassParseSpecification(
+                            new AttributeParseSpecification($expressionParseSpecification, $referenceParseSpecification),
+                            $expressionParseSpecification,
+                            $referenceParseSpecification,
+                            $hintParseSpecification,
+                        )]]></code>
+      <code><![CDATA[new ConstantParseSpecification($expressionParseSpecification, $hintParseSpecification)]]></code>
+      <code><![CDATA[new DeclareParseSpecification($parentParseSpecification)]]></code>
+      <code><![CDATA[new EnumParseSpecification($expressionParseSpecification)]]></code>
+      <code><![CDATA[new ExportParseSpecification($parentParseSpecification)]]></code>
+      <code><![CDATA[new ExpressionParseSpecification($referenceParseSpecification, $hintParseSpecification, $imports)]]></code>
+      <code><![CDATA[new HintParseSpecification($referenceParseSpecification)]]></code>
+      <code><![CDATA[new InterfaceParseSpecification($hintParseSpecification, $expressionParseSpecification)]]></code>
+      <code><![CDATA[new RecursiveParseSpecification(
+                    [
+                        new InterfaceParseSpecification($hintParseSpecification, $expressionParseSpecification),
+                        new ConstantParseSpecification($expressionParseSpecification, $hintParseSpecification),
+                        new EnumParseSpecification($expressionParseSpecification),
+                        new ClassParseSpecification(
+                            new AttributeParseSpecification($expressionParseSpecification, $referenceParseSpecification),
+                            $expressionParseSpecification,
+                            $referenceParseSpecification,
+                            $hintParseSpecification,
+                        ),
+                        new TypeParseSpecification($hintParseSpecification),
+                        fn(ParseSpecification $parentParseSpecification): ParseSpecification => new ExportParseSpecification($parentParseSpecification),
+                        fn(ParseSpecification $parentParseSpecification): ParseSpecification => new DeclareParseSpecification($parentParseSpecification),
+                        $expressionParseSpecification,
+                    ]
+                )]]></code>
+      <code><![CDATA[new ReferenceParseSpecification($imports)]]></code>
+      <code><![CDATA[new SpecificationCodeParser(
+            [
+                new RecursiveParseSpecification(
+                    [
+                        new InterfaceParseSpecification($hintParseSpecification, $expressionParseSpecification),
+                        new ConstantParseSpecification($expressionParseSpecification, $hintParseSpecification),
+                        new EnumParseSpecification($expressionParseSpecification),
+                        new ClassParseSpecification(
+                            new AttributeParseSpecification($expressionParseSpecification, $referenceParseSpecification),
+                            $expressionParseSpecification,
+                            $referenceParseSpecification,
+                            $hintParseSpecification,
+                        ),
+                        new TypeParseSpecification($hintParseSpecification),
+                        fn(ParseSpecification $parentParseSpecification): ParseSpecification => new ExportParseSpecification($parentParseSpecification),
+                        fn(ParseSpecification $parentParseSpecification): ParseSpecification => new DeclareParseSpecification($parentParseSpecification),
+                        $expressionParseSpecification,
+                    ]
+                ),
+            ],
+            flags: SpecificationCodeParser::FLAG_SKIP_WHITESPACE | SpecificationCodeParser::FLAG_SKIP_COMMENT,
+        )]]></code>
+      <code><![CDATA[new TypeParseSpecification($hintParseSpecification)]]></code>
+      <code><![CDATA[new TypescriptCodeLexer()]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[?CodeLexer]]></code>
+      <code><![CDATA[?CodeLexer]]></code>
+      <code><![CDATA[CodeLexer]]></code>
+      <code><![CDATA[CodeParser]]></code>
+      <code><![CDATA[CodeTokenStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+      <code><![CDATA[ParseSpecification]]></code>
+      <code><![CDATA[ParseSpecification]]></code>
+      <code><![CDATA[ParseSpecification]]></code>
+      <code><![CDATA[ParseSpecification]]></code>
+      <code><![CDATA[StringStream]]></code>
+      <code><![CDATA[TypescriptCodeInterpreter]]></code>
+    </DeprecatedInterface>
+    <DeprecatedTrait>
+      <code><![CDATA[ExpectParseSpecificationHelper]]></code>
+    </DeprecatedTrait>
+  </file>
+  <file src="src/Stream/AbstractStream.php">
+    <DeprecatedInterface>
+      <code><![CDATA[AbstractStream]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Stream/CodeToken/ArrayCodeTokenStream.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractStream]]></code>
+      <code><![CDATA[new EndOfStream()]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[ArrayCodeTokenStream]]></code>
+      <code><![CDATA[ArrayCodeTokenStream]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Stream/CodeToken/IteratorCodeTokenStream.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractStream]]></code>
+      <code><![CDATA[new EndOfStream()]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[IteratorCodeTokenStream]]></code>
+      <code><![CDATA[IteratorCodeTokenStream]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Stream/Lexical/AbstractLexicalStream.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractStream]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[AbstractLexicalStream]]></code>
+      <code><![CDATA[AbstractLexicalStream]]></code>
+      <code><![CDATA[AbstractLexicalStream]]></code>
+      <code><![CDATA[LexicalStream]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Stream/Lexical/ArrayLexicalStream.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractLexicalStream]]></code>
+      <code><![CDATA[new EndOfStream()]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[?Lexical]]></code>
+      <code><![CDATA[ArrayLexicalStream]]></code>
+      <code><![CDATA[ArrayLexicalStream]]></code>
+      <code><![CDATA[ArrayLexicalStream]]></code>
+      <code><![CDATA[Lexical]]></code>
+      <code><![CDATA[array<Lexical>]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Stream/Lexical/IteratorLexicalStream.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractLexicalStream]]></code>
+      <code><![CDATA[new EndOfStream()]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[?Lexical]]></code>
+      <code><![CDATA[Iterator<Lexical>]]></code>
+      <code><![CDATA[IteratorLexicalStream]]></code>
+      <code><![CDATA[IteratorLexicalStream]]></code>
+      <code><![CDATA[IteratorLexicalStream]]></code>
+      <code><![CDATA[Lexical]]></code>
+      <code><![CDATA[Lexical|null]]></code>
+      <code><![CDATA[array]]></code>
+      <code><![CDATA[private array $lookahead = [];]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Stream/Lexical/LexicalStream.php">
+    <DeprecatedInterface>
+      <code><![CDATA[?Lexical]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Stream/String/AbstractStringStream.php">
+    <DeprecatedClass>
+      <code><![CDATA[new ExpectedExactly(
+                $input,
+                $this->current($inputLength),
+            )]]></code>
+      <code><![CDATA[new ExpectedKeyword(
+                $keyword,
+                $this->current($keywordLength),
+            )]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[AbstractStringStream]]></code>
+      <code><![CDATA[AbstractStringStream]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Stream/String/DirectStringStream.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractStringStream]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[DirectStringStream]]></code>
+      <code><![CDATA[DirectStringStream]]></code>
+    </DeprecatedInterface>
+  </file>
+  <file src="src/Stream/String/FileStringStream.php">
+    <DeprecatedClass>
+      <code><![CDATA[AbstractStringStream]]></code>
+      <code><![CDATA[new CannotReadFile($this->file)]]></code>
+    </DeprecatedClass>
+    <DeprecatedInterface>
+      <code><![CDATA[FileStringStream]]></code>
+      <code><![CDATA[FileStringStream]]></code>
+    </DeprecatedInterface>
   </file>
   <file src="src/Token/Block/Switch/CaseItem.php">
     <ImpureVariable>

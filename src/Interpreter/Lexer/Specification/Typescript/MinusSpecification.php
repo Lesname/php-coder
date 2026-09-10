@@ -11,6 +11,9 @@ use LesCoder\Interpreter\Lexer\Specification\Specification;
 use LesCoder\Interpreter\Lexer\Lexical\Character\MinusLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Assignment\Math\SubtractAssignmentLexical;
 
+/**
+ * @deprecated
+ */
 final class MinusSpecification implements Specification
 {
     #[Override]

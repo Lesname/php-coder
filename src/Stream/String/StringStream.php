@@ -10,6 +10,8 @@ use LesCoder\Stream\String\Exception\ExpectedKeyword;
 
 /**
  * @extends Stream<string>
+ *
+ * @deprecated
  */
 interface StringStream extends Stream
 {

@@ -8,6 +8,9 @@ use Override;
 use LesCoder\Stream\String\Exception\ExpectedExactly;
 use LesCoder\Stream\String\Exception\ExpectedKeyword;
 
+/**
+ * @deprecated
+ */
 abstract class AbstractStringStream implements StringStream
 {
     #[Override]

@@ -12,6 +12,9 @@ use LesCoder\Interpreter\Lexer\Lexical\WhitespaceLexical;
 use LesCoder\Interpreter\Parser\Specification\ParseSpecification;
 use LesCoder\Interpreter\Parser\Specification\Helper\ExpectParseSpecificationHelper;
 
+/**
+ * @deprecated
+ */
 final class DeclareParseSpecification implements ParseSpecification
 {
     use ExpectParseSpecificationHelper;

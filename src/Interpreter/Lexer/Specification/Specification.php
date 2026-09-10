@@ -6,6 +6,9 @@ namespace LesCoder\Interpreter\Lexer\Specification;
 use LesCoder\Stream\String\StringStream;
 use LesCoder\Interpreter\Lexer\Lexical\Lexical;
 
+/**
+ * @deprecated
+ */
 interface Specification
 {
     public function isSatisfiedBy(StringStream $code): bool;

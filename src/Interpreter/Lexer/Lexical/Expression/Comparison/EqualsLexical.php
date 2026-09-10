@@ -8,6 +8,8 @@ use LesCoder\Interpreter\Lexer\Lexical\AbstractLexical;
 
 /**
  * @psalm-immutable
+ *
+ * @deprecated
  */
 final class EqualsLexical extends AbstractLexical implements ComparisonLexical
 {

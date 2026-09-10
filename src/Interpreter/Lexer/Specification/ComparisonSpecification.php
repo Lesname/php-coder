@@ -20,6 +20,9 @@ use LesCoder\Interpreter\Lexer\Lexical\Expression\Comparison\NotEqualsLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Expression\Comparison\LowerThanOrEqualsLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Expression\Comparison\GreaterThanOrEqualsLexical;
 
+/**
+ * @deprecated
+ */
 final class ComparisonSpecification implements Specification
 {
     #[Override]

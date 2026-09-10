@@ -39,6 +39,9 @@ use LesCoder\Interpreter\Lexer\Lexical\Character\CurlyBracket\CurlyBracketLeftLe
 use LesCoder\Interpreter\Parser\Specification\Typescript\ExpressionParseSpecification;
 use LesCoder\Interpreter\Lexer\Lexical\Character\CurlyBracket\CurlyBracketRightLexical;
 
+/**
+ * @deprecated
+ */
 final class TypescriptCodeInterpreter implements CodeInterpreter
 {
     use ExpectParseSpecificationHelper;

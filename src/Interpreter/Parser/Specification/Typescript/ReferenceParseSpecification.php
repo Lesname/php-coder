@@ -17,6 +17,9 @@ use LesCoder\Interpreter\Lexer\Lexical\Character\LowerThanLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Character\GreaterThanLexical;
 use LesCoder\Interpreter\Parser\Specification\Helper\ExpectParseSpecificationHelper;
 
+/**
+ * @deprecated
+ */
 final class ReferenceParseSpecification implements ParseSpecification
 {
     use ExpectParseSpecificationHelper;

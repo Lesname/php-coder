@@ -6,6 +6,9 @@ namespace LesCoder\Interpreter;
 use LesCoder\Stream\String\StringStream;
 use LesCoder\Stream\CodeToken\CodeTokenStream;
 
+/**
+ * @deprecated
+ */
 interface CodeInterpreter
 {
     public function interpret(StringStream $stream, ?string $file = null): CodeTokenStream;

@@ -11,6 +11,9 @@ use LesCoder\Interpreter\Lexer\Specification\Specification;
 use LesCoder\Interpreter\Lexer\Lexical\Character\PlusLexical;
 use LesCoder\Interpreter\Lexer\Lexical\Assignment\Math\AdditionAssignmentLexical;
 
+/**
+ * @deprecated
+ */
 final class PlusSpecification implements Specification
 {
     #[Override]

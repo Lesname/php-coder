@@ -8,6 +8,8 @@ use LesCoder\Interpreter\Lexer\Lexical\Character\AbstractCharacterLexical;
 
 /**
  * @psalm-immutable
+ *
+ * @deprecated
  */
 final class SquareBracketRightLexical extends AbstractCharacterLexical
 {

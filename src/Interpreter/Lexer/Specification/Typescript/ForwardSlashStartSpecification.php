@@ -12,6 +12,9 @@ use LesCoder\Interpreter\Lexer\Specification\Specification;
 use LesCoder\Interpreter\Lexer\Lexical\Character\Slash\ForwardSlashLexical;
 use LesCoder\Interpreter\Lexer\Specification\Exception\MissesClosingIdentifier;
 
+/**
+ * @deprecated
+ */
 final class ForwardSlashStartSpecification implements Specification
 {
     #[Override]
